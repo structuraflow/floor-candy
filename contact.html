@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Floor Candy | Get a Free Quote</title>
+  <meta name="description" content="Get in touch with Floor Candy for a free, no-obligation on-site quote. Epoxy flooring, concrete sealing and resin benchtops across Australia.">
+  <meta property="og:title" content="Contact Floor Candy — Free Quote">
+  <meta property="og:image" content="assets/images/fc1.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="loader"><div class="loader-logo">FLOOR <span>CANDY</span></div></div>
+<div class="cursor"></div>
+<div class="scroll-bar"></div>
+
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FLOOR <span class="grad-text">CANDY</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <span class="nav-phone">+61 400 000 000</span>
+        <a href="contact.html" class="btn btn-pink">Get a Quote</a>
+        <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn btn-pink mob-cta">Get a Free Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('assets/images/fc1.jpg');"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="eyebrow">Free Quote</div>
+      <h1>Let's Talk<br><span class="grad-text">Floors.</span></h1>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: INFO -->
+      <div class="contact-info reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2>We Come To You.<br>Free of Charge.</h2>
+        <p>Every quote starts with a free on-site visit. We assess your surface, discuss your vision, and give you a transparent, itemised quote — no hidden costs, no pressure, no obligation.</p>
+
+        <div class="contact-detail">
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div class="contact-item-text">
+              <h4>Phone</h4>
+              <a href="tel:+61400000000">+61 400 000 000</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div class="contact-item-text">
+              <h4>Email</h4>
+              <a href="mailto:hello@floorcandy.com.au">hello@floorcandy.com.au</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div class="contact-item-text">
+              <h4>Service Area</h4>
+              <p>Servicing All of Australia</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div class="contact-item-text">
+              <h4>Response Time</h4>
+              <p>Within 24 hours, Monday–Saturday</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-badges">
+          <div class="trust-badge"><span class="trust-badge-icon">✓</span> Free on-site quote — no obligation</div>
+          <div class="trust-badge"><span class="trust-badge-icon">✓</span> Same-week response guaranteed</div>
+          <div class="trust-badge"><span class="trust-badge-icon">✓</span> Licensed, insured, and 5-star rated</div>
+          <div class="trust-badge"><span class="trust-badge-icon">✓</span> No hidden costs — transparent pricing</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="reveal d1">
+        <div class="contact-form-wrap">
+          <h3>Request a <span class="grad-text">Free Quote</span></h3>
+
+          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name *</label>
+                <input type="text" id="fname" name="first_name" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name *</label>
+                <input type="text" id="lname" name="last_name" placeholder="Smith" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+61 400 000 000" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service Required *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option value="epoxy-coatings">Epoxy Coatings</option>
+                <option value="metallics-flakes">Metallics &amp; Flakes</option>
+                <option value="concrete-sealing">Concrete Sealing</option>
+                <option value="driveway-sealing">Driveway Sealing</option>
+                <option value="stone-polishing">Stone Polishing</option>
+                <option value="resin-benchtop">Resin Benchtop</option>
+                <option value="not-sure">Not Sure — Need Advice</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Project Location (Suburb/City) *</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Brisbane, QLD" required>
+            </div>
+
+            <div class="form-group">
+              <label for="size">Approximate Area (m²)</label>
+              <input type="text" id="size" name="area_size" placeholder="e.g. 60m² garage">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell Us About Your Project</label>
+              <textarea id="message" name="message" placeholder="Describe your floor, the finish you're after, any existing issues we should know about…"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="contact_time">Preferred Contact Time</label>
+              <select id="contact_time" name="contact_time">
+                <option value="" disabled selected>Select a time…</option>
+                <option value="morning">Morning (8am–12pm)</option>
+                <option value="afternoon">Afternoon (12pm–5pm)</option>
+                <option value="evening">Evening (5pm–7pm)</option>
+                <option value="anytime">Anytime</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-pink btn-lg" style="width:100%; justify-content:center;">
+              Send My Request →
+            </button>
+          </form>
+
+          <div id="formSuccess" class="form-success">
+            <span class="success-icon">✓</span>
+            <h3>Request Received!</h3>
+            <p>Thanks for getting in touch. We'll review your project and reach out within 24 hours to book your free site visit.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <span class="stat-num grad-text"><span class="ctr" data-target="200">0</span><span class="stat-suf">+</span></span>
+        <div class="stat-lbl">Projects Completed</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <span class="stat-num grad-text"><span class="ctr" data-target="8">0</span></span>
+        <div class="stat-lbl">Years Experience</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <span class="stat-num grad-text"><span class="ctr" data-target="5">0</span><span class="stat-suf">★</span></span>
+        <div class="stat-lbl">Average Rating</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <span class="stat-num grad-text"><span class="ctr" data-target="24">0</span><span class="stat-suf">hr</span></span>
+        <div class="stat-lbl">Response Time</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">FLOOR <span class="grad-text">CANDY</span></div>
+        <p class="footer-tagline">Premium epoxy coatings, concrete sealing, and decorative systems for spaces that demand attention. Servicing Australia-wide.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <div class="footer-col-head">Contact</div>
+        <p><a href="tel:+61400000000">+61 400 000 000</a></p>
+        <p><a href="mailto:hello@floorcandy.com.au">hello@floorcandy.com.au</a></p>
+        <p>Servicing Australia-Wide</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>© 2026 Floor Candy. All rights reserved.</p>
+      <div class="footer-bar-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="mob-bar">
+  <a href="tel:+61400000000" class="mob-call">📞 Call Now</a>
+  <a href="#contactForm" class="mob-quote">Fill Form</a>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

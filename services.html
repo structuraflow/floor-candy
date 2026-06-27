@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Floor Candy | Epoxy, Metallics, Concrete Sealing & More</title>
+  <meta name="description" content="Explore Floor Candy's full range of services: epoxy coatings, metallic & flake finishes, concrete sealing, driveway sealing, stone polishing, and resin benchtops.">
+  <meta property="og:title" content="Services — Floor Candy">
+  <meta property="og:image" content="assets/images/commercial-epoxy-flooring.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .faq-section { padding: 96px 0; background: var(--bg); border-top: 1px solid var(--border); }
+    .faq-list { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      width: 100%; background: none; border: none; text-align: left; cursor: none;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 22px 28px; transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--surface-2); }
+    .faq-q span:first-child { font-size: 15px; font-weight: 500; color: var(--white); }
+    .faq-ico { font-size: 22px; color: var(--pink); transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-ico { transform: rotate(45deg); }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 28px; }
+    .faq-item.open .faq-ans { max-height: 180px; padding: 0 28px 22px; }
+    .faq-ans p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<div class="loader"><div class="loader-logo">FLOOR <span>CANDY</span></div></div>
+<div class="cursor"></div>
+<div class="scroll-bar"></div>
+
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FLOOR <span class="grad-text">CANDY</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <span class="nav-phone">+61 400 000 000</span>
+        <a href="contact.html" class="btn btn-pink">Get a Quote</a>
+        <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn btn-pink mob-cta">Get a Free Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('assets/images/commercial-epoxy-flooring.jpg');"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="eyebrow">Our Services</div>
+      <h1>Every Surface.<br><span class="grad-text">Every Space.</span></h1>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 1: EPOXY COATINGS -->
+<section class="svc-detail-section">
+  <div class="container">
+    <div class="svc-detail-grid">
+      <div class="svc-detail-img reveal">
+        <img src="assets/images/commercial-epoxy-flooring.jpg" alt="Commercial epoxy flooring in a large warehouse" loading="lazy">
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 01</div>
+        <h2>Epoxy Coatings</h2>
+        <p>High-build epoxy systems engineered for durability, chemical resistance, and impact toughness. Ideal for garages, warehouses, factories, showrooms, and commercial spaces of all sizes.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> 100% solids high-build epoxy — 2–6mm thick applications available</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Chemical, oil, and abrasion resistant — outperforms standard coatings</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Full-broadcast, semi-broadcast, and solid colour options</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Suitable for residential garages through to 10,000m² warehouses</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 2: METALLICS & FLAKES -->
+<section class="svc-detail-section svc-alt">
+  <div class="container">
+    <div class="svc-detail-grid reverse">
+      <div class="svc-detail-img reveal">
+        <img src="assets/images/garage-flooring-2025.jpg" alt="Decorative flake epoxy garage floor" loading="lazy">
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 02</div>
+        <h2>Metallics &amp; Flakes</h2>
+        <p>Our most striking finishes — swirling metallic pigments and decorative vinyl flakes that transform a plain slab into a bespoke centrepiece. Every pour is unrepeatable, every floor is one of a kind.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Custom metallic colour blending — virtually unlimited palette</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Full, half, and quarter-broadcast vinyl flake systems</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> UV-stable polyurethane topcoat for lasting gloss</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Perfect for garages, showrooms, retail, and hospitality</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 3: CONCRETE SEALING -->
+<section class="svc-detail-section">
+  <div class="container">
+    <div class="svc-detail-grid">
+      <div class="svc-detail-img reveal">
+        <img src="assets/images/fc1.jpg" alt="Polished and sealed concrete floor with high gloss finish" loading="lazy">
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 03</div>
+        <h2>Concrete Sealing</h2>
+        <p>Penetrating and topcoat sealing systems that protect, enhance, and transform exposed concrete. Whether it's honed, polished, or raw — we find the right sealer for the job and the look.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Lithium silicate and densifier treatments for internal concrete</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Acrylic and polyurethane topcoats in matte, satin, or gloss</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Stain, moisture, and UV protection for internal and external slabs</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Enhances the natural character of exposed aggregate and honed finishes</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 4: DRIVEWAYS -->
+<section class="svc-detail-section svc-alt">
+  <div class="container">
+    <div class="svc-detail-grid reverse">
+      <div class="svc-detail-img reveal">
+        <img src="assets/images/fc3.jpg" alt="Sealed dark driveway on a luxury home" loading="lazy">
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 04</div>
+        <h2>Driveway Sealing</h2>
+        <p>Your driveway is the first thing people see. Our exterior concrete sealing systems protect against weathering, oil stains, and UV fade while delivering a finish that elevates the entire property.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Penetrating sealers that won't peel, flake, or bubble</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Wet-look, natural, and matte finish options</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Anti-slip additives available for safety compliance</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Suitable for plain, exposed aggregate, stencilled and coloured concrete</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 5: STONE POLISHING -->
+<section class="svc-detail-section">
+  <div class="container">
+    <div class="svc-detail-grid">
+      <div class="svc-detail-img reveal">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1208, #8a7050, #c8a96e, #8a7050); border-radius: 8px;"></div>
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 05</div>
+        <h2>Natural Stone Polishing</h2>
+        <p>Reveal the true depth of natural stone through diamond honing and machine polishing. Marble, granite, travertine, and limestone — restored or upgraded to the finish they deserve.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Multi-step diamond grinding and honing process</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Matte hone through to mirror polish — your choice</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Crack and chip repair prior to polishing</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Impregnating sealer application for lasting protection</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 6: RESIN BENCHTOPS -->
+<section class="svc-detail-section svc-alt">
+  <div class="container">
+    <div class="svc-detail-grid reverse">
+      <div class="svc-detail-img reveal">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #3d0020, #E8157A, #ff69b4, #E8157A, #3d0020); border-radius: 8px;"></div>
+      </div>
+      <div class="svc-detail-content reveal d1">
+        <div class="eyebrow">Service 06</div>
+        <h2>Resin Benchtops</h2>
+        <p>Custom-poured resin benchtops that become the focal point of any room. Kitchens, bars, bathrooms, laundries — each piece is cast to your exact specification and unique to your space.</p>
+        <ul class="svc-bullets">
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Solid colour, metallic, and multi-colour pour options</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Embedded objects and custom inclusions available</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Heat, stain, and scratch resistant topcoat systems</li>
+          <li class="svc-bullet"><span class="bullet-dot">◆</span> Cut-outs for sinks, taps, and appliances included</li>
+        </ul>
+        <a href="contact.html" class="btn btn-pink">Get a Free Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-heading">Common Questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span>How long does an epoxy floor coating last?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>A professionally applied high-build epoxy system typically lasts 10–20 years with proper maintenance. Surface preparation and product quality are the biggest factors — we use commercial-grade materials and thorough diamond grinding on every job to maximise longevity.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can epoxy be applied over existing concrete?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>In most cases, yes. The slab must be structurally sound, dry, and free of previous coatings that may delaminate. We assess every floor during the free consultation and advise on any repairs or moisture mitigation needed before we begin.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How long before I can use the floor?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Light foot traffic is generally safe within 24–48 hours. Full vehicle traffic and heavy loads should wait 5–7 days for a complete cure. We provide specific timelines for each job based on the product system and ambient conditions on your site.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Do you offer custom colours and metallic effects?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Absolutely — custom work is one of our specialties. We can colour-match to almost any palette, create bespoke metallic pours, or blend custom flake mixes. Bring a mood board, a paint chip, or just a description and we'll develop the right finish for your space.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What's the difference between epoxy and polyurethane coatings?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Epoxy provides a harder, thicker build — ideal for impact resistance and chemical exposure. Polyurethane (PU) is more flexible and UV-stable, making it the ideal topcoat or finish for outdoor-exposed applications. Many of our systems layer both to combine the benefits of each.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="eyebrow reveal" style="justify-content:center; margin-bottom:20px;">Let's Talk</div>
+    <h2 class="reveal">Not Sure Which<br>Service You Need?</h2>
+    <p class="cta-sub-text reveal d1">We'll come to you, assess the surface, and recommend the right solution for your space and budget — at no cost.</p>
+    <div class="cta-btns reveal d2">
+      <a href="contact.html" class="btn btn-pink btn-xl">Book a Free Site Visit →</a>
+      <a href="tel:+61400000000" class="btn btn-ghost btn-lg">📞 Call Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">FLOOR <span class="grad-text">CANDY</span></div>
+        <p class="footer-tagline">Premium epoxy coatings, concrete sealing, and decorative systems for spaces that demand attention. Servicing Australia-wide.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <div class="footer-col-head">Contact</div>
+        <p><a href="tel:+61400000000">+61 400 000 000</a></p>
+        <p><a href="mailto:hello@floorcandy.com.au">hello@floorcandy.com.au</a></p>
+        <p>Servicing Australia-Wide</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>© 2026 Floor Candy. All rights reserved.</p>
+      <div class="footer-bar-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="mob-bar">
+  <a href="tel:+61400000000" class="mob-call">📞 Call Now</a>
+  <a href="contact.html" class="mob-quote">Get a Quote</a>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
