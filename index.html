@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floor Candy — Premium Epoxy & Concrete Specialists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0A0A0A;
+      --surface:   #141414;
+      --surface-2: #1C1C1C;
+      --pink:      #E8157A;
+      --gold:      #FF8C00;
+      --white:     #F0F0F0;
+      --muted:     #666666;
+      --border:    #242424;
+      --gradient:  linear-gradient(135deg, #E8157A 0%, #FF8C00 100%);
+      --glow:      0 0 40px rgba(232,21,122,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── UTILS ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    .grad-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section { padding: 96px 0; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 1.0;
+      color: var(--white);
+    }
+    .section-header { margin-bottom: 56px; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-pink { background: var(--pink); color: #fff; }
+    .btn-pink:hover { background: #ff1f88; box-shadow: var(--glow); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1.5px solid rgba(240,240,240,0.25); }
+    .btn-ghost:hover { border-color: var(--white); transform: translateY(-1px); }
+    .btn-lg { padding: 16px 36px; font-size: 14px; }
+    .btn-xl { padding: 19px 48px; font-size: 15px; box-shadow: 0 0 50px rgba(232,21,122,0.35); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 0;
+      transition: background 0.3s, padding 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 14px 0;
+      border-color: var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-phone { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+
+    /* ── MOBILE MENU ── */
+    .mob-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(10,10,10,0.98);
+      flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a {
+      font-family: 'Oswald', sans-serif; font-size: 38px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+      transition: color 0.2s;
+    }
+    .mob-menu a:hover { color: var(--pink); }
+    .mob-close {
+      position: absolute; top: 24px; right: 28px;
+      font-size: 36px; color: var(--muted); cursor: pointer; line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 100px; overflow: hidden;
+      background: radial-gradient(ellipse at 75% 55%, #200818 0%, #0A0A0A 58%);
+    }
+    .hero-wm {
+      position: absolute; right: -3vw; bottom: -8vw;
+      font-family: 'Oswald', sans-serif;
+      font-size: 30vw; font-weight: 700; text-transform: uppercase;
+      line-height: 0.8; letter-spacing: -0.02em;
+      background: var(--gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      opacity: 0.055; user-select: none; pointer-events: none; white-space: nowrap;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(232,21,122,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,21,122,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at 30% 50%, transparent 15%, black 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 32px; height: 1px; background: var(--pink); display: block; }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(56px, 9vw, 100px);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: -0.01em; line-height: 0.93;
+      margin-bottom: 28px;
+    }
+    .hero h1 em { font-style: normal; }
+    .hero-sub {
+      font-size: 17px; color: var(--muted); line-height: 1.75;
+      max-width: 460px; margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
+    .trust-strip {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); font-weight: 500; }
+    .trust-icon { color: var(--gold); }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .svc-card {
+      background: var(--surface); padding: 40px 32px;
+      transition: background 0.25s, box-shadow 0.25s;
+    }
+    .svc-card:hover {
+      background: var(--surface-2);
+      box-shadow: inset 0 0 0 1px var(--pink), inset 0 -2px 0 var(--pink);
+    }
+    .svc-icon { font-size: 26px; margin-bottom: 20px; display: block; }
+    .svc-card h3 {
+      font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px;
+    }
+    .svc-card p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 24px; }
+    .link-arr {
+      font-size: 12px; font-weight: 600; color: var(--pink);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s;
+    }
+    .link-arr:hover { gap: 10px; }
+
+    /* ── STATS ── */
+    .stats-band {
+      background: var(--surface);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 72px 0;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item {
+      text-align: center; padding: 20px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 700; line-height: 1; margin-bottom: 10px;
+    }
+    .stat-suf { font-family: 'Oswald', sans-serif; font-size: 0.55em; }
+    .stat-lbl { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 260px 260px;
+      gap: 12px;
+    }
+    .g-item {
+      position: relative; border-radius: 8px; overflow: hidden; cursor: pointer;
+    }
+    .g-item:first-child { grid-row: span 2; }
+    .g-bg { position: absolute; inset: 0; transition: transform 0.5s ease; }
+    .g-item:hover .g-bg { transform: scale(1.05); }
+    .g-ov {
+      position: absolute; inset: 0;
+      background: rgba(232,21,122,0);
+      transition: background 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .g-item:hover .g-ov { background: rgba(232,21,122,0.22); }
+    .g-lbl {
+      font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; color: #fff;
+      opacity: 0; transform: translateY(6px); transition: all 0.3s;
+    }
+    .g-item:hover .g-lbl { opacity: 1; transform: translateY(0); }
+    .gp1 { background: linear-gradient(135deg, #3d0020, #E8157A, #ff69b4); }
+    .gp2 { background: linear-gradient(135deg, #b0b0b0, #707070, #c8c8c8); }
+    .gp3 { background: linear-gradient(135deg, #3d2000, #FF8C00, #ffd060); }
+    .gp4 { background: linear-gradient(135deg, #141414, #3c3c3c, #141414); }
+    .gp5 { background: linear-gradient(135deg, #00153d, #0055bb, #00aadd); }
+    .gp6 { background: linear-gradient(135deg, #1a100a, #c09050, #e8cc8a); }
+
+    /* ── PROCESS ── */
+    .process-band { background: var(--surface); border-top: 1px solid var(--border); }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; position: relative;
+    }
+    .process-grid::after {
+      content: '';
+      position: absolute; top: 36px;
+      left: calc(12.5% + 16px); right: calc(12.5% + 16px);
+      height: 1px;
+      background: repeating-linear-gradient(90deg, #E8157A 0, #E8157A 8px, transparent 8px, transparent 18px);
+      opacity: 0.4;
+    }
+    .p-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .p-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 52px; font-weight: 700; line-height: 1;
+      margin-bottom: 18px; display: inline-block;
+    }
+    .p-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+    .p-step h3 {
+      font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;
+    }
+    .p-step p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── TESTIMONIALS ── */
+    .t-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .t-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 36px 30px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .t-card:hover { border-color: rgba(232,21,122,0.3); box-shadow: var(--glow); }
+    .stars { color: var(--gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 18px; }
+    .t-card blockquote {
+      font-size: 15px; color: var(--white); line-height: 1.8;
+      font-style: italic; font-weight: 300; margin-bottom: 24px;
+    }
+    .t-card blockquote::before {
+      content: '\201C'; color: var(--pink); font-size: 30px;
+      line-height: 0; vertical-align: -10px; margin-right: 3px; font-style: normal;
+    }
+    .t-name { font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+    .t-loc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* ── FAQ ── */
+    .faq-band { background: var(--surface); border-top: 1px solid var(--border); }
+    .faq-list {
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      width: 100%; background: none; border: none; text-align: left; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 22px 28px; transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--surface-2); }
+    .faq-q span { font-size: 15px; font-weight: 500; color: var(--white); }
+    .faq-ico { font-size: 22px; color: var(--pink); transition: transform 0.3s; line-height: 1; flex-shrink: 0; }
+    .faq-item.open .faq-ico { transform: rotate(45deg); }
+    .faq-ans { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 28px; }
+    .faq-item.open .faq-ans { max-height: 180px; padding: 0 28px 22px; }
+    .faq-ans p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      position: relative; text-align: center; padding: 120px 0; overflow: hidden;
+    }
+    .cta-radial {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 700px; height: 420px;
+      background: radial-gradient(ellipse, rgba(232,21,122,0.11) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 700; text-transform: uppercase; line-height: 1.0;
+      margin-bottom: 18px; position: relative;
+    }
+    .cta-section > .container > p {
+      font-size: 17px; color: var(--muted); margin-bottom: 44px; position: relative;
+    }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; position: relative; }
+    .cta-sub { font-size: 13px; color: var(--muted); position: relative; }
+    .cta-sub a { color: var(--muted); transition: color 0.2s; }
+    .cta-sub a:hover { color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060606;
+      padding: 64px 0 32px;
+      border-top: 1px solid;
+      border-image: var(--gradient) 1;
+    }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .f-logo {
+      font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .f-tag { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 230px; }
+    .f-head { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .f-links a { font-size: 14px; color: #4a4a4a; transition: color 0.2s; }
+    .f-links a:hover { color: var(--white); }
+    .f-contact p { font-size: 14px; color: #4a4a4a; margin-bottom: 9px; line-height: 1.5; }
+    .f-contact a { color: #4a4a4a; transition: color 0.2s; }
+    .f-contact a:hover { color: var(--white); }
+    .f-bar {
+      border-top: 1px solid var(--border); padding-top: 26px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .f-bar p, .f-bar a { font-size: 12px; color: #3a3a3a; }
+    .f-bar a { transition: color 0.2s; }
+    .f-bar a:hover { color: var(--muted); }
+    .f-bar-links { display: flex; gap: 22px; }
+
+    /* ── MOBILE STICKY BAR ── */
+    .mob-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px; gap: 10px;
+    }
+    .mob-bar a {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 12px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .mob-bar .m-call { background: var(--pink); color: #fff; }
+    .mob-bar .m-quote { background: var(--surface-2); color: var(--white); border: 1px solid var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-right: none; }
+      .process-grid { grid-template-columns: repeat(2,1fr); gap: 48px; }
+      .process-grid::after { display: none; }
+      .t-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-phone { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+      .g-item:first-child { grid-row: span 1; }
+      .process-grid { grid-template-columns: 1fr; }
+      .mob-bar { display: flex; }
+      body { padding-bottom: 70px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .f-bar { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .nav-right .btn { display: none; }
+    }
+    :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">FLOOR <span class="grad-text">CANDY</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <span class="nav-phone">+61 400 000 000</span>
+        <a href="#contact" class="btn btn-pink">Get a Quote</a>
+        <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" id="mobClose">×</span>
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#gallery" class="mob-link">Gallery</a>
+  <a href="#process" class="mob-link">Process</a>
+  <a href="#reviews" class="mob-link">Reviews</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="tel:+61400000000" class="btn btn-pink" style="margin-top:8px;">Call Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-wm">CANDY</div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Australia's Premium Floor Specialists</div>
+      <h1>
+        Your Floor.<br>
+        <em class="grad-text">Reinvented.</em>
+      </h1>
+      <p class="hero-sub">Epoxy coatings, metallics, concrete sealing and resin art — crafted for spaces that demand attention.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-pink btn-lg">Get a Free Quote →</a>
+        <a href="#gallery" class="btn btn-ghost btn-lg">View Our Work</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item"><span class="trust-icon">★</span> 5-Star Rated</div>
+        <div class="trust-item"><span class="trust-icon">✓</span> Licensed &amp; Insured</div>
+        <div class="trust-item"><span class="trust-icon">◈</span> 200+ Projects</div>
+        <div class="trust-item"><span class="trust-icon">⬡</span> Australia-Wide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="section-heading">Floors That Stop You<br>In Your Tracks</h2>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal d1">
+        <span class="svc-icon">⬡</span>
+        <h3>Epoxy Coatings</h3>
+        <p>High-build epoxy systems engineered for durability and impact resistance — garages, warehouses, showrooms and everything in between.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <span class="svc-icon">✦</span>
+        <h3>Metallics &amp; Flakes</h3>
+        <p>Swirling metallic pigments and decorative vinyl flakes that turn a plain slab into a centrepiece. Every pour is one of a kind.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <span class="svc-icon">◈</span>
+        <h3>Concrete Sealing</h3>
+        <p>Penetrating sealers and topcoat systems that protect and enhance exposed aggregate, honed, and polished concrete surfaces.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+      <div class="svc-card reveal d1">
+        <span class="svc-icon">◇</span>
+        <h3>Stone Polishing</h3>
+        <p>Diamond-honed and machine-polished stone floors revealing natural depth. Marble, granite, travertine — restored to their best.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+      <div class="svc-card reveal d2">
+        <span class="svc-icon">▣</span>
+        <h3>Resin Benchtops</h3>
+        <p>Custom-poured resin benchtops for kitchens, bars, and bathrooms. Bold colour, embedded objects, or clean solid finishes.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+      <div class="svc-card reveal d3">
+        <span class="svc-icon">❋</span>
+        <h3>Decorative Concrete</h3>
+        <p>Micro-cement overlays, stencilled patterns, and bespoke decorative systems for internal and external surfaces.</p>
+        <a href="#contact" class="link-arr">Enquire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num grad-text"><span class="ctr" data-target="200">0</span><span class="stat-suf">+</span></div>
+        <div class="stat-lbl">Projects Completed</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num grad-text"><span class="ctr" data-target="8">0</span></div>
+        <div class="stat-lbl">Years Experience</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num grad-text"><span class="ctr" data-target="5">0</span><span class="stat-suf">★</span></div>
+        <div class="stat-lbl">Average Rating</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-num grad-text"><span class="ctr" data-target="100">0</span><span class="stat-suf">%</span></div>
+        <div class="stat-lbl">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Portfolio</div>
+      <h2 class="section-heading">The <span class="grad-text">Candy</span></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item reveal"><div class="g-bg gp1"></div><div class="g-ov"><span class="g-lbl">Pink Metallic</span></div></div>
+      <div class="g-item reveal d1"><div class="g-bg gp2"></div><div class="g-ov"><span class="g-lbl">Silver Chrome</span></div></div>
+      <div class="g-item reveal d2"><div class="g-bg gp3"></div><div class="g-ov"><span class="g-lbl">Gold Flake</span></div></div>
+      <div class="g-item reveal d1"><div class="g-bg gp4"></div><div class="g-ov"><span class="g-lbl">Charcoal Honed</span></div></div>
+      <div class="g-item reveal d2"><div class="g-bg gp5"></div><div class="g-ov"><span class="g-lbl">Ocean Metallic</span></div></div>
+      <div class="g-item reveal d3"><div class="g-bg gp6"></div><div class="g-ov"><span class="g-lbl">Stone Polish</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process-band" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2 class="section-heading">From Slab to Showpiece</h2>
+    </div>
+    <div class="process-grid">
+      <div class="p-step reveal">
+        <div class="p-num grad-text">01</div>
+        <span class="p-icon">💬</span>
+        <h3>Consult</h3>
+        <p>Free on-site visit. We assess your surface, understand your vision, and talk through what's possible.</p>
+      </div>
+      <div class="p-step reveal d1">
+        <div class="p-num grad-text">02</div>
+        <span class="p-icon">✏️</span>
+        <h3>Design</h3>
+        <p>We present finish samples, colour options, and a transparent quote — no surprises, no hidden costs.</p>
+      </div>
+      <div class="p-step reveal d2">
+        <div class="p-num grad-text">03</div>
+        <span class="p-icon">⚙️</span>
+        <h3>Install</h3>
+        <p>Our crew preps, primes, and applies your system with precision. Minimal disruption, maximum result.</p>
+      </div>
+      <div class="p-step reveal d3">
+        <div class="p-num grad-text">04</div>
+        <span class="p-icon">✨</span>
+        <h3>Reveal</h3>
+        <p>Full walkthrough and handover. A floor worth showing off — backed by our workmanship guarantee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Client Reviews</div>
+      <h2 class="section-heading">What Clients Say</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>The metallic epoxy in our showroom is absolutely stunning. Floor Candy didn't install a floor — they delivered a piece of art.</blockquote>
+        <div class="t-name">Sarah M.</div>
+        <div class="t-loc">Melbourne, VIC</div>
+      </div>
+      <div class="t-card reveal d1">
+        <div class="stars">★★★★★</div>
+        <blockquote>Our garage was transformed in two days. The flake finish is gorgeous and insanely durable. Neighbours knock just to look at it.</blockquote>
+        <div class="t-name">James T.</div>
+        <div class="t-loc">Brisbane, QLD</div>
+      </div>
+      <div class="t-card reveal d2">
+        <div class="stars">★★★★★</div>
+        <blockquote>The resin benchtop is the centrepiece of our kitchen renovation. Everyone asks who did it. Already sent three referrals their way.</blockquote>
+        <div class="t-name">Priya K.</div>
+        <div class="t-loc">Sydney, NSW</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-band" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-heading">Common Questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span>How long does an epoxy floor coating last?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>A professionally applied epoxy system typically lasts 10–20 years with proper maintenance. We use commercial-grade products and thorough surface preparation to maximise longevity.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can epoxy be applied over existing concrete?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Yes — in most cases. The slab must be structurally sound and free of moisture issues. We assess every floor during the free consultation and advise on any prep required.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How long before I can walk or drive on the floor?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Light foot traffic is safe within 24–48 hours. Full vehicle traffic and heavy loads should wait 5–7 days for a complete cure. We provide specific timelines based on your system and conditions.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Do you offer custom colours and metallic effects?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Absolutely — it's one of our specialties. We can colour-match to existing palettes, create bespoke metallic pours, or blend custom flake mixes. Bring a mood board or just an idea.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What's the difference between epoxy and polyurethane?</span><span class="faq-ico">+</span></button>
+        <div class="faq-ans"><p>Epoxy builds thicker and handles heavy traffic and chemicals. Polyurethane is more flexible and UV-stable, ideal as a topcoat or outdoors. Many of our systems combine both for the best of each.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-radial"></div>
+  <div class="container">
+    <div class="eyebrow reveal" style="margin-bottom:20px;">Let's Talk</div>
+    <h2 class="reveal">Ready for a Floor<br>That Turns Heads?</h2>
+    <p class="reveal d1">Book your free on-site consultation. No obligation, no pressure — just honest advice.</p>
+    <div class="cta-btns reveal d2">
+      <a href="mailto:hello@floorcandy.com.au" class="btn btn-pink btn-xl">Get My Free Quote →</a>
+      <a href="tel:+61400000000" class="btn btn-ghost btn-lg">📞 Call Now</a>
+    </div>
+    <p class="cta-sub reveal d3">
+      <a href="tel:+61400000000">+61 400 000 000</a> &nbsp;·&nbsp;
+      <a href="mailto:hello@floorcandy.com.au">hello@floorcandy.com.au</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="f-logo">FLOOR <span class="grad-text">CANDY</span></div>
+        <p class="f-tag">Premium epoxy coatings, concrete sealing, and decorative systems for spaces that demand attention.</p>
+      </div>
+      <div>
+        <div class="f-head">Quick Links</div>
+        <ul class="f-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="f-contact">
+        <div class="f-head">Contact</div>
+        <p><a href="tel:+61400000000">+61 400 000 000</a></p>
+        <p><a href="mailto:hello@floorcandy.com.au">hello@floorcandy.com.au</a></p>
+        <p>Servicing Australia-Wide</p>
+      </div>
+    </div>
+    <div class="f-bar">
+      <p>© 2026 Floor Candy. All rights reserved.</p>
+      <div class="f-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE BAR -->
+<div class="mob-bar">
+  <a href="tel:+61400000000" class="m-call">📞 Call Now</a>
+  <a href="#contact" class="m-quote">Get a Quote</a>
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+  // Mobile menu
+  const ham = document.getElementById('ham');
+  const mob = document.getElementById('mobMenu');
+  const cls = document.getElementById('mobClose');
+  ham.addEventListener('click', () => mob.classList.add('open'));
+  cls.addEventListener('click', () => mob.classList.remove('open'));
+  document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Counter animation
+  const co = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.target, dur = 1600;
+      const step = target / (dur / 16);
+      let cur = 0;
+      const t = setInterval(() => {
+        cur += step;
+        if (cur >= target) { el.textContent = target; clearInterval(t); }
+        else { el.textContent = Math.floor(cur); }
+      }, 16);
+      co.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.ctr').forEach(el => co.observe(el));
+
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
