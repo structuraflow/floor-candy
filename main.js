@@ -217,4 +217,94 @@
     });
   }
 
+  /* ── BEFORE / AFTER SLIDER ── */
+  const baSlider = document.getElementById('baSlider');
+  if (baSlider) {
+    const baBefore  = baSlider.querySelector('.ba-before');
+    const baDivider = document.getElementById('baDivider');
+    let dragging = false;
+    let pct = 50;
+
+    function baSetPos(clientX) {
+      const rect = baSlider.getBoundingClientRect();
+      pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+      baBefore.style.clipPath  = `inset(0 ${100 - pct}% 0 0)`;
+      baDivider.style.left = pct + '%';
+    }
+
+    baSlider.addEventListener('mousedown',  e => { dragging = true; baSetPos(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove',    e => { if (dragging) baSetPos(e.clientX); });
+    window.addEventListener('mouseup',      ()  => { dragging = false; });
+    baSlider.addEventListener('touchstart', e => { dragging = true; baSetPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove',    e => { if (dragging) baSetPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend',     ()  => { dragging = false; });
+  }
+
+  /* ── COST ESTIMATOR ── */
+  const estSqmInput = document.getElementById('estSqm');
+  const estRangeInput = document.getElementById('estRange');
+  const estLowEl  = document.getElementById('estLow');
+  const estHighEl = document.getElementById('estHigh');
+  const estNoteEl = document.getElementById('estNote');
+  const estOpts   = document.querySelectorAll('.est-opt');
+
+  if (estSqmInput && estOpts.length) {
+    let rateMin = 65, rateMax = 90;
+
+    estOpts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        estOpts.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        rateMin = +btn.dataset.rate;
+        rateMax = +btn.dataset.max;
+        calcEst();
+      });
+    });
+
+    function calcEst() {
+      const sqm = parseFloat(estSqmInput.value) || parseFloat(estRangeInput.value) || 0;
+      if (!sqm || sqm <= 0) {
+        estLowEl.textContent = '—'; estHighEl.textContent = '—';
+        if (estNoteEl) estNoteEl.style.display = 'block';
+        return;
+      }
+      if (estNoteEl) estNoteEl.style.display = 'none';
+      estLowEl.textContent  = '$' + Math.round(sqm * rateMin).toLocaleString('en-AU');
+      estHighEl.textContent = '$' + Math.round(sqm * rateMax).toLocaleString('en-AU');
+    }
+
+    estSqmInput.addEventListener('input', () => {
+      const v = parseFloat(estSqmInput.value);
+      if (estRangeInput && v >= 10 && v <= 500) estRangeInput.value = v;
+      calcEst();
+    });
+    if (estRangeInput) {
+      estRangeInput.addEventListener('input', () => {
+        estSqmInput.value = estRangeInput.value;
+        calcEst();
+      });
+    }
+    calcEst();
+  }
+
+  /* ── FINISH SELECTOR ── */
+  const finishSwatches = document.querySelectorAll('.finish-swatch');
+  const finishPreviewImg = document.getElementById('finishPreview');
+  const finishLabelEl = document.getElementById('finishLabel');
+
+  if (finishSwatches.length && finishPreviewImg) {
+    finishSwatches.forEach(sw => {
+      sw.addEventListener('click', () => {
+        finishSwatches.forEach(s => s.classList.remove('active'));
+        sw.classList.add('active');
+        finishPreviewImg.style.opacity = '0';
+        setTimeout(() => {
+          finishPreviewImg.src = sw.dataset.img;
+          if (finishLabelEl) finishLabelEl.textContent = sw.dataset.name;
+          finishPreviewImg.style.opacity = '1';
+        }, 220);
+      });
+    });
+  }
+
 })();

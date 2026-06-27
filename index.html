@@ -186,6 +186,35 @@
   </div>
 </section>
 
+<!-- BEFORE / AFTER SLIDER -->
+<section class="section ba-section">
+  <div class="container">
+    <div class="section-header reveal text-center">
+      <div class="eyebrow">Transformation</div>
+      <h2 class="section-heading">Before <span class="grad-text">&amp;</span> After</h2>
+      <p style="color:var(--muted); font-size:15px; margin-top:12px;">Drag the handle left or right to reveal the transformation.</p>
+    </div>
+    <div class="ba-wrap reveal d1">
+      <div class="ba-slider" id="baSlider">
+        <div class="ba-after">
+          <img src="assets/images/fc4.jpg" alt="Finished flake epoxy garage floor" draggable="false">
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+        <div class="ba-before">
+          <img src="assets/images/fc2.jpg" alt="Concrete surface during preparation" draggable="false">
+          <span class="ba-label ba-label-before">Before</span>
+        </div>
+        <div class="ba-divider" id="baDivider">
+          <div class="ba-line-top"></div>
+          <div class="ba-btn">⟺</div>
+          <div class="ba-line-bot"></div>
+        </div>
+      </div>
+    </div>
+    <p class="ba-note reveal d2">Surface prep shown on left. Completed flake epoxy installation on right. Results vary by substrate and finish selected.</p>
+  </div>
+</section>
+
 <!-- WHY FLOOR CANDY -->
 <section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="container">
@@ -257,6 +286,27 @@
   </div>
 </section>
 
+<!-- WARRANTY BAND -->
+<div class="warranty-band">
+  <div class="container">
+    <div class="warranty-inner">
+      <div class="warranty-icon-wrap">
+        <span class="warranty-icon">◈</span>
+      </div>
+      <div class="warranty-content reveal">
+        <h3>20-Year Workmanship Guarantee</h3>
+        <p>Every floor we install is backed by our industry-leading 20-year workmanship guarantee. If the coating fails due to our application, we fix it — at no cost to you. No fine print.</p>
+      </div>
+      <div class="warranty-badges reveal d1">
+        <div class="w-badge"><span class="w-badge-ico">✓</span> Licensed Applicators</div>
+        <div class="w-badge"><span class="w-badge-ico">✓</span> Fully Insured</div>
+        <div class="w-badge"><span class="w-badge-ico">✓</span> 20-Yr Guarantee</div>
+        <div class="w-badge"><span class="w-badge-ico">✓</span> 5-Star Rated</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- TESTIMONIALS -->
 <section class="section" style="border-top: 1px solid var(--border);">
   <div class="container">
@@ -282,6 +332,54 @@
         <blockquote>The resin benchtop is the absolute centrepiece of our kitchen renovation. Everyone who visits asks who did it. Already sent three referrals their way and they've all been thrilled.</blockquote>
         <div class="testi-name">Priya K.</div>
         <div class="testi-loc">Sydney, NSW</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST ESTIMATOR -->
+<section class="section estimator-section">
+  <div class="container">
+    <div class="est-grid">
+      <div class="est-content reveal">
+        <div class="eyebrow">Price Estimator</div>
+        <h2 class="section-heading">How Much Will<br>Your Floor Cost?</h2>
+        <p>Get a ballpark figure instantly. Select your service and enter your floor area — our free on-site quote gives you the exact price.</p>
+        <div class="est-disclaimer">Estimates are indicative only. Final price depends on surface condition, current coating, access and finish selected.</div>
+        <a href="contact.html" class="btn btn-ghost btn-lg" style="margin-top:32px;">Book Free On-Site Quote →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="est-card">
+          <div class="est-field">
+            <label>Select Service</label>
+            <div class="est-options">
+              <button class="est-opt active" data-rate="65" data-max="90">Epoxy Coating</button>
+              <button class="est-opt" data-rate="95" data-max="140">Metallic / Flake</button>
+              <button class="est-opt" data-rate="40" data-max="65">Concrete Sealing</button>
+              <button class="est-opt" data-rate="28" data-max="48">Driveway Sealing</button>
+              <button class="est-opt" data-rate="60" data-max="100">Stone Polishing</button>
+            </div>
+          </div>
+          <div class="est-field">
+            <label>Floor Area</label>
+            <div class="est-sqm-wrap">
+              <input type="number" id="estSqm" placeholder="Enter m²" min="1" max="10000">
+              <span class="est-unit">m²</span>
+            </div>
+            <input type="range" id="estRange" min="10" max="500" value="60" class="est-range">
+            <div class="est-range-labels"><span>10m²</span><span>500m²</span></div>
+          </div>
+          <div class="est-result" id="estResult">
+            <div class="est-result-label">Estimated Investment</div>
+            <div class="est-prices">
+              <span class="est-price grad-text" id="estLow">—</span>
+              <span class="est-dash">–</span>
+              <span class="est-price grad-text" id="estHigh">—</span>
+            </div>
+            <div class="est-note" id="estNote">Enter your floor area above</div>
+          </div>
+          <a href="contact.html" class="btn btn-pink" style="width:100%; justify-content:center; margin-top:20px;">Confirm My Quote Free →</a>
+        </div>
       </div>
     </div>
   </div>
