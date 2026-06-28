@@ -292,8 +292,7 @@ footer {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('assets/images/fc1.jpg');
-  background-size: cover; background-position: center top;
+  background: #0a0a0a;
   will-change: transform;
 }
 .hero-bg video {
