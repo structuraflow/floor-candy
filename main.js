@@ -43,6 +43,14 @@
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }
 
+  /* ── HERO VIDEO AUTOPLAY ── */
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    heroVideo.play().catch(() => {
+      document.addEventListener('touchstart', () => heroVideo.play(), { once: true });
+    });
+  }
+
   /* ── PARALLAX HERO ── */
   const heroBg = document.querySelector('.hero-bg');
   function parallax() {
