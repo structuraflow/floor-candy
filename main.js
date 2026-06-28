@@ -54,7 +54,7 @@
   /* ── PARALLAX HERO ── */
   const heroBg = document.querySelector('.hero-bg');
   function parallax() {
-    if (!heroBg) return;
+    if (!heroBg || window.innerWidth < 768) return;
     heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
   }
 
