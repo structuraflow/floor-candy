@@ -46,8 +46,14 @@
   /* ── HERO VIDEO AUTOPLAY ── */
   const heroVideo = document.getElementById('heroVideo');
   if (heroVideo) {
-    heroVideo.play().catch(() => {
-      document.addEventListener('touchstart', () => heroVideo.play(), { once: true });
+    const showVideo = () => heroVideo.classList.add('playing');
+    heroVideo.load();
+    heroVideo.play().then(showVideo).catch(() => {
+      const onTouch = () => {
+        heroVideo.play().then(showVideo);
+        document.removeEventListener('touchstart', onTouch);
+      };
+      document.addEventListener('touchstart', onTouch);
     });
   }
 

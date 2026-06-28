@@ -301,9 +301,14 @@ footer {
   object-fit: cover; object-position: center;
   pointer-events: none;
 }
-.hero-bg video::-webkit-media-controls { display: none !important; }
-.hero-bg video::-webkit-media-controls-enclosure { display: none !important; }
-.hero-bg video::-webkit-media-controls-panel { display: none !important; }
+.hero-bg video::-webkit-media-controls,
+.hero-bg video::-webkit-media-controls-enclosure,
+.hero-bg video::-webkit-media-controls-panel,
+.hero-bg video::-webkit-media-controls-play-button,
+.hero-bg video::-webkit-media-controls-start-playback-button,
+.hero-bg video::-webkit-media-controls-overlay-play-button { display: none !important; opacity: 0 !important; }
+.hero-bg video { opacity: 0; transition: opacity 0.6s ease; }
+.hero-bg video.playing { opacity: 1; }
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(105deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.45) 60%, rgba(10,10,10,0.2) 100%);
