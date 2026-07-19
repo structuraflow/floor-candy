@@ -324,7 +324,7 @@ html.cine .hero-hint { display: flex; }
 html.cine .hero.started .hero-hint { opacity: 0; }
 .hero-bg {
   position: absolute; inset: 0;
-  background: #0a0a0a url('assets/images/hero-cinematic.jpg') center / cover no-repeat;
+  background: #0a0a0a url('assets/images/hero-frame1.jpg') center / cover no-repeat;
   will-change: transform;
 }
 .hero-bg video {
@@ -339,7 +339,7 @@ html.cine .hero.started .hero-hint { opacity: 0; }
 .hero-bg video::-webkit-media-controls-play-button,
 .hero-bg video::-webkit-media-controls-start-playback-button,
 .hero-bg video::-webkit-media-controls-overlay-play-button { display: none !important; opacity: 0 !important; }
-.hero-bg video { opacity: 0; transition: opacity 0.6s ease; }
+.hero-bg video { opacity: 0; transition: opacity 0.25s ease; }
 .hero-bg video.playing { opacity: 1; }
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
@@ -802,7 +802,7 @@ html.cine .hero.started .hero-hint { opacity: 0; }
   .section { padding: 56px 0; }
   .hero { min-height: 100svh; }
   .hero-sticky { min-height: 100svh; }
-  .hero-bg { background-image: url('assets/images/hero-cinematic-mobile.jpg'); }
+  .hero-bg { background-image: url('assets/images/hero-frame1-mobile.jpg'); }
   .svc-tease-section { background-image: url('assets/images/showroom-dark-mobile.jpg'); }
   .process-bg { background-image: url('assets/images/process-epoxy-mobile.jpg'); }
   .hero h1 { font-size: clamp(40px, 11vw, 64px); }
