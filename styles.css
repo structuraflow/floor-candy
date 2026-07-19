@@ -383,11 +383,11 @@ html.cine .hero.started .hero-hint { opacity: 0; }
 /* ── SERVICE TEASER SECTION (Lamborghini backdrop) ── */
 .svc-tease-section {
   position: relative; border-bottom: 1px solid var(--border);
-  background: #0a0a0a url('assets/images/lambo-garage.jpg') center / cover no-repeat;
+  background: #0a0a0a url('assets/images/showroom-dark.jpg') center / cover no-repeat;
 }
 .svc-tease-section::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.78) 45%, rgba(10,10,10,0.88) 100%);
+  background: linear-gradient(to bottom, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.75) 100%);
 }
 .svc-tease-section .container { position: relative; z-index: 1; }
 
@@ -500,12 +500,12 @@ html.cine .hero.started .hero-hint { opacity: 0; }
 }
 .process-bg {
   position: absolute; inset: 0;
-  background-image: url('assets/images/fc2.jpg');
+  background-image: url('assets/images/process-epoxy.jpg');
   background-size: cover; background-position: center;
 }
 .process-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: rgba(10,10,10,0.88);
+  background: rgba(10,10,10,0.78);
 }
 .process-content { position: relative; z-index: 2; }
 .process-grid {
@@ -803,7 +803,8 @@ html.cine .hero.started .hero-hint { opacity: 0; }
   .hero { min-height: 100svh; }
   .hero-sticky { min-height: 100svh; }
   .hero-bg { background-image: url('assets/images/hero-cinematic-mobile.jpg'); }
-  .svc-tease-section { background-image: url('assets/images/lambo-garage-mobile.jpg'); }
+  .svc-tease-section { background-image: url('assets/images/showroom-dark-mobile.jpg'); }
+  .process-bg { background-image: url('assets/images/process-epoxy-mobile.jpg'); }
   .hero h1 { font-size: clamp(40px, 11vw, 64px); }
   .hero-sub { font-size: 15px; max-width: 100%; }
   .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
