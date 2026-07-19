@@ -69,6 +69,7 @@ ul { list-style: none; }
   animation: loaderPulse 1.4s ease forwards;
 }
 .loader-logo span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.loader-logo img { width: min(280px, 58vw); height: auto; display: block; }
 @keyframes loaderPulse {
   0%   { opacity: 0; transform: translateY(12px); }
   40%  { opacity: 1; transform: translateY(0); }
@@ -172,7 +173,9 @@ nav.scrolled {
   font-size: 20px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   white-space: nowrap; flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 10px;
 }
+.nav-mark { height: 34px; width: auto; display: block; }
 .nav-links {
   display: flex; gap: 28px; align-items: center;
 }
@@ -244,7 +247,9 @@ footer {
   font-family: var(--font-head);
   font-size: 22px; font-weight: 700;
   letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 14px;
+  display: inline-flex; align-items: center; gap: 10px;
 }
+.footer-mark { height: 30px; width: auto; display: block; }
 .footer-tagline { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 240px; }
 .footer-col-head {
   font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
@@ -286,13 +291,40 @@ footer {
 /* ── HOMEPAGE HERO ── */
 .hero {
   position: relative; min-height: 100vh;
+}
+.hero-sticky {
+  position: relative; width: 100%; min-height: 100vh;
   display: flex; align-items: center;
   padding-top: var(--nav-h);
   overflow: hidden;
 }
+/* Cinematic scroll mode (desktop): tall track + sticky stage, JS scrubs the video */
+html.cine .hero { height: 420vh; }
+html.cine .hero-sticky { position: sticky; top: 0; height: 100vh; min-height: 0; }
+html.cine .hero-content {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+  pointer-events: none;
+}
+html.cine .hero.revealed .hero-content { opacity: 1; transform: none; pointer-events: auto; }
+.hero-hint {
+  position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%);
+  display: none; flex-direction: column; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(240,240,240,0.55); z-index: 3;
+  transition: opacity 0.6s ease;
+}
+.hero-hint-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, transparent, var(--pink));
+  animation: hintPulse 2s ease-in-out infinite;
+}
+@keyframes hintPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+html.cine .hero-hint { display: flex; }
+html.cine .hero.started .hero-hint { opacity: 0; }
 .hero-bg {
   position: absolute; inset: 0;
-  background: #0a0a0a;
+  background: #0a0a0a url('assets/images/hero-cinematic.jpg') center / cover no-repeat;
   will-change: transform;
 }
 .hero-bg video {
@@ -347,6 +379,17 @@ footer {
 }
 .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(240,240,240,0.5); font-weight: 500; letter-spacing: 0.04em; }
 .trust-icon { color: var(--gold); font-size: 13px; }
+
+/* ── SERVICE TEASER SECTION (Lamborghini backdrop) ── */
+.svc-tease-section {
+  position: relative; border-bottom: 1px solid var(--border);
+  background: #0a0a0a url('assets/images/lambo-garage.jpg') center / cover no-repeat;
+}
+.svc-tease-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.78) 45%, rgba(10,10,10,0.88) 100%);
+}
+.svc-tease-section .container { position: relative; z-index: 1; }
 
 /* ── SERVICE TEASER CARDS ── */
 .svc-tease-grid {
@@ -758,6 +801,9 @@ footer {
   .nav-right .btn { display: none; }
   .section { padding: 56px 0; }
   .hero { min-height: 100svh; }
+  .hero-sticky { min-height: 100svh; }
+  .hero-bg { background-image: url('assets/images/hero-cinematic-mobile.jpg'); }
+  .svc-tease-section { background-image: url('assets/images/lambo-garage-mobile.jpg'); }
   .hero h1 { font-size: clamp(40px, 11vw, 64px); }
   .hero-sub { font-size: 15px; max-width: 100%; }
   .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }

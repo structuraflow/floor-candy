@@ -43,24 +43,82 @@
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }
 
-  /* ── HERO VIDEO AUTOPLAY ── */
+  /* ── HERO VIDEO: cinematic scroll-scrub on desktop, autoplay loop elsewhere ── */
   const heroVideo = document.getElementById('heroVideo');
+  const heroSection = document.getElementById('cineHero');
+  let cineMode = false;
+
   if (heroVideo) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const desktop = window.matchMedia('(hover: hover) and (min-width: 1025px)').matches;
+    const cineSrc = heroVideo.dataset.srcCine;
+    const loopSrc = heroVideo.dataset.srcLoop;
     const showVideo = () => heroVideo.classList.add('playing');
-    heroVideo.load();
-    heroVideo.play().then(showVideo).catch(() => {
-      const onTouch = () => {
-        heroVideo.play().then(showVideo);
-        document.removeEventListener('touchstart', onTouch);
-      };
-      document.addEventListener('touchstart', onTouch);
-    });
+
+    const startLoop = () => {
+      heroVideo.src = loopSrc;
+      heroVideo.load();
+      heroVideo.play().then(showVideo).catch(() => {
+        const onTouch = () => {
+          heroVideo.play().then(showVideo);
+          document.removeEventListener('touchstart', onTouch);
+        };
+        document.addEventListener('touchstart', onTouch);
+      });
+    };
+
+    if (desktop && !reduced && cineSrc && heroSection) {
+      // Probe the cinematic file; fall back to the loop if it isn't deployed yet
+      heroVideo.preload = 'auto';
+      heroVideo.src = cineSrc;
+      heroVideo.load();
+
+      let duration = 0, target = 0, current = 0;
+
+      heroVideo.addEventListener('loadedmetadata', () => {
+        duration = heroVideo.duration;
+        cineMode = true;
+        document.documentElement.classList.add('cine');
+        heroVideo.pause();
+        onCineScroll();
+      });
+      heroVideo.addEventListener('loadeddata', () => { if (cineMode) showVideo(); });
+      heroVideo.addEventListener('error', startLoop);
+
+      function onCineScroll() {
+        if (!cineMode) return;
+        const rect = heroSection.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+        target = p;
+        heroSection.classList.toggle('started', p > 0.02);
+        heroSection.classList.toggle('revealed', p > 0.7);
+      }
+
+      let seekBusy = false;
+      heroVideo.addEventListener('seeked', () => { seekBusy = false; });
+      (function scrub() {
+        if (cineMode && duration && heroVideo.readyState >= 3 && !seekBusy) {
+          current += (target - current) * 0.18;
+          const t = current * Math.max(0.01, duration - 0.05);
+          if (Math.abs(heroVideo.currentTime - t) > 0.02) {
+            seekBusy = true;
+            heroVideo.currentTime = t;
+          }
+        }
+        requestAnimationFrame(scrub);
+      })();
+
+      window.addEventListener('scroll', onCineScroll, { passive: true });
+    } else if (loopSrc) {
+      startLoop();
+    }
   }
 
-  /* ── PARALLAX HERO ── */
+  /* ── PARALLAX HERO (loop mode only — sticky handles cinematic mode) ── */
   const heroBg = document.querySelector('.hero-bg');
   function parallax() {
-    if (!heroBg || window.innerWidth < 768) return;
+    if (!heroBg || cineMode || window.innerWidth < 768) return;
     heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
   }
 
