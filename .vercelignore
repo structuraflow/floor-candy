@@ -1,0 +1,5 @@
+# Kept in the repo for provenance and tooling, but not deployed.
+assets/_quarantine
+assets/images
+tools
+docs
