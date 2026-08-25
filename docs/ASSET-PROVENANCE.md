@@ -14,9 +14,55 @@ Every visual asset in the deployed site, where it came from, and whether it may 
 | `assets/images/fc2.jpg` → `assets/img/prep-grinding-extraction-*.{webp,jpg}` | Genuine Floor Candy job photo (phone camera, 640×1422) | Preparation in progress — floor grinder + Hilti VC 40-U dust extractor | Home (preparation section), Process, Projects | **Yes** |
 | `assets/images/fc1.jpg` → `assets/img/polished-concrete-finished-*.{webp,jpg}` | Genuine Floor Candy job photo (phone camera, 640×1422) | Finished polished concrete interior | Home (preparation section, services card), Projects | **Yes** |
 | `assets/images/fc3.jpg` → `assets/img/driveway-sealed-*.{webp,jpg}` | Genuine Floor Candy job photo (phone camera, 1440×648) | Finished sealed concrete driveway | Home (services card, recent work), Projects | **Yes** |
-| `assets/img/og-floor-candy.jpg` | Crop of fc4.jpg | Social share card | All pages (`og:image`) | Yes |
 
-**Edits applied to the genuine set:** resize (Lanczos 3), mild unsharp mask, and AVIF/WebP/JPEG re-encoding only. **No content was altered** — the floors, finishes, geometry, lighting and settings are exactly as photographed.
+### Added 25 August 2026 — the social-export set
+
+Thirty-four job photographs supplied by the owner, exported from Floor Candy's
+own social posts. Fourteen are used; the rest are held in `~/Downloads/floor candy/`.
+
+| File(s) | Source | Type | Used on | Project proof? |
+|---|---|---|---|---|
+| `ba-drive-before-414.*` / `ba-drive-after-414.*` | Genuine job photos, same property | Driveway before coating / after coating | Home (before-and-after slider) | **Yes** |
+| `ba-garage-before-414.*` / `ba-garage-after-414.*` | Genuine job photos, same property | Garage mid-preparation / completed flake floor | Home (before-and-after slider) | **Yes** |
+| `work-flake-garage`, `work-drive-dark`, `work-flake-cream`, `work-alfresco`, `work-flake-brick`, `work-flake-tan`, `work-drive-blue`, `work-path-light` (all `-414.{avif,webp,jpg}`) | Genuine job photos | Finished floors, driveways, paths | Home (recent work grid) | **Yes** |
+| `prep-grind-{600,900,1200}.{avif,webp,jpg}` | Genuine job photo, 1536×2048 original | Grinding a driveway, extraction hose in frame | Home (mechanism section) | **Yes** |
+
+**How the two before/after pairs were verified as genuine pairs.** Each pair was
+checked side by side against fixed features in frame before being presented as
+the same floor: the driveway pair shares the same rock retaining wall, brick
+facade and kerb line; the garage pair shares the same ceiling truss rack, wall
+doors and louvre door. The garage "before" is labelled **During prep**, not
+"Before", because a dust extractor is visible in shot — the slab is already
+part-way through preparation. Nothing is presented as a same-frame comparison.
+
+**Resolution caveat.** These are 414×414 social exports, not originals. The
+recent-work grid is emitted at native size and displayed no larger. Only
+`prep-grind-*` came through at full size (1536×2048).
+
+### AI upscaling — the four before/after images only ⚠️
+
+The four slider images are displayed up to ~880 px, so the 414 px source was
+being stretched 2×. They were upscaled to 2160×2160 with **Higgsfield →
+`bytedance_image_upscale`** (2K, 2 credits each, 25 Aug 2026) and the web set is
+derived from that. Job IDs: `82334bfa`, `47d2dacf`, `f84add0f`, `9990e7f2`.
+2K masters kept in `assets/_originals/` (not deployed).
+
+**This is a generative process, so each result was compared against its source
+before use.** All four resolve real detail rather than inventing it — the
+driveway pair preserves the brick courses, rock wall, planting and the exact
+staining pattern on the slab; the garage pair preserves the dust extractor, its
+hose routing, the ceiling truss rack, the wall doors and the slab's marks.
+Nothing was added, removed or restaged. **The remaining job photographs are not
+upscaled** — only these four, because only these are displayed large enough to
+need it.
+
+If original-resolution files ever come off the owner's phone, they should replace
+these outright: a real pixel beats a reconstructed one, and it removes a
+generative step from the proof imagery.
+
+| `assets/img/og-floor-candy.jpg` | Crop of the hero still | Social share card | All pages (`og:image`) | **No — illustration** |
+
+**Edits applied to the genuine set:** resize (Lanczos 3), crop (`prep-grind` only), and AVIF/WebP/JPEG re-encoding. **No content was altered** — no brightening of "after" shots, no colour grading, no retouching. The floors, finishes, geometry, lighting and settings are exactly as photographed.
 
 ---
 
@@ -24,8 +70,19 @@ Every visual asset in the deployed site, where it came from, and whether it may 
 
 | File | Source | Type | Used on | Project proof? |
 |---|---|---|---|---|
-| `assets/videos/hero-loop.mp4` | **Higgsfield → Seedance 2.0**, image-to-video, `start_image` = genuine `fc4.jpg` | 12.08s silent loop, 1920×824, H.264, 2.8 MB | Homepage hero background (desktop only) | **No — motion only** |
-| `assets/img/hero-poster-*.{avif,webp,jpg}` | First frame of `hero-loop.mp4` | Hero poster / LCP image | Homepage hero | **No — see note** |
+| `assets/img/hero-garage-{720,1080,1376}.{avif,webp,jpg}` | **Higgsfield**, text-to-image, `hf_20260815_085454_fa1de56c…png`, 1376×768 | Dark flake floor in a modern concrete garage | Homepage hero background | **No — illustration** |
+| `assets/img/og-floor-candy.jpg` | 1200×630 crop of the above | Social share card | All pages (`og:image`) | **No — illustration** |
+| ~~`assets/videos/hero-loop.mp4`~~ | Higgsfield → Seedance 2.0 | 12.08s silent loop | **Retired 25 Aug 2026.** In git history; excluded from deploy via `.vercelignore` | — |
+| ~~`assets/img/hero-poster-*`~~ | First frame of the above | Hero poster | **Retired 25 Aug 2026.** Same as above | — |
+
+**The hero is disclosed on the page itself.** Directly beneath the hero copy:
+*"This hero image is an illustration. Every other photograph on this page is a
+Floor Candy job."* This is deliberate. The image is a wholly generated space —
+not derived from a Floor Candy floor, unlike the retired video — so leaving it
+unlabelled would imply a project claim the business cannot support. Labelling it
+converts a liability into a trust signal, and it is the only generated asset that
+ships. It carries an empty `alt` and is never captioned with a location, client
+or date.
 
 **Generation record for `hero-loop.mp4`:**
 - Platform: Higgsfield (Pro plan) · Model: `seedance_2_0` · Mode: image-to-video

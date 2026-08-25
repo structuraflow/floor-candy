@@ -241,6 +241,73 @@
     paint();
   }
 
+  /* ---------- Homepage quick-capture form ----------
+     Single step, three fields. Same endpoint and attribution as the full
+     assessment form; validated on blur and on submit. */
+  var quick = document.getElementById('quickForm');
+  if (quick) {
+    var qCheck = function (f) {
+      var v = f.value.trim();
+      if (!v) return 'This field is required.';
+      if (f.type === 'tel' && v.replace(/[^\d]/g, '').length < 8) return 'Please enter a valid phone number.';
+      return '';
+    };
+    var qPaint = function (f) {
+      var slot = quick.querySelector('[data-err="' + f.name + '"]');
+      var msg = qCheck(f);
+      if (slot) slot.textContent = msg;
+      f.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return !msg;
+    };
+    quick.querySelectorAll('[required]').forEach(function (f) {
+      f.addEventListener('blur', function () { qPaint(f); });
+    });
+
+    quick.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = true, first = null;
+      quick.querySelectorAll('[required]').forEach(function (f) {
+        if (!qPaint(f) && ok) { ok = false; first = f; }
+      });
+      if (!ok) { if (first) first.focus({ preventScroll: true }); return; }
+
+      var btn = quick.querySelector('[data-submit]');
+      var status = quick.querySelector('.form-status');
+      var attr = attribution();
+      Object.keys(attr).forEach(function (k) {
+        if (quick.querySelector('[name="' + k + '"]')) return;
+        var i = document.createElement('input');
+        i.type = 'hidden'; i.name = k; i.value = attr[k];
+        quick.appendChild(i);
+      });
+
+      var label = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      if (status) status.textContent = '';
+
+      fetch(quick.getAttribute('action'), {
+        method: 'POST', body: new FormData(quick), headers: { Accept: 'application/json' }
+      })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
+        .then(function () {
+          var done = document.getElementById('quickSuccess');
+          quick.hidden = true;
+          if (done) {
+            done.hidden = false;
+            done.setAttribute('tabindex', '-1');
+            done.focus({ preventScroll: true });
+          }
+        })
+        .catch(function () {
+          btn.disabled = false; btn.textContent = label;
+          if (status) {
+            status.innerHTML = 'Could not send that. Please call ' +
+              '<a href="tel:+61435193845">0435 193 845</a> and we\'ll pick it up from there.';
+          }
+        });
+    });
+  }
+
   /* ---------- Current year ---------- */
   var y = document.getElementById('yr');
   if (y) y.textContent = new Date().getFullYear();

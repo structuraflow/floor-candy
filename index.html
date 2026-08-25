@@ -4,23 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Epoxy &amp; Concrete Floors | Newcastle &amp; Hunter | Floor Candy</title>
-<meta name="description" content="Floor Candy coats garage floors, driveways and interior concrete across Newcastle, Lake Macquarie and Maitland. Diamond-ground preparation, owner-led, free on-site floor assessment.">
+<meta name="description" content="Garage floors, driveways and interior concrete across Newcastle, Lake Macquarie and Maitland. Every slab diamond-ground first. Free on-site floor assessment, fixed written price.">
 <link rel="canonical" href="https://www.floorcandyepoxy.com/">
-<meta name="theme-color" content="#0B0B0C">
+<meta name="theme-color" content="#E9EBEC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16191B" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Epoxy &amp; Concrete Floor Coatings | Newcastle &amp; the Hunter">
-<meta property="og:description" content="Garage floors, driveways and interior concrete across Newcastle, Lake Macquarie and Maitland. Diamond-ground preparation. Free on-site floor assessment.">
+<meta property="og:title" content="Coatings don't fail. Preparation does. | Floor Candy">
+<meta property="og:description" content="Garage floors, driveways and interior concrete across Newcastle and the Hunter. Diamond-ground preparation. Free on-site floor assessment.">
 <meta property="og:url" content="https://www.floorcandyepoxy.com/">
 <meta property="og:image" content="https://www.floorcandyepoxy.com/assets/img/og-floor-candy.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/img/hero-poster-1920.avif" as="image" type="image/avif" media="(min-width: 1441px)">
-<link rel="preload" href="assets/img/hero-poster-1440.avif" as="image" type="image/avif" media="(min-width: 861px) and (max-width: 1440px)">
-<link rel="preload" href="assets/img/hero-poster-720.avif" as="image" type="image/avif" media="(max-width: 860px)">
-<link rel="stylesheet" href="styles.css">
+<link rel="preload" href="assets/img/hero-garage-1376.avif" as="image" type="image/avif" media="(min-width: 1081px)">
+<link rel="preload" href="assets/img/hero-garage-1080.avif" as="image" type="image/avif" media="(min-width: 721px) and (max-width: 1080px)">
+<link rel="preload" href="assets/img/hero-garage-720.avif" as="image" type="image/avif" media="(max-width: 720px)">
+<link rel="stylesheet" href="styles.css?v=6">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -35,6 +38,11 @@
   "telephone": "+61435193845",
   "email": "admin@floorcandyepoxy.com",
   "image": "https://www.floorcandyepoxy.com/assets/img/og-floor-candy.jpg",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3"
+  },
   "areaServed": [
     {"@type":"City","name":"Newcastle","addressRegion":"NSW","addressCountry":"AU"},
     {"@type":"City","name":"Lake Macquarie","addressRegion":"NSW","addressCountry":"AU"},
@@ -53,16 +61,19 @@
 
 <header class="hdr">
   <div class="container hdr-in">
-    <a class="brand" href="/"><img src="assets/logo-mark.png" alt="" width="26" height="26">Floor <span>Candy</span></a>
+    <a class="brand" href="/"><picture><source srcset="assets/logo-mark-light.png" media="(prefers-color-scheme: dark)"><img src="assets/logo-mark.png" alt="" width="26" height="26"></picture>Floor <span>Candy</span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="/garage-floor-coating" >Garage floors</a>
+      <a href="/garage-floor-coating">Garage floors</a>
       <a href="/projects">Projects</a>
       <a href="/process">Process</a>
       <a href="/about">About</a>
     </nav>
     <div class="hdr-cta">
-      <a class="hdr-phone" href="tel:+61435193845">0435&nbsp;193&nbsp;845</a>
-      <a class="btn" href="/floor-assessment">Free floor assessment</a>
+      <a class="hdr-phone" href="tel:+61435193845">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.7 1.5a1.3 1.3 0 0 0-1.2.4L1.7 2.7C.8 3.6.7 5 1.4 6.4a17 17 0 0 0 8.2 8.2c1.4.7 2.8.6 3.7-.3l.8-.8a1.3 1.3 0 0 0-.1-1.9l-2-1.6a1.3 1.3 0 0 0-1.6 0l-.9.7a12 12 0 0 1-3.7-3.7l.7-.9a1.3 1.3 0 0 0 0-1.6l-1.6-2a1.3 1.3 0 0 0-.7-.5Z"/></svg>
+        0435&nbsp;193&nbsp;845
+      </a>
+      <a class="btn" href="/floor-assessment">Book free assessment</a>
       <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Menu"><span></span></button>
     </div>
   </div>
@@ -73,180 +84,126 @@
   <a href="/projects">Projects</a>
   <a href="/process">Process</a>
   <a href="/about">About</a>
-  <a href="/floor-assessment" class="btn btn--lg">Book a free floor assessment</a>
-  <a href="tel:+61435193845" class="btn btn--ghost btn--lg">Call Jarrod — 0435 193 845</a>
+  <a href="/floor-assessment" class="btn btn--lg btn--block">Book my free floor assessment</a>
+  <a href="tel:+61435193845" class="btn btn--ghost btn--lg btn--block">Call Jarrod — 0435 193 845</a>
   <p class="drawer-meta">Servicing Newcastle &amp; the Hunter Region<br>Mon–Fri, 7am–7pm</p>
 </div>
 
 <main id="main">
 
-  <!-- ============ HERO ============ -->
+  <!-- ============ 1. HERO ============ -->
   <section class="hero">
     <div class="hero-media">
-      <!-- Poster carries LCP. main.js attaches the loop after load, and skips it
-           on mobile / save-data / slow connections / reduced-motion. -->
       <picture>
-        <source type="image/avif" srcset="assets/img/hero-poster-1920.avif 1920w, assets/img/hero-poster-1440.avif 1440w, assets/img/hero-poster-1080.avif 1080w, assets/img/hero-poster-720.avif 720w" sizes="100vw">
-        <source type="image/webp" srcset="assets/img/hero-poster-1920.webp 1920w, assets/img/hero-poster-1440.webp 1440w, assets/img/hero-poster-1080.webp 1080w, assets/img/hero-poster-720.webp 720w" sizes="100vw">
-        <img src="assets/img/hero-poster-1440.jpg" alt="Completed flake epoxy garage floor installed by Floor Candy" width="1920" height="824" fetchpriority="high" decoding="async">
+        <source type="image/avif" srcset="assets/img/hero-garage-1376.avif 1376w, assets/img/hero-garage-1080.avif 1080w, assets/img/hero-garage-720.avif 720w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/hero-garage-1376.webp 1376w, assets/img/hero-garage-1080.webp 1080w, assets/img/hero-garage-720.webp 720w" sizes="100vw">
+        <img src="assets/img/hero-garage-1376.jpg" srcset="assets/img/hero-garage-1376.jpg 1376w, assets/img/hero-garage-1080.jpg 1080w, assets/img/hero-garage-720.jpg 720w" sizes="100vw" alt="" width="1376" height="768" fetchpriority="high" decoding="async">
       </picture>
-      <video id="heroVideo" muted loop playsinline preload="none" aria-hidden="true"
-             data-src="assets/videos/hero-loop.mp4"
-             poster="assets/img/hero-poster-1440.jpg"></video>
     </div>
     <div class="hero-scrim"></div>
 
     <div class="container hero-in">
       <div class="hero-copy">
-        <p class="eyebrow">Servicing Newcastle &amp; the Hunter Region</p>
-        <h1>Epoxy and concrete floors,<br><em>prepared properly.</em></h1>
-        <p class="lead">Garage floors, driveways and interior concrete across Newcastle, Lake Macquarie and Maitland. Every slab is assessed and diamond-ground before a drop of coating goes down — because that is what decides whether a floor lasts.</p>
+        <p class="eyebrow">Newcastle · Lake Macquarie · Maitland</p>
+        <h1>Coatings don't fail.<br><em>Preparation does.</em></h1>
+        <p class="lead">Floor Candy coats garage floors, driveways and interior concrete across Newcastle and the Hunter. Every slab is diamond-ground back to sound concrete before a drop goes down — because that, not the product, decides whether your floor is still there in five years.</p>
         <div class="btn-row">
-          <a class="btn btn--lg" href="/floor-assessment">Book a free floor assessment</a>
+          <a class="btn btn--lg" href="/floor-assessment">Book my free floor assessment</a>
           <a class="btn btn--ghost btn--lg" href="tel:+61435193845">Call Jarrod — 0435 193 845</a>
         </div>
         <div class="hero-proof">
           <span class="stars" aria-hidden="true">★★★★★</span>
-          <span class="small"><strong>5.0</strong> from 3 Google reviews</span>
-          <span class="xs">Owner-led · Free on-site assessment</span>
+          <span><strong>5.0</strong> from 3 Google reviews</span>
+          <span class="xs">Owner-led · Free on-site assessment · Fixed price in writing</span>
         </div>
       </div>
     </div>
-    <span class="scroll-cue" aria-hidden="true"><i></i>Scroll</span>
   </section>
 
-  <!-- ============ TRUST STRIP ============ -->
+  <!-- ============ 2. TRUST STRIP ============ -->
   <dl class="trust">
     <div><dt>Owner-led</dt><dd>Jarrod quotes the work, sets the preparation standard and signs it off.</dd></div>
-    <div><dt>Free on-site assessment</dt><dd>We look at the actual slab, then put the scope and price in writing.</dd></div>
+    <div><dt>Free on-site assessment</dt><dd>We look at your actual slab, then put the scope and the price in writing.</dd></div>
     <div><dt>Diamond-ground preparation</dt><dd>Mechanical grinding and industrial dust extraction on every floor.</dd></div>
-    <div><dt>Final walkthrough</dt><dd>You inspect the finished surface before paying the remaining balance.</dd></div>
+    <div><dt>You inspect before you pay</dt><dd>Walk the finished floor with us before the balance is due.</dd></div>
   </dl>
 
-  <!-- ============ PREPARATION → FINISHED ============ -->
+  <!-- ============ 3. PROOF — THE SAME SLAB ============ -->
   <section class="section">
     <div class="container">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">The part you never see</p>
-        <h2 class="h2">Most of the job happens before the coating does.</h2>
-        <p class="lead measure">Coatings fail at the bond, not the surface. These are two of our own floors — one mid-preparation, one finished. The grinding stage is the one that decides which of those you end up with.</p>
+        <p class="eyebrow">Our own work</p>
+        <h2 class="h2">The same slab, before and after.</h2>
+        <p class="lead measure">Drag the handle. Two Floor Candy jobs — a driveway shot from the kerb, and a garage shot from the roller door. Same property, same angle, photographed before we started and after we finished.</p>
       </div>
 
-      <div class="compare">
+      <div class="ba-pair">
         <figure class="fig" data-reveal>
-          <span class="stage stage--prep">During preparation</span>
-          <div class="fig-media">
+          <div class="ba" data-ba>
             <picture>
-              <source type="image/webp" srcset="assets/img/prep-grinding-extraction-900.webp 900w, assets/img/prep-grinding-extraction-600.webp 600w" sizes="(max-width:780px) 100vw, 45vw">
-              <img src="assets/img/prep-grinding-extraction-900.jpg" alt="Floor grinder and Hilti industrial dust extractor part-way through grinding a concrete slab on a Floor Candy job" width="900" height="2000" loading="lazy" decoding="async">
+              <source type="image/avif" srcset="assets/img/ba-drive-after-1200.avif 1200w, assets/img/ba-drive-after-900.avif 900w, assets/img/ba-drive-after-600.avif 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <source type="image/webp" srcset="assets/img/ba-drive-after-1200.webp 1200w, assets/img/ba-drive-after-900.webp 900w, assets/img/ba-drive-after-600.webp 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <img src="assets/img/ba-drive-after-900.jpg" alt="The same driveway after Floor Candy coated it — an even dark finish from the kerb to the door" width="900" height="900" loading="lazy" decoding="async">
             </picture>
+            <div class="ba-top">
+              <picture>
+              <source type="image/avif" srcset="assets/img/ba-drive-before-1200.avif 1200w, assets/img/ba-drive-before-900.avif 900w, assets/img/ba-drive-before-600.avif 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <source type="image/webp" srcset="assets/img/ba-drive-before-1200.webp 1200w, assets/img/ba-drive-before-900.webp 900w, assets/img/ba-drive-before-600.webp 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <img src="assets/img/ba-drive-before-900.jpg" alt="A stained, patchy concrete driveway before Floor Candy started work" width="900" height="900" loading="lazy" decoding="async">
+            </picture>
+            </div>
+            <span class="ba-tag ba-tag--l">Before</span>
+            <span class="ba-tag ba-tag--r">After</span>
+            <button class="ba-handle" type="button" role="slider" aria-label="Reveal the driveway before and after"
+                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span class="ba-knob">◂▸</span></button>
           </div>
           <figcaption>
-            <p class="fig-title">Mechanical grinding with dust extraction</p>
-            <p class="fig-meta">Weak surface material removed and the slab profiled so the system can bond. Industrial extraction keeps the dust out of the rest of the house.</p>
+            <p class="fig-title">Driveway — resurfaced and sealed</p>
+            <p class="fig-meta">Weathered, patchy concrete ground back and coated kerb to garage door.</p>
           </figcaption>
         </figure>
 
         <figure class="fig" data-reveal data-d="1">
-          <span class="stage stage--done">Completed</span>
-          <div class="fig-media">
+          <div class="ba" data-ba>
             <picture>
-              <source type="image/webp" srcset="assets/img/polished-concrete-finished-900.webp 900w, assets/img/polished-concrete-finished-600.webp 600w" sizes="(max-width:780px) 100vw, 45vw">
-              <img src="assets/img/polished-concrete-finished-900.jpg" alt="Finished polished concrete floor completed by Floor Candy" width="900" height="2000" loading="lazy" decoding="async">
+              <source type="image/avif" srcset="assets/img/ba-garage-after-1200.avif 1200w, assets/img/ba-garage-after-900.avif 900w, assets/img/ba-garage-after-600.avif 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <source type="image/webp" srcset="assets/img/ba-garage-after-1200.webp 1200w, assets/img/ba-garage-after-900.webp 900w, assets/img/ba-garage-after-600.webp 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <img src="assets/img/ba-garage-after-900.jpg" alt="The same garage finished with a full grey flake epoxy floor" width="900" height="900" loading="lazy" decoding="async">
             </picture>
+            <div class="ba-top">
+              <picture>
+              <source type="image/avif" srcset="assets/img/ba-garage-before-1200.avif 1200w, assets/img/ba-garage-before-900.avif 900w, assets/img/ba-garage-before-600.avif 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <source type="image/webp" srcset="assets/img/ba-garage-before-1200.webp 1200w, assets/img/ba-garage-before-900.webp 900w, assets/img/ba-garage-before-600.webp 600w" sizes="(max-width:719px) calc(100vw - 40px), (max-width:1240px) 46vw, 570px">
+              <img src="assets/img/ba-garage-before-900.jpg" alt="The same garage part-way through preparation, bare slab with a dust extractor on the floor" width="900" height="900" loading="lazy" decoding="async">
+            </picture>
+            </div>
+            <span class="ba-tag ba-tag--l">During prep</span>
+            <span class="ba-tag ba-tag--r">Completed</span>
+            <button class="ba-handle" type="button" role="slider" aria-label="Reveal the garage during preparation and completed"
+                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span class="ba-knob">◂▸</span></button>
           </div>
           <figcaption>
-            <p class="fig-title">Finished polished concrete</p>
-            <p class="fig-meta">The same preparation standard, taken through to a sealed, cleanable finish.</p>
+            <p class="fig-title">Garage — full flake broadcast</p>
+            <p class="fig-meta">Ground back with extraction running, then flaked and topcoated.</p>
           </figcaption>
         </figure>
       </div>
 
-      <p class="note" data-reveal style="margin-top:var(--s-6)">These are two separate Floor Candy photographs, not a before-and-after of the same frame. We would rather show you what the work actually looks like than stage a comparison.</p>
+      <p class="note" data-reveal style="margin-top:var(--s-6)">Both pairs are the same floor on two different days. We haven't staged a comparison, brightened the "after", or used anyone else's job.</p>
     </div>
   </section>
 
-  <!-- ============ WHAT WE COAT ============ -->
+  <!-- ============ 4. PROBLEM ============ -->
   <section class="section section--surface section--line">
-    <div class="container">
-      <div class="section-head section-head--row" data-reveal>
-        <div class="stack-sm">
-          <p class="eyebrow">What we coat</p>
-          <h2 class="h2">Concrete, finished four ways.</h2>
-        </div>
-        <a class="arrow-link" href="/projects">See recent work
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="grid grid-3">
-        <article class="svc" data-reveal>
-          <div class="svc-media">
-            <picture>
-              <source type="image/webp" srcset="assets/img/garage-flake-finished-720.webp">
-              <img src="assets/img/garage-flake-finished-720.jpg" alt="Flake epoxy garage floor" width="720" height="540" loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <div class="svc-body">
-            <p class="svc-tag">Most requested</p>
-            <h3 class="h3">Garage floor coatings</h3>
-            <p>Full flake broadcast or solid colour, ground back and sealed. The finish most people picture when they picture a finished garage.</p>
-            <a class="arrow-link" href="/garage-floor-coating">Garage floors
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <article class="svc" data-reveal data-d="1">
-          <div class="svc-media">
-            <picture>
-              <source type="image/webp" srcset="assets/img/driveway-sealed-900.webp">
-              <img src="assets/img/driveway-sealed-900.jpg" alt="Sealed and coated concrete driveway on a Floor Candy project" width="900" height="675" loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <div class="svc-body">
-            <p class="svc-tag">Exterior</p>
-            <h3 class="h3">Driveways &amp; outdoor concrete</h3>
-            <p>Resurfacing, sealing and decorative finishes for driveways, paths and alfresco areas — the first thing anyone sees.</p>
-            <a class="arrow-link" href="/floor-assessment">Ask about a driveway
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <article class="svc" data-reveal data-d="2">
-          <div class="svc-media">
-            <picture>
-              <source type="image/webp" srcset="assets/img/polished-concrete-finished-600.webp">
-              <img src="assets/img/polished-concrete-finished-600.jpg" alt="Polished concrete interior floor" width="600" height="450" loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <div class="svc-body">
-            <p class="svc-tag">Interior</p>
-            <h3 class="h3">Polished &amp; sealed concrete</h3>
-            <p>Interior slabs, sheds and converted spaces — ground back, sealed and finished so they clean up with a mop.</p>
-            <a class="arrow-link" href="/floor-assessment">Ask about interiors
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <p class="small" data-reveal style="margin-top:var(--s-6)">We also take on natural stone polishing, and selected commercial work where the scope suits a small owner-led operation. <a class="arrow-link" href="/floor-assessment">Tell us about the space</a></p>
-    </div>
-  </section>
-
-  <!-- ============ WHY COATINGS FAIL ============ -->
-  <section class="section">
     <div class="container">
       <div class="split">
         <div class="stack" data-reveal>
           <p class="eyebrow">Why floors fail</p>
           <h2 class="h2">A cheap floor costs more the second time.</h2>
-          <p class="lead measure-tight">Nearly every failure people describe traces back to the same thing: the slab was never properly prepared. Coating over a sealed, contaminated or unground surface is why floors lift in sheets, peel at the tyre tracks, or chip off in coin-sized pieces a season later.</p>
-          <p class="small measure">The honest version is that preparation is most of the labour and almost none of what you can see afterwards. It is also the first thing cut when a quote is sharpened.</p>
+          <p class="lead measure-tight">Nearly every failure people describe traces back to one thing: the slab was never properly prepared. Coating over a sealed, contaminated or unground surface is why floors lift in sheets, peel at the tyre tracks, or chip off in coin-sized pieces a season later.</p>
+          <p class="small measure">Preparation is most of the labour and almost none of what you can see afterwards. It is also the first thing quietly cut when a quote gets sharpened — which is exactly why the cheapest number in your inbox is usually the one that comes back.</p>
           <div class="btn-row" style="margin-top:var(--s-3)">
-            <a class="btn" href="/floor-assessment">Get your slab assessed</a>
+            <a class="btn" href="/floor-assessment">Get my slab assessed free</a>
           </div>
         </div>
 
@@ -257,15 +214,15 @@
           </div>
           <div class="fail-row">
             <div><p class="fail-term">Hot-tyre pickup</p></div>
-            <div><p class="fail-desc">Warm tyres soften a weakly bonded coating and lift it off in patches where you park.</p></div>
+            <div><p class="fail-desc">Warm tyres soften a weakly bonded coating and lift it off in patches, right where you park.</p></div>
           </div>
           <div class="fail-row">
             <div><p class="fail-term">Yellowing</p></div>
-            <div><p class="fail-desc">Direct sun on a topcoat that was never intended for UV exposure. Common on driveways and roller-door thresholds.</p></div>
+            <div><p class="fail-desc">Direct sun on a topcoat never intended for UV exposure. Common on driveways and roller-door thresholds.</p></div>
           </div>
           <div class="fail-row">
             <div><p class="fail-term">Bubbling &amp; patchiness</p></div>
-            <div><p class="fail-desc">Moisture moving up through the slab, or product applied outside its conditions. Both are assessment problems, not luck.</p></div>
+            <div><p class="fail-desc">Moisture moving up through the slab, or product applied outside its conditions. Both are assessment problems, not bad luck.</p></div>
           </div>
           <div class="fail-row">
             <div><p class="fail-term">Dusting</p></div>
@@ -276,79 +233,113 @@
     </div>
   </section>
 
-  <!-- ============ THE SYSTEM ============ -->
-  <section class="section section--surface section--line">
-    <div class="container">
-      <div class="split" style="align-items:flex-start">
-        <div class="sticky-col stack" data-reveal>
-          <p class="eyebrow">Our method</p>
-          <h2 class="h2">The Floor Candy Surface Preparation System.</h2>
-          <p class="lead measure-tight">Ten steps, in order, on every floor. What changes between jobs is the system specified at the end of step&nbsp;2 — because that depends on your concrete, not on a package.</p>
-          <div class="btn-row" style="margin-top:var(--s-3)">
-            <a class="btn btn--ghost" href="/process">The full process</a>
-          </div>
-        </div>
-
-        <ol class="steps" data-reveal data-d="1">
-          <li><div><h3>Inspect the concrete</h3><p>We look at the slab and at how the space is actually used — parked on, walked on, washed down, or all three.</p></div></li>
-          <li><div><h3>Assess the surface</h3><p>Cracks, damage, contamination and potential moisture concerns. This is where the system gets specified.</p></div></li>
-          <li><div><h3>Diamond-grind mechanically</h3><p>Weak surface material comes off and the slab is profiled so the coating has something to key into.</p></div></li>
-          <li><div><h3>Extract and clean</h3><p>Industrial dust extraction through the grind, then a thorough clean of the prepared surface.</p></div></li>
-          <li><div><h3>Repair where appropriate</h3><p>Cracks, chips and damaged areas made good. Existing or moving cracks can be repaired — they cannot be permanently eliminated, and we will say so on site.</p></div></li>
-          <li><div><h3>Prime or base-coat</h3><p>The primer or base system specified for your concrete and its intended use.</p></div></li>
-          <li><div><h3>Apply the finish</h3><p>Your selected finish, including a full flake broadcast where that is the system chosen.</p></div></li>
-          <li><div><h3>Refine before topcoat</h3><p>Excess flake removed and the surface refined, then the protective topcoat goes on.</p></div></li>
-          <li><div><h3>Final inspection and walkthrough</h3><p>We walk the finished floor with you before the balance is paid.</p></div></li>
-          <li><div><h3>Handover guidance</h3><p>System-specific advice on curing, when vehicles can go back on, cleaning and maintenance.</p></div></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ RECENT WORK ============ -->
+  <!-- ============ 5. MECHANISM ============ -->
   <section class="section">
     <div class="container">
-      <div class="section-head section-head--row" data-reveal>
-        <div class="stack-sm">
-          <p class="eyebrow">Recent work</p>
-          <h2 class="h2">Real floors, photographed as they are.</h2>
-        </div>
-        <a class="arrow-link" href="/projects">All projects
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      <div class="split" style="align-items:flex-start">
+        <div class="stack" data-reveal>
+          <p class="eyebrow">How we do it</p>
+          <h2 class="h2">Three days of work you'll never see.</h2>
+          <p class="lead measure-tight">The finish takes hours. Everything that makes it last happens before it.</p>
 
-      <div class="grid grid-2">
-        <figure class="fig ar-wide" data-reveal>
-          <div class="fig-media">
-            <picture>
-              <source type="image/webp" srcset="assets/img/garage-flake-finished-1080.webp 1080w, assets/img/garage-flake-finished-720.webp 720w" sizes="(max-width:680px) 100vw, 48vw">
-              <img src="assets/img/garage-flake-finished-1080.jpg" alt="Completed flake epoxy garage floor with grey and charcoal flake" width="1080" height="608" loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <figcaption>
-            <p class="fig-title">Flake epoxy garage floor</p>
-            <p class="fig-meta">Full flake broadcast, ground back and topcoated.</p>
-          </figcaption>
-        </figure>
+          <ol class="steps" style="margin-top:var(--s-4)">
+            <li><div>
+              <h3>We read the slab</h3>
+              <p>On site, free. Cracks, contamination, existing coatings, potential moisture concerns, and how the space actually gets used — parked on, walked on, hosed down.</p>
+            </div></li>
+            <li><div>
+              <h3>We grind it back</h3>
+              <p>Diamond grinding removes the weak surface layer and profiles the concrete so the system can key in. Industrial extraction keeps the dust out of the rest of the house.</p>
+            </div></li>
+            <li><div>
+              <h3>We coat it and walk it with you</h3>
+              <p>The system specified for <em>your</em> concrete goes down — primer, finish, topcoat. Then you inspect the floor before the balance is paid.</p>
+            </div></li>
+          </ol>
+
+          <a class="arrow-link" href="/process" style="margin-top:var(--s-3)">The full ten-step process
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
 
         <figure class="fig ar-wide" data-reveal data-d="1">
           <div class="fig-media">
             <picture>
-              <source type="image/webp" srcset="assets/img/driveway-sealed-1440.webp 1440w, assets/img/driveway-sealed-900.webp 900w" sizes="(max-width:680px) 100vw, 48vw">
-              <img src="assets/img/driveway-sealed-1440.jpg" alt="Finished sealed concrete driveway running up to a modern Australian home" width="1440" height="648" loading="lazy" decoding="async">
+              <source type="image/avif" srcset="assets/img/prep-grind-1200.avif 1200w, assets/img/prep-grind-900.avif 900w, assets/img/prep-grind-600.avif 600w" sizes="(max-width:899px) 100vw, 46vw">
+              <source type="image/webp" srcset="assets/img/prep-grind-1200.webp 1200w, assets/img/prep-grind-900.webp 900w, assets/img/prep-grind-600.webp 600w" sizes="(max-width:899px) 100vw, 46vw">
+              <img src="assets/img/prep-grind-900.jpg" alt="Grinding a concrete driveway on a Floor Candy job, extraction hose running across the slab" width="900" height="744" loading="lazy" decoding="async">
             </picture>
           </div>
           <figcaption>
-            <p class="fig-title">Sealed concrete driveway</p>
-            <p class="fig-meta">Resurfaced and sealed, kerb to garage door.</p>
+            <p class="fig-title">Grinding a driveway, mid-job</p>
+            <p class="fig-meta">This is the stage that decides the outcome — and the stage a cheap quote leaves out.</p>
           </figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- ============ REVIEWS ============ -->
+  <!-- ============ 6. THE OFFER ============ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="callout" data-reveal>
+        <div class="split" style="align-items:center">
+          <div class="stack">
+            <p class="eyebrow">No cost, no obligation</p>
+            <h2 class="h2">What you get before you spend a cent.</h2>
+            <p class="lead measure-tight">Jarrod comes to you, looks at the actual concrete, and leaves you with something in writing — whether or not you go ahead with us.</p>
+            <div class="btn-row" style="margin-top:var(--s-3)">
+              <a class="btn btn--lg" href="/floor-assessment">Book my free floor assessment</a>
+              <a class="btn btn--ghost btn--lg" href="tel:+61435193845">Call Jarrod</a>
+            </div>
+            <p class="xs" style="color:#9BA2A7">Takes about 30 seconds to book. We'll confirm a time that suits you.</p>
+          </div>
+          <div>
+            <ul style="margin-bottom:var(--s-6)">
+              <li><span class="tick" aria-hidden="true">✓</span><span>A written read on your slab — its condition, and what that means for the job</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span>The preparation and coating system specified for your concrete, in writing</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span>A fixed, itemised price — not a range that moves on the day</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span>A confirmed installation date</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span>Finish options you can look at in person</span></li>
+              <li><span class="tick" aria-hidden="true">✓</span><span>An honest answer if we're not the right fit for the job</span></li>
+            </ul>
+
+            <form id="quickForm" class="quickform" action="https://formspree.io/f/xqerqnyv" method="POST" novalidate>
+              <p class="quickform-title">Three details and Jarrod will call you back.</p>
+              <input type="hidden" name="_subject" value="Floor Candy — homepage quick enquiry">
+              <input type="hidden" name="lead_source" value="homepage-offer-block">
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="vh" aria-hidden="true">
+              <div class="field">
+                <label for="qf-name">Your name</label>
+                <input id="qf-name" name="name" type="text" autocomplete="name" required>
+                <p class="err" data-err="name"></p>
+              </div>
+              <div class="field">
+                <label for="qf-phone">Phone</label>
+                <input id="qf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+                <p class="err" data-err="phone"></p>
+              </div>
+              <div class="field">
+                <label for="qf-suburb">Suburb</label>
+                <input id="qf-suburb" name="suburb_postcode" type="text" autocomplete="address-level2" required>
+                <p class="err" data-err="suburb_postcode"></p>
+              </div>
+              <button class="btn btn--lg btn--block" type="submit" data-submit>Book my free assessment</button>
+              <p class="form-status" role="alert"></p>
+              <p class="quickform-note">No cost, no obligation. Prefer to talk now? <a href="tel:+61435193845">Call 0435&nbsp;193&nbsp;845</a>.</p>
+            </form>
+
+            <div id="quickSuccess" class="quickform form-ok" hidden>
+              <p class="quickform-title">Got it — thanks.</p>
+              <p class="small">Jarrod will call you to confirm a time for the assessment. If it's urgent, ring <a href="tel:+61435193845">0435 193 845</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. PROOF — REVIEWS ============ -->
   <section class="section section--surface section--line">
     <div class="container">
       <div class="section-head" data-reveal>
@@ -360,7 +351,7 @@
             <span class="small" style="display:block">from 3 Google reviews</span>
           </span>
         </div>
-        <p class="small measure">We are a small operation and these are all of them, in full, exactly as they were written. Every one is answered personally.</p>
+        <p class="small measure">We're a small operation, so here are all of them, in full, exactly as they were written. We haven't cherry-picked — there is nothing to cherry-pick from.</p>
       </div>
 
       <div class="grid grid-3">
@@ -397,33 +388,81 @@
     </div>
   </section>
 
-  <!-- ============ THE OFFER ============ -->
+  <!-- ============ 8. RECENT WORK ============ -->
   <section class="section">
     <div class="container">
-      <div class="callout" data-reveal>
-        <div class="split" style="align-items:center">
-          <div class="stack">
-            <p class="eyebrow">No cost, no obligation</p>
-            <h2 class="h2">The free floor assessment.</h2>
-            <p class="lead measure-tight">Jarrod comes to you, looks at the actual concrete, and leaves you with something in writing — whether or not you go ahead.</p>
-            <div class="btn-row" style="margin-top:var(--s-3)">
-              <a class="btn btn--lg" href="/floor-assessment">Book your assessment</a>
-              <a class="btn btn--ghost btn--lg" href="tel:+61435193845">Call Jarrod</a>
-            </div>
-          </div>
-          <ul>
-            <li><span class="tick" aria-hidden="true">✓</span><span>A written assessment of your slab — its condition, and what that means for the job</span></li>
-            <li><span class="tick" aria-hidden="true">✓</span><span>The preparation and system specified for your concrete, in writing</span></li>
-            <li><span class="tick" aria-hidden="true">✓</span><span>A fixed, itemised price — not a range</span></li>
-            <li><span class="tick" aria-hidden="true">✓</span><span>A confirmed installation date</span></li>
-            <li><span class="tick" aria-hidden="true">✓</span><span>Finish options you can look at in person</span></li>
-          </ul>
+      <div class="section-head section-head--row" data-reveal>
+        <div class="stack-sm">
+          <p class="eyebrow">Recent work</p>
+          <h2 class="h2">Real floors, photographed as they are.</h2>
         </div>
+        <a class="arrow-link" href="/projects">All projects
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-4">
+        <figure class="fig" data-reveal>
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-flake-garage-414.avif">
+            <source type="image/webp" srcset="assets/img/work-flake-garage-414.webp">
+            <img src="assets/img/work-flake-garage-414.jpg" alt="Completed grey flake epoxy garage floor" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Flake epoxy garage</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="1">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-drive-dark-414.avif">
+            <source type="image/webp" srcset="assets/img/work-drive-dark-414.webp">
+            <img src="assets/img/work-drive-dark-414.jpg" alt="Dark sealed concrete driveway running up to a brick home" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Sealed driveway</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="2">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-flake-cream-414.avif">
+            <source type="image/webp" srcset="assets/img/work-flake-cream-414.webp">
+            <img src="assets/img/work-flake-cream-414.jpg" alt="Cream flake coating on a covered outdoor walkway" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Cream flake walkway</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="3">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-alfresco-414.avif">
+            <source type="image/webp" srcset="assets/img/work-alfresco-414.webp">
+            <img src="assets/img/work-alfresco-414.jpg" alt="Coated alfresco slab in a slate blue finish beside a brick wall" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Alfresco slab</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal>
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-flake-brick-414.avif">
+            <source type="image/webp" srcset="assets/img/work-flake-brick-414.webp">
+            <img src="assets/img/work-flake-brick-414.jpg" alt="Flake epoxy floor finished up to a face brick wall" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Flake, edge to edge</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="1">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-flake-tan-414.avif">
+            <source type="image/webp" srcset="assets/img/work-flake-tan-414.webp">
+            <img src="assets/img/work-flake-tan-414.jpg" alt="Warm tan flake floor, close detail of the chip broadcast" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Tan flake detail</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="2">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-drive-blue-414.avif">
+            <source type="image/webp" srcset="assets/img/work-drive-blue-414.webp">
+            <img src="assets/img/work-drive-blue-414.jpg" alt="Wide coated driveway leading to a double garage" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Driveway, kerb to door</p></figcaption>
+        </figure>
+        <figure class="fig" data-reveal data-d="3">
+          <div class="fig-media"><picture>
+            <source type="image/avif" srcset="assets/img/work-path-light-414.avif">
+            <source type="image/webp" srcset="assets/img/work-path-light-414.webp">
+            <img src="assets/img/work-path-light-414.jpg" alt="Light coated concrete path running alongside a lawn" width="414" height="414" loading="lazy" decoding="async"></picture></div>
+          <figcaption><p class="fig-title">Path &amp; surrounds</p></figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- ============ FAQ ============ -->
+  <!-- ============ 9. OBJECTIONS ============ -->
   <section class="section section--surface section--line">
     <div class="container narrow">
       <div class="section-head" data-reveal>
@@ -443,7 +482,7 @@
           <summary>Will it peel or lift?</summary>
           <div class="faq-body">
             <p>Lifting is a bond problem, and bond is decided during preparation. Mechanical grinding, proper extraction, and specifying the system after we have seen the slab are how that risk is managed.</p>
-            <p>What we will not do is promise an outcome for concrete we have not inspected. If the slab has a moisture issue, we would rather tell you at the assessment than after the coating is down.</p>
+            <p>What we will not do is promise an outcome for concrete we have not inspected. If your slab has a moisture issue, we would rather tell you at the assessment than after the coating is down.</p>
           </div>
         </details>
         <details>
@@ -487,7 +526,7 @@
     </div>
   </section>
 
-  <!-- ============ FINAL CTA ============ -->
+  <!-- ============ 10. FINAL CTA ============ -->
   <section class="section">
     <div class="container center">
       <div class="stack" data-reveal style="justify-items:center">
@@ -495,9 +534,10 @@
         <h2 class="h-display" style="max-width:16ch">Start with the slab.</h2>
         <p class="lead measure" style="margin-inline:auto">Book a free on-site assessment and find out what your concrete actually needs — before anyone quotes you a number.</p>
         <div class="btn-row" style="justify-content:center;margin-top:var(--s-4)">
-          <a class="btn btn--lg" href="/floor-assessment">Book a free floor assessment</a>
+          <a class="btn btn--lg" href="/floor-assessment">Book my free floor assessment</a>
           <a class="btn btn--ghost btn--lg" href="tel:+61435193845">Call Jarrod — 0435 193 845</a>
         </div>
+        <p class="xs">Costs nothing. No obligation. Mon–Fri, 7am–7pm.</p>
       </div>
     </div>
   </section>
@@ -508,7 +548,7 @@
   <div class="container">
     <div class="ftr-grid">
       <div>
-        <a class="brand" href="/"><img src="assets/logo-mark.png" alt="" width="26" height="26">Floor <span>Candy</span></a>
+        <a class="brand" href="/"><img src="assets/logo-mark-light.png" alt="" width="26" height="26">Floor <span>Candy</span></a>
         <p class="small" style="margin-top:var(--s-4);max-width:34ch">Epoxy and concrete floor coatings, owner-led, servicing Newcastle and the Hunter Region.</p>
       </div>
       <div>
@@ -533,6 +573,7 @@
         <p class="ftr-head">Contact</p>
         <ul>
           <li><a href="tel:+61435193845">0435 193 845</a></li>
+          <li><a href="https://wa.me/61435193845?text=Hi%20Jarrod%2C%20I%27d%20like%20a%20quote%20on%20a%20floor." rel="noopener">WhatsApp</a></li>
           <li><a href="mailto:admin@floorcandyepoxy.com">admin@floorcandyepoxy.com</a></li>
         </ul>
         <p class="xs" style="margin-top:var(--s-4)">Servicing Newcastle, Lake Macquarie, Maitland &amp; surrounding parts of the Hunter Region.<br>Mon–Fri, 7am–7pm</p>
@@ -545,11 +586,25 @@
   </div>
 </footer>
 
-<div class="mbar">
-  <a href="tel:+61435193845">Call Jarrod</a>
-  <a href="/floor-assessment" class="is-primary">Free assessment</a>
-</div>
+<!-- WhatsApp — desktop and tablet -->
+<a class="wa-float" href="https://wa.me/61435193845?text=Hi%20Jarrod%2C%20I%27d%20like%20a%20quote%20on%20a%20floor." rel="noopener">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.04 0 1.2.87 2.36.99 2.53.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+  WhatsApp us
+</a>
 
-<script src="main.js" defer></script>
+<!-- Sticky action bar — mobile -->
+<nav class="mbar" aria-label="Contact Floor Candy">
+  <a href="tel:+61435193845" aria-label="Call Jarrod on 0435 193 845">
+    <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.7 1.5a1.3 1.3 0 0 0-1.2.4L1.7 2.7C.8 3.6.7 5 1.4 6.4a17 17 0 0 0 8.2 8.2c1.4.7 2.8.6 3.7-.3l.8-.8a1.3 1.3 0 0 0-.1-1.9l-2-1.6a1.3 1.3 0 0 0-1.6 0l-.9.7a12 12 0 0 1-3.7-3.7l.7-.9a1.3 1.3 0 0 0 0-1.6l-1.6-2a1.3 1.3 0 0 0-.7-.5Z"/></svg>
+    Call
+  </a>
+  <a class="is-wa" href="https://wa.me/61435193845?text=Hi%20Jarrod%2C%20I%27d%20like%20a%20quote%20on%20a%20floor." rel="noopener" aria-label="Message Floor Candy on WhatsApp">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.04 0 1.2.87 2.36.99 2.53.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+    WhatsApp
+  </a>
+  <a class="is-primary" href="/floor-assessment">Free assessment</a>
+</nav>
+
+<script src="main.js?v=6" defer></script>
 </body>
 </html>
