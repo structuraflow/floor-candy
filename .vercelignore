@@ -1,0 +1,12 @@
+# Kept in the repo for provenance and tooling, but not deployed.
+assets/_quarantine
+assets/images
+tools
+docs
+
+# Superseded by the hero-garage-* still. Retained in git history, not shipped.
+assets/videos/hero-loop.mp4
+assets/img/hero-poster-*
+
+# 2K upscale masters — provenance only, not shipped.
+assets/_originals
