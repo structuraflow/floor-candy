@@ -5,6 +5,30 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Conversion events ----------
+     Vendor-neutral. Pushes to dataLayer and forwards to gtag when either is
+     present, so GA4 or GTM can be installed later without touching this file.
+     No analytics library is loaded here — see docs/TRACKING.md. */
+  function track(name, params) {
+    var payload = params || {};
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: name }, payload));
+      if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+    } catch (e) { /* tracking must never break the page */ }
+  }
+
+  // Any element carrying data-ev reports itself once clicked.
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-ev]');
+    if (!el) return;
+    track(el.getAttribute('data-ev'), {
+      link_text: (el.textContent || '').trim().slice(0, 60),
+      link_url: el.getAttribute('href') || '',
+      page_path: location.pathname
+    });
+  }, true);
+
   /* ---------- Header scroll state ---------- */
   var hdr = document.querySelector('.hdr');
   if (hdr) {
@@ -97,8 +121,14 @@
       var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
       set((x / r.width) * 100);
     };
+    var reported = false;
+    var report = function (how) {
+      if (reported) return;
+      reported = true;
+      track('before_after_interaction', { method: how, label: handle.getAttribute('aria-label') || '' });
+    };
     var dragging = false;
-    var start = function (e) { dragging = true; fromEvent(e); };
+    var start = function (e) { dragging = true; fromEvent(e); report(e.touches ? 'touch' : 'pointer'); };
     var move = function (e) { if (dragging) { fromEvent(e); if (e.cancelable) e.preventDefault(); } };
     var end = function () { dragging = false; };
     el.addEventListener('mousedown', start);
@@ -108,6 +138,7 @@
     window.addEventListener('touchmove', move, { passive: false });
     window.addEventListener('touchend', end);
     handle.addEventListener('keydown', function (e) {
+      if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(e.key) > -1) report('keyboard');
       var cur = parseFloat(el.style.getPropertyValue('--pos')) || 50;
       if (e.key === 'ArrowLeft') { set(cur - 4); e.preventDefault(); }
       if (e.key === 'ArrowRight') { set(cur + 4); e.preventDefault(); }
@@ -139,9 +170,27 @@
     catch (e) { return {}; }
   }
 
+  /* ---------- Form engagement ----------
+     One assessment_form_start per form, on the first real interaction. */
+  function wireFormStart(el, formName) {
+    if (!el) return;
+    var started = false;
+    var fire = function () {
+      if (started) return;
+      started = true;
+      track('assessment_form_start', { form_name: formName, page_path: location.pathname });
+    };
+    el.addEventListener('focusin', function (e) {
+      if (e.target.matches('input, select, textarea')) fire();
+    });
+    el.addEventListener('change', fire);
+  }
+
   /* ---------- Multi-step assessment form ---------- */
   var form = document.getElementById('assessmentForm');
   if (form) {
+    wireFormStart(form, 'assessment_full');
+    var fullSending = false;
     var panels = Array.prototype.slice.call(form.querySelectorAll('.fs'));
     var bar = form.querySelector('.steps-bar');
     var counter = bar ? bar.querySelector('span') : null;
@@ -191,7 +240,9 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (fullSending) return;
       if (!validate(panels[idx])) return;
+      fullSending = true;
 
       var btn = form.querySelector('[data-submit]');
       var status = form.querySelector('.form-status');
@@ -218,6 +269,7 @@
           return r.json().catch(function () { return {}; });
         })
         .then(function () {
+          track('assessment_form_submit', { form_name: 'assessment_full', page_path: location.pathname });
           var ok = document.getElementById('formSuccess');
           if (ok) {
             form.hidden = true;
@@ -228,6 +280,7 @@
           }
         })
         .catch(function () {
+          fullSending = false;
           btn.disabled = false;
           btn.textContent = label;
           if (status) {
@@ -246,6 +299,8 @@
      assessment form; validated on blur and on submit. */
   var quick = document.getElementById('quickForm');
   if (quick) {
+    wireFormStart(quick, 'assessment_quick');
+    var quickSending = false;
     var qCheck = function (f) {
       var v = f.value.trim();
       if (!v) return 'This field is required.';
@@ -265,11 +320,13 @@
 
     quick.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (quickSending) return;
       var ok = true, first = null;
       quick.querySelectorAll('[required]').forEach(function (f) {
         if (!qPaint(f) && ok) { ok = false; first = f; }
       });
       if (!ok) { if (first) first.focus({ preventScroll: true }); return; }
+      quickSending = true;
 
       var btn = quick.querySelector('[data-submit]');
       var status = quick.querySelector('.form-status');
@@ -290,6 +347,7 @@
       })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
         .then(function () {
+          track('assessment_form_submit', { form_name: 'assessment_quick', page_path: location.pathname });
           var done = document.getElementById('quickSuccess');
           quick.hidden = true;
           if (done) {
@@ -299,6 +357,7 @@
           }
         })
         .catch(function () {
+          quickSending = false;
           btn.disabled = false; btn.textContent = label;
           if (status) {
             status.innerHTML = 'Could not send that. Please call ' +

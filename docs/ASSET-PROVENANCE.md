@@ -35,6 +35,38 @@ doors and louvre door. The garage "before" is labelled **During prep**, not
 "Before", because a dust extractor is visible in shot — the slab is already
 part-way through preparation. Nothing is presented as a same-frame comparison.
 
+### Added 9 September 2026 — the garage transformation pair
+
+| File(s) | Source | Type | Used on | Project proof? |
+|---|---|---|---|---|
+| `garage-epoxy-floor-before-{400,600,800,1024}.{avif,webp,jpg}` | Client-supplied photograph, 1024×768 PNG | Bare garage slab before coating | Home (featured project slider + JS-off fallback) | **Yes** |
+| `garage-epoxy-floor-after-{400,600,800,1024}.{avif,webp,jpg}` | Client-supplied photograph, 1024×768 PNG | Completed grey flake epoxy garage floor | Home (featured project slider, recent-work grid, JS-off fallback) | **Yes** |
+
+**How this pair was verified as the same garage.** Both frames share the same
+side window and its external blind, the same two internal doors either side of
+the back wall, the same pair of ceiling fluorescent tubes, and the same red
+opener pull-cord hanging in the same position. The photographer's vantage point
+differs slightly — the "before" is taken from just outside the roller door and
+the "after" from inside it — so **neither frame has been cropped**. Both are
+emitted at full 4:3 frame and the slider renders them at 4:3, so the comparison
+applies identical framing treatment to both sides. Nothing has been brightened,
+straightened or retouched.
+
+The unfinished "before" frame is used **only** inside the labelled comparison and
+its fallback. The recent-work grid and any promotional surface use the finished
+frame only. Both sides are generated from one source file each by
+`tools/build-garage-project.py`; the uploads are not duplicated in the repo.
+
+**Still outstanding (client requests not yet actionable):**
+
+- **Pathway photographs.** The client has asked for the existing pathway images
+  (`work-path-light-414.*`) to be replaced once better ones are supplied. Not
+  supplied as at 9 September 2026 — the current image remains in place.
+- **Metallic epoxy project.** No metallic photography has been supplied. The grey
+  flake garage above is **not** to be relabelled as metallic. A separate project
+  and, if warranted, a separate service page are to be created once genuine
+  metallic photographs exist.
+
 **Resolution caveat.** These are 414×414 social exports, not originals. The
 recent-work grid is emitted at native size and displayed no larger. Only
 `prep-grind-*` came through at full size (1536×2048).
