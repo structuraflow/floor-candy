@@ -1,14 +1,47 @@
 # Deployment Notes
 
-## Production is untouched
+## Current production
 
 | | |
 |---|---|
-| Production branch | `main`, at commit `757a952` — **not modified** |
-| Work branch | `redesign/phase3-premium` |
-| Live domain | `https://www.floorcandyepoxy.com` — **not redeployed** |
-| Vercel project | `prj_mH0vxpw7jtwjWi3lqQm26a6UlWrM` (team `team_5Zr8gdgFERAhRnaT82R74pE5`) |
+| Live domain | `https://www.floorcandyepoxy.com` (apex 308s to `www` — **www is canonical**) |
+| Production commit | `75413fc` — Mid North Coast repositioning, deployed 11 Sep 2026 |
+| Previous production | `c2f5713` — checkpoint tag `pre-midnorthcoast-upgrade` |
+| Vercel project | `prj_mH0vxpw7jtwjWi3lqQm26a6UlWrM` (team `team_5Zr8gdgFERAhRnaT82R74pE5`, scope `structuraflow-6315`) |
 | Git remote | `https://github.com/structuraflow/floor-candy.git` |
+
+## Deploying
+
+There is **no GitHub auto-deploy** on this project — pushing `main` does not
+ship anything. Deploys are manual, from the working tree:
+
+```bash
+# preview (Vercel-auth protected)
+vercel deploy --yes --no-color --scope team_5Zr8gdgFERAhRnaT82R74pE5 </dev/null
+
+# production
+vercel deploy --prod --yes --no-color --scope team_5Zr8gdgFERAhRnaT82R74pE5 </dev/null
+```
+
+**`</dev/null` is not optional.** Without it the CLI waits on an interactive
+prompt it cannot render in a non-TTY shell and hangs indefinitely with no output.
+
+Roll back with `vercel rollback`, or redeploy from the previous commit.
+
+## Testing before a deploy
+
+No framework, so there is no `npm test`. The checks that matter:
+
+```bash
+# serve with Vercel's cleanUrls behaviour
+python3 tools/dev-server.py        # http://127.0.0.1:8899
+```
+
+Responsive testing uses a zero-dependency headless-Chrome CDP harness (the
+Claude-in-Chrome extension is not connected on this machine). It measures real
+element geometry at each width, so it catches overflow even where it is being
+clipped. The last full pass covered 10 pages x 8 widths (320-1440) with zero
+horizontal overflow and zero touch targets under 44px.
 
 ## Stack
 
