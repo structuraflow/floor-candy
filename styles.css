@@ -1,13 +1,17 @@
 /* ==========================================================================
-   Floor Candy — "Ground Truth" design system
+   Floor Candy — "Coastal Grain" design system
 
-   The ground of this page is the colour of a diamond-ground slab: a cool
-   mineral grey, not paper-white and not the near-black that every coatings
-   site defaults to. Panels lift by getting *whiter*, never by casting a
-   shadow. One typeface. One accent, spent only on the thing you should press.
+   The ground is a diamond-ground slab in daylight: warm mineral grey, not
+   paper-cream and not the near-black every coatings site defaults to. Panels
+   lift by getting cleaner, never by casting a shadow, and structure is carried
+   by hairlines rather than boxes — the way a spec sheet is set.
 
-   Type on the accent is near-black (4.54:1). White on the accent is 3.93:1
-   and fails AA — so the more distinctive choice is also the correct one.
+   Two faces. Instrument Serif carries every heading, lowercase, with the
+   second clause in italic; Archivo carries body, labels and data. One accent,
+   #F0335F, spent only on the thing you should press.
+
+   Type on the accent is near-black (4.70:1). White on it is 3.93:1 and fails
+   AA — so the more distinctive choice is also the correct one.
    ========================================================================== */
 
 @font-face {
@@ -17,113 +21,129 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('assets/fonts/instrument-serif-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('assets/fonts/instrument-serif-italic-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: light;
 
   /* Surfaces — ground concrete, then progressively cleaner */
-  --bg:         #E9EBEC;
-  --surface:    #F2F4F4;
-  --panel:      #FFFFFF;
-  --ink-block:  #15181A;
+  --bg:         #EDEAE4;
+  --surface:    #F5F2EC;
+  --panel:      #FBF9F5;
+  --ink-block:  #1F1E1A;
 
-  /* Ink */
-  --ink:        #15181A;   /* 14.9:1 on --bg */
-  --muted:      #5A6268;   /* 5.19:1 on --bg  */
-  --on-dark:     #EDEFF0;
-  --on-dark-mut: #A0A8AD;
-  --on-dark-hi:  #FFFFFF;
-  /* Body copy on any dark surface — hero scrim, offer block, footer. Three
-     near-identical greys were in use here; this is the single value. */
-  --on-dark-body:#D5D9DB;
-  /* The accent is too dark to read on near-black, so dark surfaces get the
-     lighter tint. */
+  /* Ink — warm near-black, so it sits into the ground rather than on it */
+  --ink:        #1B1A17;   /* 14.5:1 on --bg */
+  --muted:      #645E54;   /* 5.36:1 on --bg */
+  --on-dark:     #E9E5DD;
+  --on-dark-mut: #A39C90;
+  --on-dark-hi:  #FFFCF6;
+  --on-dark-body:#D3CDC2;
   --accent-on-dark: #FF8FA6;
-  /* Interaction states for the near-black button/surface. */
-  --ink-hover:  #2A3033;
-  --ink-press:  #101315;
-  /* Label plate over photography — must stay dark in both themes. */
-  --photo-veil: rgba(10,12,13,.78);
-  --photo-ink:  #15181A;
+  --ink-hover:  #33312B;
+  --ink-press:  #131210;
+  --photo-veil: rgba(18,17,14,.76);
+  --photo-ink:  #1B1A17;
 
-  /* Lines */
-  --line:       #D3D7D9;
-  --line-2:     #B9BFC3;
-  --line-dark:  rgba(255,255,255,.14);
+  /* Lines — the structural language of the page */
+  --line:       #D9D3C8;
+  --line-2:     #C2B9A9;
+  --line-dark:  rgba(255,252,246,.16);
+  --sand:       #D8CFC0;   /* vinyl flake tan — rules, tracks, inactive states */
 
   /* Brand — sampled from logo-mark.png */
   --accent:      #F0335F;
   --accent-hi:   #FF4A70;
   --accent-press:#D31E49;
-  --accent-ink:  #15181A;  /* label ON accent — 4.54:1 */
+  --accent-ink:  #14130F;  /* label ON accent — 4.70:1 */
   --accent-text: #B81742;  /* accent AS text on light — 5.42:1 */
   --accent-wash: rgba(240,51,95,.09);
 
-  /* Type scale — 1.25 ratio, fluid */
-  --fs-display: clamp(2.5rem, 1.1rem + 6.2vw, 5.75rem);
-  --fs-h1:      clamp(1.95rem, 1.02rem + 4.4vw, 4.5rem);
-  --fs-h2:      clamp(1.6rem, 1.06rem + 2.5vw, 3rem);
-  --fs-h3:      clamp(1.15rem, 1rem + .7vw, 1.5rem);
-  --fs-lead:    clamp(1.05rem, .98rem + .4vw, 1.25rem);
+  /* Faces */
+  --font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Type scale — display runs large and airy, body stays tight and plain */
+  --fs-display: clamp(2.9rem, 1rem + 8vw, 6.75rem);
+  --fs-h1:      clamp(2.35rem, 1rem + 5.6vw, 4.75rem);
+  --fs-h2:      clamp(1.95rem, 1.1rem + 3.6vw, 3.75rem);
+  --fs-h3:      clamp(1.2rem, 1.02rem + .85vw, 1.6rem);
+  --fs-lead:    clamp(1.05rem, .99rem + .35vw, 1.1875rem);
   --fs-body:    1rem;
   --fs-sm:      .9375rem;
   --fs-xs:      .8125rem;
-  --fs-label:   .75rem;
+  --fs-label:   .6875rem;
 
   /* Spacing — 8pt */
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
   --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
-  --section-y: clamp(56px, 7vw, 112px);
+  --section-y: clamp(60px, 7.5vw, 124px);
 
   /* Layout */
-  --container: 1240px;
+  --container: 1280px;
   --container-narrow: 760px;
-  --gutter: clamp(20px, 4vw, 48px);
+  --gutter: clamp(20px, 4vw, 56px);
 
-  /* Radius */
-  --r-sm: 3px;
-  --r-md: 6px;
-  --r-lg: 10px;
+  /* Radius — near-square. Only the pill and the knob are round. */
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
   --r-pill: 100px;
 
   /* Motion */
   --e-out: cubic-bezier(.16,.84,.44,1);
   --t-fast: 150ms;
   --t-base: 240ms;
+  --t-slow: 520ms;
 
   --ar-hero: 16/9;
   --ar-card: 4/3;
   --ar-sq: 1/1;
 
-  --hdr-h: 68px;
+  --hdr-h: 72px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg:        #16191B;
-    --surface:   #1E2225;
-    --panel:     #262B2F;
-    --ink:       #EDEFF0;
-    --muted:     #A0A8AD;
-    --line:      #333A3E;
-    --line-2:    #454D52;
+    --bg:        #1A1916;
+    --surface:   #24231F;
+    --panel:     #2C2B26;
+    --ink:       #EDE9E1;
+    --muted:     #A69F93;
+    --line:      #383630;
+    --line-2:    #4B483F;
+    --sand:      #4B4438;
     --accent-text: #FF6B8A;
-    --ink-block: #0D0F10;
+    --ink-block: #121110;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg:        #16191B;
-  --surface:   #1E2225;
-  --panel:     #262B2F;
-  --ink:       #EDEFF0;
-  --muted:     #A0A8AD;
-  --line:      #333A3E;
-  --line-2:    #454D52;
+  --bg:        #1A1916;
+  --surface:   #24231F;
+  --panel:     #2C2B26;
+  --ink:       #EDE9E1;
+  --muted:     #A69F93;
+  --line:      #383630;
+  --line-2:    #4B483F;
+  --sand:      #4B4438;
   --accent-text: #FF6B8A;
-  --ink-block: #0D0F10;
+  --ink-block: #121110;
 }
 
 /* ---------- Reset ---------- */
@@ -141,7 +161,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: var(--font-ui);
   font-size: var(--fs-body);
   line-height: 1.6;
   font-synthesis-weight: none;
@@ -155,15 +175,26 @@ body {
 .section-head > *, .hero-copy > * { min-width: 0; }
 .stack, .stack-sm, .split, .grid { min-width: 0; }
 
+[hidden] { display: none !important; }
+
 img, picture, video, svg { max-width: 100%; display: block; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 
+/* Every heading is set in the serif. Instrument Serif has a single weight, so
+   emphasis comes from size and from the italic — never from a faux bold. */
 h1, h2, h3, h4 {
-  margin: 0; font-weight: 800; letter-spacing: -.022em; line-height: 1.06;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400; letter-spacing: -.012em; line-height: 1.02;
   /* Balanced wrapping keeps a heading from dropping one orphan word onto its
      own line, which is where these break worst between 320px and 430px. */
   text-wrap: balance;
+}
+/* The second clause of a headline goes italic. This is the one emphasis move
+   the display face gets, so it is never doubled up with colour or weight. */
+h1 em, h2 em, h3 em, .h-display em, .h1 em, .h2 em, .h3 em {
+  font-style: italic; color: inherit;
 }
 .lead, .measure, .measure-tight { text-wrap: pretty; }
 p { margin: 0; }
@@ -208,12 +239,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 899px) { .sticky-col { position: static; } }
 
 /* ---------- Type roles ---------- */
-.h-display { font-size: var(--fs-display); line-height: .98; letter-spacing: -.032em; }
-.h1 { font-size: var(--fs-h1); }
-.h2 { font-size: var(--fs-h2); letter-spacing: -.026em; }
-.h3 { font-size: var(--fs-h3); font-weight: 700; letter-spacing: -.014em; line-height: 1.2; }
+.h-display {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: var(--fs-display); line-height: .94; letter-spacing: -.018em;
+}
+.h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h1); line-height: .98; letter-spacing: -.016em; }
+.h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: 1.0; letter-spacing: -.014em; }
+.h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h3); letter-spacing: -.008em; line-height: 1.14; }
 
-.lead { font-size: var(--fs-lead); color: var(--muted); line-height: 1.55; }
+.lead { font-size: var(--fs-lead); color: var(--muted); line-height: 1.6; }
 .small { font-size: var(--fs-sm); color: var(--muted); }
 .xs { font-size: var(--fs-xs); color: var(--muted); }
 .note {
@@ -221,24 +255,34 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-left: 2px solid var(--line-2); padding-left: var(--s-4); max-width: 62ch;
 }
 
-/* The eyebrow is a location/section marker, never decoration. */
+/* The eyebrow is a location/section marker, never decoration. It is the only
+   uppercase type on the page, which is what makes it read as a marker at all. */
 .eyebrow {
-  font-size: var(--fs-label); font-weight: 700; text-transform: uppercase;
-  letter-spacing: .13em; color: var(--accent-text);
-  display: flex; align-items: center; gap: var(--s-3);
+  font-family: var(--font-ui);
+  font-size: var(--fs-label); font-weight: 600; text-transform: uppercase;
+  letter-spacing: .2em; color: var(--muted);
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  line-height: 1.5;
 }
 .eyebrow::before {
-  content: ""; width: 18px; height: 2px; background: currentColor; flex: none;
+  content: ""; width: 26px; height: 1px; background: var(--line-2); flex: none;
+  margin-top: .72em;
 }
-.eyebrow { align-items: flex-start; }
-.eyebrow::before { margin-top: .55em; }
 /* The location eyebrow is the longest string on the page at 320-400px.
    Tightening it keeps "COAST" off a line of its own. */
 @media (max-width: 400px) {
-  .eyebrow { font-size: .6875rem; letter-spacing: .075em; gap: var(--s-2); }
+  .eyebrow { font-size: .625rem; letter-spacing: .13em; gap: var(--s-2); }
+  .eyebrow::before { width: 16px; }
 }
-.eyebrow--plain { color: var(--muted); }
 .eyebrow--plain::before { display: none; }
+
+/* Centred variant — a rule on each side, the way a masthead strapline is set. */
+.eyebrow--rules { justify-content: center; align-items: center; text-align: center; }
+.eyebrow--rules::before, .eyebrow--rules::after {
+  content: ""; width: clamp(24px, 6vw, 64px); height: 1px;
+  background: var(--line-2); flex: none; margin-top: 0;
+}
+.eyebrow--rules { gap: clamp(12px, 2vw, 20px); }
 
 .section-head { display: grid; gap: var(--s-4); margin-bottom: clamp(32px, 4vw, 56px); max-width: 68ch; }
 .section-head--row { max-width: none; }
@@ -258,7 +302,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   min-height: 48px; padding: 13px 24px;
   background: var(--btn-bg); color: var(--btn-fg);
   border: 1px solid var(--btn-bd); border-radius: var(--r-md);
-  font-size: var(--fs-sm); font-weight: 700; letter-spacing: -.005em;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm); font-weight: 600; letter-spacing: .01em;
   text-decoration: none; cursor: pointer; white-space: nowrap;
   text-align: center;
   transition: background var(--t-fast) var(--e-out),
@@ -271,8 +316,28 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   --btn-bg: var(--line); --btn-fg: var(--muted);
   cursor: not-allowed; transform: none;
 }
-.btn--lg { min-height: 54px; padding: 16px 30px; font-size: 1rem; }
+.btn--lg { min-height: 56px; padding: 16px 30px; font-size: 1rem; }
 .btn--block { width: 100%; }
+.btn--pill { border-radius: var(--r-pill); padding-inline: 34px; }
+
+/* A button with its arrow in its own cell, divided by a hairline — the detail
+   that tells you the label and the action are the same object. The arrow is
+   drawn in CSS so it inherits the label colour in every state. */
+.btn--arrow { padding-right: 0; gap: 0; }
+.btn--arrow > span { padding-right: 20px; }
+.btn--arrow > i {
+  flex: none; align-self: stretch; width: 46px;
+  display: grid; place-items: center;
+  border-left: 1px solid currentColor;
+  font-style: normal; font-size: 1.05em; line-height: 1;
+  opacity: .7;
+  transition: opacity var(--t-fast), transform var(--t-fast) var(--e-out);
+}
+.btn--arrow:hover > i { opacity: 1; transform: translateX(2px); }
+@media (max-width: 479px) {
+  .btn--arrow > i { width: 38px; }
+  .btn--arrow > span { padding-right: 14px; }
+}
 
 .btn--ghost {
   --btn-bg: transparent; --btn-fg: var(--ink); --btn-bd: var(--line-2);
@@ -851,3 +916,468 @@ html:not(.js) .ba { display: none; }
 }
 .hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 .scroll-cue { display: none; }
+
+/* ==========================================================================
+   Coastal Grain — page modules
+   ========================================================================== */
+
+/* ---------- Header over a hero ----------
+   On pages that open with full-bleed media the header floats on the image
+   until the first scroll, then takes the page ground. */
+.hdr--over {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: transparent; backdrop-filter: none;
+}
+.hdr--over.is-stuck {
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+.hdr--over:not(.is-stuck) { --hdr-ink: var(--on-dark-hi); }
+.hdr--over:not(.is-stuck) .brand,
+.hdr--over:not(.is-stuck) .hdr-phone { color: var(--hdr-ink); }
+.hdr--over:not(.is-stuck) .brand span { color: var(--accent-on-dark); }
+.hdr--over:not(.is-stuck) .nav a { color: rgba(255,252,246,.82); }
+.hdr--over:not(.is-stuck) .nav a:hover { color: var(--hdr-ink); }
+.hdr--over:not(.is-stuck) .burger { border-color: rgba(255,252,246,.4); }
+.hdr--over:not(.is-stuck) .burger span,
+.hdr--over:not(.is-stuck) .burger span::before,
+.hdr--over:not(.is-stuck) .burger span::after { background: var(--hdr-ink); }
+.hdr--over:not(.is-stuck) .brand img { filter: brightness(0) invert(1); }
+/* The header CTA is the one element that keeps its own colour throughout. */
+.hdr .btn--ghost { --btn-fg: var(--ink); --btn-bd: var(--line-2); }
+.hdr--over:not(.is-stuck) .btn--ghost {
+  --btn-fg: var(--on-dark-hi); --btn-bd: rgba(255,252,246,.45);
+}
+.hdr--over:not(.is-stuck) .btn--ghost:hover { --btn-bg: rgba(255,252,246,.14); }
+
+/* ---------- Hero ----------
+   Centred, because the photograph is the argument and the type sits on it
+   rather than beside it. */
+.hero--center .hero-in { justify-content: center; }
+.hero--center .hero-copy {
+  max-width: 58rem; text-align: center; justify-items: center; gap: var(--s-5);
+}
+.hero--center .hero-copy .lead { max-width: 44ch; margin-inline: auto; }
+.hero--center h1 {
+  font-size: var(--fs-h1); line-height: .96; letter-spacing: -.018em;
+  color: var(--on-dark-hi);
+  text-shadow: 0 1px 30px rgba(12,11,9,.35);
+}
+.hero--center h1 em { color: var(--on-dark-hi); }
+.hero--center .eyebrow { color: rgba(255,252,246,.8); }
+.hero--center .eyebrow::before,
+.hero--center .eyebrow::after { background: rgba(255,252,246,.42); }
+.hero--center .btn-row { justify-content: center; }
+/* A lighter scrim than a dark-theme hero needs — the floor has to stay legible,
+   it is the thing being sold. */
+.hero--center .hero-scrim {
+  background:
+    linear-gradient(to bottom, rgba(16,15,12,.70) 0%, rgba(16,15,12,.40) 30%, rgba(16,15,12,.56) 62%, rgba(16,15,12,.84) 100%);
+}
+@media (max-width: 780px) {
+  .hero--center .hero-scrim {
+    background: linear-gradient(to bottom, rgba(16,15,12,.70) 0%, rgba(16,15,12,.52) 40%, rgba(16,15,12,.84) 100%);
+  }
+}
+
+/* The three things a first-time visitor is entitled to know. Divided by
+   hairlines rather than boxed, so the row reads as one statement. */
+.hero-stats {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  margin-top: var(--s-4);
+  border-top: 1px solid rgba(255,252,246,.22);
+  padding-top: var(--s-5);
+  width: min(100%, 40rem);
+}
+.hero-stats > div {
+  flex: 1 1 0; min-width: 8.5rem; padding-inline: clamp(8px, 2vw, 24px);
+  display: grid; gap: 6px; justify-items: center; text-align: center;
+}
+.hero-stats > div + div { border-left: 1px solid rgba(255,252,246,.22); }
+.hero-stat-v {
+  font-family: var(--font-display); font-size: clamp(1.5rem, 1rem + 1.9vw, 2.1rem);
+  line-height: 1; color: var(--on-dark-hi); letter-spacing: -.01em;
+}
+.hero-stat-v .stars { font-size: .62em; letter-spacing: .06em; vertical-align: .12em; }
+.hero-stat-l {
+  font-size: .625rem; text-transform: uppercase; letter-spacing: .16em;
+  color: rgba(255,252,246,.66); font-weight: 600; line-height: 1.45;
+}
+@media (max-width: 520px) {
+  .hero-stats > div { flex-basis: 100%; padding-block: var(--s-3); }
+  .hero-stats > div + div { border-left: 0; border-top: 1px solid rgba(255,252,246,.18); }
+}
+
+/* ---------- Trust ticker ----------
+   Credentials and real review lines, alternating. Nothing in here is a claim
+   we cannot stand behind on the phone. */
+.ticker {
+  background: var(--ink-block); color: var(--on-dark);
+  border-block: 1px solid var(--ink-block);
+  overflow: hidden; position: relative;
+}
+.ticker-track {
+  display: flex; width: max-content;
+  animation: ticker-run 64s linear infinite;
+}
+.ticker:hover .ticker-track, .ticker:focus-within .ticker-track { animation-play-state: paused; }
+.ticker-set { display: flex; align-items: center; flex: none; }
+.ticker-set > span {
+  display: inline-flex; align-items: center; gap: var(--s-4);
+  padding: 15px clamp(18px, 2.4vw, 34px);
+  font-size: var(--fs-sm); line-height: 1.3; white-space: nowrap;
+}
+.ticker-set > span::after {
+  content: ""; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); flex: none; opacity: .85;
+}
+.ticker-set q { font-family: var(--font-display); font-style: italic; font-size: 1.08em; }
+.ticker-set q::before, .ticker-set q::after { content: none; }
+.ticker-set em { font-style: normal; color: var(--on-dark-mut); }
+@keyframes ticker-run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker { overflow-x: auto; }
+  .ticker-track { animation: none; }
+  .ticker-set:last-child { display: none; }
+}
+
+/* ---------- Section headings with a rule ---------- */
+.rule-head {
+  display: grid; gap: var(--s-4);
+  padding-bottom: var(--s-5); margin-bottom: clamp(28px, 3.5vw, 48px);
+  border-bottom: 1px solid var(--line);
+}
+.rule-head--row { gap: var(--s-5); }
+@media (min-width: 900px) {
+  .rule-head--row { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); align-items: end; }
+  .rule-head--row .lead { margin-bottom: 4px; }
+}
+
+/* ---------- Services accordion ----------
+   Four panels that open on hover or focus. The collapsed state keeps its label
+   upright-readable by rotating it, so nothing is hidden behind an interaction. */
+.svc-acc { display: grid; gap: var(--s-3); }
+@media (min-width: 900px) {
+  .svc-acc { display: flex; gap: var(--s-2); height: clamp(440px, 46vw, 620px); }
+  .svc-panel {
+    flex: 1 1 0; min-width: 0;
+    transition: flex-grow 620ms var(--e-out);
+  }
+  .svc-panel:hover, .svc-panel:focus-within { flex-grow: 3.2; }
+}
+.svc-panel {
+  position: relative; display: block; overflow: hidden;
+  border-radius: var(--r-lg); background: var(--ink-block);
+  text-decoration: none; color: var(--on-dark-hi);
+  min-height: 260px;
+}
+.svc-panel img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 900ms var(--e-out), opacity var(--t-base);
+}
+.svc-panel:hover img, .svc-panel:focus-within img { transform: scale(1.04); }
+.svc-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(14,13,11,.88) 0%, rgba(14,13,11,.34) 46%, rgba(14,13,11,.12) 100%);
+}
+.svc-panel-n {
+  position: absolute; top: var(--s-4); left: var(--s-4); z-index: 3;
+  font-size: .625rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,252,246,.72); font-weight: 600;
+}
+.svc-panel-body {
+  position: absolute; z-index: 3; left: var(--s-5); right: var(--s-5); bottom: var(--s-5);
+  display: grid; gap: var(--s-3);
+}
+.svc-panel-body h3 { color: var(--on-dark-hi); font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); }
+.svc-panel-body p { font-size: var(--fs-sm); color: var(--on-dark-body); line-height: 1.5; max-width: 34ch; }
+.svc-panel-more {
+  font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .14em;
+  font-weight: 600; color: rgba(255,252,246,.82);
+  display: inline-flex; align-items: center; gap: var(--s-2);
+}
+/* The closed state carries its own upright label rather than animating the
+   open one — writing-mode cannot be transitioned, and crossfading two elements
+   is both smoother and readable to a screen reader in either state. */
+.svc-panel-tab { display: none; }
+@media (min-width: 900px) {
+  .svc-panel-tab {
+    display: block; position: absolute; z-index: 3;
+    left: var(--s-5); bottom: var(--s-5);
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family: var(--font-display); font-size: 1.4rem; line-height: 1;
+    color: var(--on-dark-hi); white-space: nowrap;
+    transition: opacity var(--t-base) var(--e-out);
+  }
+  .svc-panel-body { opacity: 0; transition: opacity var(--t-base) var(--e-out); }
+  .svc-panel:hover .svc-panel-tab, .svc-panel:focus-within .svc-panel-tab { opacity: 0; }
+  .svc-panel:hover .svc-panel-body, .svc-panel:focus-within .svc-panel-body {
+    opacity: 1; transition-delay: 140ms;
+  }
+}
+.svc-acc-note { margin-top: var(--s-4); }
+
+/* ---------- One floor, dragged ----------
+   The slider is the same component as the pair above, given the full column. */
+.ba--solo { aspect-ratio: 16/10; border-radius: var(--r-lg); }
+@media (max-width: 640px) { .ba--solo { aspect-ratio: 4/3; } }
+.ba-hint {
+  position: absolute; z-index: 4; left: 50%; top: var(--s-4);
+  transform: translateX(-50%);
+  font-size: .625rem; text-transform: uppercase; letter-spacing: .18em; font-weight: 600;
+  background: var(--photo-veil); color: var(--on-dark-hi);
+  padding: 6px 12px; border-radius: var(--r-pill);
+  transition: opacity var(--t-base);
+  pointer-events: none;
+}
+.ba.is-touched .ba-hint { opacity: 0; }
+
+/* ---------- Finish collection ----------
+   Four finishes, one spec sheet each. Values read left, labels right — the way
+   a product sheet is set, and the reason this does not look like a card grid. */
+.tabs {
+  display: flex; flex-wrap: wrap; gap: clamp(16px, 3vw, 40px);
+  border-bottom: 1px solid var(--line); margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+.tab {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  padding: 0 0 var(--s-4); margin-bottom: -1px;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.05rem, .95rem + .65vw, 1.45rem);
+  line-height: 1.2; color: var(--muted);
+  border-bottom: 1px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+  min-height: 44px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: var(--r-sm); }
+
+.finish { display: grid; gap: clamp(24px, 4vw, 56px); }
+@media (min-width: 900px) {
+  .finish { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: start; }
+}
+.finish[hidden] { display: none; }
+.finish-media {
+  position: relative; overflow: hidden; border-radius: var(--r-lg);
+  aspect-ratio: 4/3; background: var(--surface);
+}
+.finish-media img { width: 100%; height: 100%; object-fit: cover; }
+.finish-body { display: grid; gap: var(--s-4); align-content: start; }
+.finish-body > p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; max-width: 52ch; }
+.spec { display: grid; margin-top: var(--s-2); }
+.spec-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-4);
+  align-items: baseline; padding-block: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+.spec-row:last-child { border-bottom: 1px solid var(--line); }
+.spec-v { font-size: var(--fs-sm); line-height: 1.4; }
+.spec-l {
+  font-size: .625rem; text-transform: uppercase; letter-spacing: .16em;
+  color: var(--muted); font-weight: 600; white-space: nowrap;
+}
+
+/* ---------- The build-up ----------
+   A cutaway of the floor. Every band except the top one is decided before a
+   drop of colour goes down, which is the whole argument of the business. */
+.buildup { display: grid; gap: clamp(32px, 5vw, 72px); }
+@media (min-width: 960px) {
+  .buildup { grid-template-columns: minmax(0, .82fr) minmax(0, 1fr); align-items: start; }
+}
+.buildup-fig { margin: 0; display: grid; gap: var(--s-4); }
+@media (min-width: 960px) {
+  .buildup-fig { position: sticky; top: calc(var(--hdr-h) + var(--s-6)); }
+}
+.buildup-svg {
+  width: 100%; height: auto; display: block;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg);
+}
+.bu-band { transition: opacity var(--t-base) var(--e-out); }
+.bu-label {
+  font-family: var(--font-ui); font-size: 9px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  fill: var(--muted); transition: fill var(--t-base);
+}
+.bu-rule { stroke: var(--line-2); stroke-width: 1; }
+.bu-group.is-active .bu-label { fill: var(--accent-text); }
+.bu-group:not(.is-active) .bu-band { opacity: .62; }
+
+.bu-steps { display: grid; counter-reset: bstep; }
+.bu-step {
+  counter-increment: bstep;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-4) var(--s-5);
+  padding-block: clamp(22px, 3vw, 34px);
+  border-top: 1px solid var(--line);
+}
+.bu-step:last-child { border-bottom: 1px solid var(--line); }
+.bu-step::before {
+  content: counter(bstep, decimal-leading-zero);
+  font-family: var(--font-ui); font-size: .625rem; font-weight: 600;
+  letter-spacing: .16em; color: var(--muted); padding-top: .55em;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--t-base);
+}
+.bu-step.is-active::before { color: var(--accent-text); }
+.bu-step h3 { font-size: clamp(1.3rem, 1.05rem + 1.1vw, 1.9rem); margin-bottom: var(--s-3); }
+.bu-step p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; max-width: 54ch; }
+
+/* ---------- Service area columns ---------- */
+.areas-cols {
+  display: grid; gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+.areas-col h3 {
+  font-size: var(--fs-h3);
+  padding-bottom: var(--s-3); margin-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line-2);
+}
+.areas-col ul { display: grid; gap: var(--s-2); }
+.areas-col li { font-size: var(--fs-sm); color: var(--muted); line-height: 1.5; }
+.areas-col li b { font-weight: 600; color: var(--ink); }
+.areas-col .xs { margin-top: var(--s-3); }
+
+/* ---------- Editorial FAQ ---------- */
+.faq-split { display: grid; gap: clamp(28px, 4vw, 64px); }
+@media (min-width: 960px) {
+  .faq-split { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); align-items: start; }
+  .faq-split > .stack { position: sticky; top: calc(var(--hdr-h) + var(--s-6)); }
+}
+.faq--editorial summary {
+  font-family: var(--font-display); font-weight: 400;
+  /* The questions are authored in sentence case so the DOM text matches the
+     FAQPage schema exactly; the lowercase register is a type decision. */
+  text-transform: lowercase;
+  font-size: clamp(1.15rem, 1rem + .8vw, 1.55rem);
+  letter-spacing: -.008em; line-height: 1.2;
+  padding-block: clamp(20px, 2.6vw, 30px);
+  align-items: flex-start;
+}
+.faq--editorial summary::after {
+  content: "+"; border: 0; width: auto; height: auto; transform: none;
+  font-family: var(--font-ui); font-size: 1.25rem; font-weight: 400;
+  color: var(--muted); line-height: 1; margin-top: .2em;
+  transition: transform var(--t-base) var(--e-out), color var(--t-fast);
+}
+.faq--editorial details[open] summary::after { content: "\2013"; transform: none; }
+.faq--editorial summary:hover::after { color: var(--ink); }
+
+/* ---------- Edge-to-edge work strip ---------- */
+.strip {
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: var(--s-3);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--s-3);
+  scrollbar-width: thin;
+}
+.strip > * { scroll-snap-align: start; }
+.strip .fig-media { aspect-ratio: 3/4; border-radius: var(--r-lg); }
+@media (min-width: 900px) { .strip { grid-auto-columns: minmax(260px, 1fr); } }
+
+/* ---------- Dark section ---------- */
+.section--dark {
+  background: var(--ink-block); color: var(--on-dark);
+  border-block: 1px solid var(--ink-block);
+}
+.section--dark h2, .section--dark h3, .section--dark .h2, .section--dark .h3 { color: var(--on-dark-hi); }
+.section--dark .lead, .section--dark .small { color: var(--on-dark-body); }
+.section--dark .xs { color: var(--on-dark-mut); }
+.section--dark .eyebrow { color: var(--on-dark-mut); }
+.section--dark .eyebrow::before, .section--dark .eyebrow::after { background: var(--line-dark); }
+.section--dark .rule-head { border-bottom-color: var(--line-dark); }
+.section--dark .fail-row { border-top-color: var(--line-dark); }
+.section--dark .fail-row:last-child { border-bottom-color: var(--line-dark); }
+.section--dark .fail-desc { color: var(--on-dark-mut); }
+@media (min-width: 900px) { .section--dark .split { align-items: start; } }
+.section--dark .btn--ghost { --btn-fg: var(--on-dark-hi); --btn-bd: rgba(255,252,246,.45); }
+.section--dark .btn--ghost:hover { --btn-bg: rgba(255,252,246,.14); --btn-bd: var(--on-dark-hi); }
+
+/* ---------- Closing panel ---------- */
+.closer { position: relative; isolation: isolate; overflow: hidden; }
+.closer-media { position: absolute; inset: 0; z-index: -2; }
+.closer-media img { width: 100%; height: 100%; object-fit: cover; }
+.closer::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, rgba(16,15,12,.82), rgba(16,15,12,.70));
+}
+.closer-in {
+  display: grid; gap: var(--s-5); justify-items: center; text-align: center;
+  padding-block: clamp(72px, 10vw, 150px); color: var(--on-dark);
+}
+.closer-in h2 { color: var(--on-dark-hi); font-size: clamp(2.5rem, 1rem + 5.4vw, 4.75rem); line-height: .98; }
+.closer-in .lead { color: var(--on-dark-body); max-width: 46ch; }
+.closer-in .eyebrow { color: rgba(255,252,246,.78); }
+.closer-in .eyebrow::before, .closer-in .eyebrow::after { background: rgba(255,252,246,.4); }
+.closer-in .btn-row { justify-content: center; }
+.closer-in .btn--ghost { --btn-fg: var(--on-dark-hi); --btn-bd: rgba(255,252,246,.45); }
+.closer-in .btn--ghost:hover { --btn-bg: rgba(255,252,246,.14); --btn-bd: var(--on-dark-hi); }
+.closer-in .xs { color: rgba(255,252,246,.7); }
+
+/* ---------- Finish swatches ----------
+   Two of the four finishes have no Floor Candy photograph yet. Rather than
+   borrow someone else's job, those panels show a drawn specimen, labelled as
+   an illustration, with real samples offered at the assessment. */
+.swatch { position: absolute; inset: 0; display: block; }
+.swatch--metallic {
+  background-color: #6E7B85;
+  background-image:
+    radial-gradient(140% 90% at 22% 26%, rgba(255,255,255,.5), transparent 58%),
+    radial-gradient(90% 70% at 78% 78%, rgba(12,16,20,.45), transparent 62%),
+    conic-gradient(from 205deg at 42% 58%, #7E8B95, #B6C0C7, #49525A, #94A0A9, #5E6A73, #7E8B95);
+}
+.swatch--nonslip {
+  background-color: #55504A;
+  background-image:
+    radial-gradient(circle at 30% 30%, rgba(255,252,246,.38) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 70% 62%, rgba(10,9,8,.42) 0 1.3px, transparent 1.9px),
+    radial-gradient(circle at 15% 78%, rgba(255,252,246,.22) 0 1px, transparent 1.5px);
+  background-size: 9px 9px, 11px 11px, 14px 14px;
+}
+.swatch-note {
+  position: absolute; z-index: 2; left: var(--s-3); bottom: var(--s-3);
+  font-size: .625rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 600;
+  background: var(--photo-veil); color: var(--on-dark-hi);
+  padding: 5px 10px; border-radius: var(--r-sm);
+}
+
+/* ---------- Re-skinned carry-overs ---------- */
+.gsum-score {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(2.6rem, 5vw, 3.6rem); letter-spacing: -.02em;
+}
+.callout .eyebrow { color: var(--on-dark-mut); }
+.callout .eyebrow::before, .callout .eyebrow::after { background: var(--line-dark); }
+.callout .xs { color: var(--on-dark-mut); }
+.trust dt { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; }
+.svc-tag, .fig-title, .review-name, .fail-term, .quickform-title, .fs-title,
+.field > label, .fieldset-label, .ftr-head, .hero-stat-l, .spec-l {
+  font-family: var(--font-ui);
+}
+.fail-term { font-weight: 700; }
+.stars { color: var(--accent); letter-spacing: .08em; }
+.hero-stat-v .stars, .hero--center .stars { color: var(--accent-on-dark); }
+
+/* ---------- Cover-image plumbing ----------
+   `height:100%` on an <img> resolves against its <picture>, not against the
+   positioned box outside it. Without this the picture keeps its intrinsic
+   ratio and the "cover" image stops short — which is why the mobile hero only
+   filled its top 218px. Every full-bleed slot needs the wrapper stretched. */
+.hero-media picture,
+.closer-media picture,
+.finish-media picture,
+.fig-media picture,
+.svc-media picture,
+.map-frame picture { position: absolute; inset: 0; display: block; }
+.finish-media img, .fig-media img, .closer-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* The header now floats over the hero, so the hero's own top padding has to
+   clear it rather than relying on the header taking layout space. */
+.hero--center .hero-in { padding-top: calc(var(--hdr-h) + clamp(28px, 6vw, 72px)); }
+
+/* The strapline wraps to two lines on a phone; flanking rules on a wrapped
+   line read as stray marks, so they come off. */
+@media (max-width: 600px) {
+  .eyebrow--rules::before, .eyebrow--rules::after { display: none; }
+}

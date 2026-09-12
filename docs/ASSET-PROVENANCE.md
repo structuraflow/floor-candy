@@ -169,3 +169,16 @@ Also removed: `assets/videos/hero-transform-scrub.mp4` (8.5 MB) and `hero-transf
 2. Generated imagery is permitted for atmosphere and motion only, must never carry a project claim, and must be recorded in this file with model, prompt, settings and job ID.
 3. Never present a generated space as a Floor Candy location, and never attach a client, suburb or date to one.
 4. Inspect every generated asset before it ships.
+
+## Coastal Grain redesign — new non-photographic assets
+
+| Asset | What it is | Honest? |
+|---|---|---|
+| Build-up cutaway (inline SVG, homepage §7) | A schematic drawing of the five layers of a coated floor, authored by hand. Carries no thicknesses, no product names and no performance figures, and is captioned "A cutaway, not to scale." | Yes — a diagram of a generic build-up, not a depiction of a specific Floor Candy job. |
+| `swatch--metallic` (CSS gradient, finish tabs) | A drawn impression of a metallic finish. Labelled **"illustration — samples shown on site"** on the image itself. | Honest as an illustration. It is **not** evidence Floor Candy installs metallic floors — see `QUESTIONS-FOR-JARROD.md` §4.5. |
+| `swatch--nonslip` (CSS gradient, finish tabs) | A drawn impression of a broadcast-aggregate texture, labelled the same way. | Same caveat as above. |
+
+No stock photography, no AI-generated imagery and no competitor photographs were
+added in this pass. The hero (Higgsfield still) and the four before/after images
+(Higgsfield 2K upscales) are unchanged from the previous build — their entries
+above still stand.

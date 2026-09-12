@@ -128,7 +128,7 @@
       track('before_after_interaction', { method: how, label: handle.getAttribute('aria-label') || '' });
     };
     var dragging = false;
-    var start = function (e) { dragging = true; fromEvent(e); report(e.touches ? 'touch' : 'pointer'); };
+    var start = function (e) { dragging = true; el.classList.add('is-touched'); fromEvent(e); report(e.touches ? 'touch' : 'pointer'); };
     var move = function (e) { if (dragging) { fromEvent(e); if (e.cancelable) e.preventDefault(); } };
     var end = function () { dragging = false; };
     el.addEventListener('mousedown', start);
@@ -366,6 +366,66 @@
         });
     });
   }
+
+
+  /* ---------- Finish collection tabs ----------
+     Roving tabindex, arrow-key navigation, one panel visible at a time. The
+     panels are plain elements with [hidden], so with JS off every finish is
+     still readable on the page. */
+  (function finishTabs() {
+    var list = document.querySelector('[role="tablist"]');
+    if (!list) return;
+    var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+    if (tabs.length < 2) return;
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+
+    var select = function (i, focus) {
+      tabs.forEach(function (t, n) {
+        var on = n === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (panels[n]) panels[n].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+      track('finish_tab_view', { finish: tabs[i].textContent.trim() });
+    };
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i, false); });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') n = 0;
+        if (e.key === 'End') n = tabs.length - 1;
+        if (n !== null) { select(n, true); e.preventDefault(); }
+      });
+    });
+  })();
+
+  /* ---------- Build-up diagram ----------
+     Each process step lights the layer it creates. Nothing is hidden behind
+     this — it is emphasis on a drawing that is complete without it. */
+  (function buildUp() {
+    var steps = [].slice.call(document.querySelectorAll('.bu-step'));
+    var groups = [].slice.call(document.querySelectorAll('.bu-group'));
+    if (!steps.length || !groups.length) return;
+
+    var show = function (n) {
+      steps.forEach(function (s) { s.classList.toggle('is-active', s.getAttribute('data-step') === n); });
+      groups.forEach(function (g) { g.classList.toggle('is-active', g.getAttribute('data-layer') === n); });
+    };
+
+    if (!('IntersectionObserver' in window)) { groups.forEach(function (g) { g.classList.add('is-active'); }); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) show(en.target.getAttribute('data-step'));
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach(function (s) { io.observe(s); });
+    show('1');
+  })();
 
   /* ---------- Current year ---------- */
   var y = document.getElementById('yr');
