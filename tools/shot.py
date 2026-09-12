@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Zero-dependency full-page screenshots over the Chrome DevTools Protocol.
 
-Usage: shot.py <out-dir> <url> <label:width:height> [...]
+Usage: shot.py <out-dir> <url> <label:width:height[:scheme]> [...]
+The optional scheme is "dark" or "light"; it emulates prefers-color-scheme.
 Chrome is launched headless on a throwaway profile; nothing is installed.
 """
 import base64, hashlib, json, os, socket, struct, subprocess, sys, time, urllib.request
@@ -91,8 +92,11 @@ def main():
         ws.call("Page.enable")
 
         for spec in targets:
-            label, w, h = spec.split(":")
-            w, h = int(w), int(h)
+            parts = spec.split(":")
+            label, w, h = parts[0], int(parts[1]), int(parts[2])
+            scheme = parts[3] if len(parts) > 3 else ""
+            ws.call("Emulation.setEmulatedMedia", {
+                "features": [{"name": "prefers-color-scheme", "value": scheme}] if scheme else []})
             ws.call("Emulation.setDeviceMetricsOverride", {
                 "width": w, "height": h, "deviceScaleFactor": 2,
                 "mobile": w < 700, "screenWidth": w, "screenHeight": h})

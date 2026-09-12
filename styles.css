@@ -119,34 +119,10 @@
   --hdr-h: 72px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg:        #1A1916;
-    --surface:   #24231F;
-    --panel:     #2C2B26;
-    --ink:       #EDE9E1;
-    --muted:     #A69F93;
-    --line:      #383630;
-    --line-2:    #4B483F;
-    --sand:      #4B4438;
-    --accent-text: #FF6B8A;
-    --ink-block: #121110;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg:        #1A1916;
-  --surface:   #24231F;
-  --panel:     #2C2B26;
-  --ink:       #EDE9E1;
-  --muted:     #A69F93;
-  --line:      #383630;
-  --line-2:    #4B483F;
-  --sand:      #4B4438;
-  --accent-text: #FF6B8A;
-  --ink-block: #121110;
-}
+/* No dark variant. The warm mineral ground is the identity here — a dark
+   re-skin flattens the light/dark band rhythm the page is built on, and the
+   previous one was inherited Ground Truth values that were never re-keyed to
+   Coastal Grain. `color-scheme: light` on :root pins form controls to match. */
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
