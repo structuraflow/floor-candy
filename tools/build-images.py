@@ -28,6 +28,9 @@ JOBS = {
     "work-flake-brick":  "770919249_122139640521197682_4231726085946889890_n.jpg",
     "work-path-light":   "621809877_122109580401197682_2551109649450473223_n.jpg",
     "work-drive-blue":   "619669544_122109580473197682_5767530575579350438_n.jpg",
+    # Solid-colour (non-flake) coating on an alfresco slab. Masking tape is
+    # still down at the edges, and the caption says so.
+    "finish-solid":      "774178748_122139640437197682_1213576438287910503_n.jpg",
 }
 PREP_HI = "774512745_122139640347197682_8579019277707021752_n.jpg"
 

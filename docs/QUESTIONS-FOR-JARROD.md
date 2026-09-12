@@ -86,25 +86,29 @@ Still nothing published, deliberately. The cost guide in `CONTENT-BRIEFS.md`
 cannot be written as a price guide without real figures, and will not be
 published with invented ones.
 
-**4.5 — ⚠️ The four finishes on the new homepage. BLOCKS DEPLOYMENT.**
-The redesigned homepage carries a "finish collection" with four tabs: **flake
-system**, **metallic marble**, **polished concrete look** and **commercial
-non-slip**. Two of those are claims the site has never made before and that
-question 2.1 (metallic) and 2.5 (commercial) have never been answered for:
+**4.5 — The four finishes on the new homepage. RESOLVED, no longer blocking.**
+The first draft of this section carried *metallic marble* and *commercial
+non-slip* — both taken from the design brief rather than from anything Floor
+Candy has shown. Reviewing all 34 genuine job photographs in the source folder
+settles it:
 
-* **Flake** and **polished concrete look** are backed by Floor Candy photographs
-  already on the site, so they are safe.
-* **Metallic marble** and **commercial non-slip** have no Floor Candy
-  photograph. Rather than borrow someone else's job, those two panels show a
-  *drawn* specimen, labelled on the image as "illustration — samples shown on
-  site", and the spec rows say the finish is specified in person. That keeps the
-  imagery honest, but it does **not** answer the underlying question: does Floor
-  Candy actually offer these two finishes?
+* **Flake** — many photographs, grey, cream and tan blends. Evidenced.
+* **Sealed exterior** — many photographs, driveways and paths. Evidenced.
+* **Polished concrete look** — `fc1.jpg`, a genuine finished interior.
+  Evidenced.
+* **Solid colour** — the alfresco slab, masking still down. Evidenced.
+* **Metallic marble** — *no Floor Candy photograph exists.*
+* **Commercial non-slip** — *no Floor Candy photograph exists.* The only
+  commercial epoxy images in the folder are stock, and they are already in
+  `assets/_quarantine`.
 
-**Do not put this page into production until Jarrod confirms 2.1 and 2.5.** If
-either finish is not offered, delete that tab — the component works with two,
-three or four. If they are offered, the drawn specimens should be replaced with
-photographs of real Floor Candy jobs as soon as there are any.
+So the page now shows the four finishes above, each with a real Floor Candy
+photograph and no drawn specimens anywhere. Nothing is claimed that the work
+does not already demonstrate, and nothing is blocking deployment.
+
+Questions 2.1 and 2.5 still stand as *business* questions — if Jarrod does
+offer metallic or commercial work, those tabs can be added the moment there are
+photographs of a finished job. Until then the page does not raise them.
 
 **4.6 — The hero image is still the Higgsfield still.**
 Unchanged by the redesign, and still running without a disclosure label, per
