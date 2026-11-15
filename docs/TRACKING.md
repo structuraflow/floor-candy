@@ -1,62 +1,50 @@
-# Conversion tracking
+# Lead routing and conversion tracking
 
-## What is installed
+_Rewritten 30 Sep 2026. The previous version described the pre-rebuild site's
+events and no longer matched `main.js`._
 
-**No analytics library is loaded by this site.** There is no GA4 tag, no Google
-Tag Manager container, and no third-party pixel. That was true before this pass
-and is still true — nothing was removed, and nothing was added with a made-up
-measurement ID.
+## Where form leads go
 
-What *was* added is a vendor-neutral event layer in `main.js`. Every conversion
-action now calls `track(name, params)`, which:
+Both quote forms (`#home-quote` on `/`, `#contact-quote` on `/contact`) post to
+**Formspree form `mrpeeawq`** — `FORM_ENDPOINT` in `tools/build-site.py`. Created by Zach
+on 7 Oct 2026, replacing `xqerqnyv` (the July form from commit `b343ab9`). The 21 Sep rebuild shipped the
+forms with **no action**, so from 21 Sep to the next deploy the forms could not
+send anything; visitors got a "call or email" fallback message.
 
-1. pushes `{ event: name, ...params }` onto `window.dataLayer`, and
-2. calls `window.gtag('event', name, params)` if `gtag` exists.
+**Unverified: which inbox Formspree delivers to.** It is not
+zachjamesriley12@gmail.com. Log in to Formspree (probably the
+structuraflow@gmail.com account), open form `mrpeeawq`, and confirm the target
+email is one Jarrod reads within the hour — ideally floorcandyepoxy@gmail.com
+plus a copy to Zach. Then send one real test from the live site.
 
-Both calls are wrapped in `try/catch`, so tracking can never break the page.
+- JS submits with `fetch` and shows an inline confirmation; without JS the form
+  POSTs natively and Formspree shows its own thank-you page.
+- `_gotcha` honeypot and `_subject` are included.
+- There is **no file field**: Formspree rejects uploads on free plans, which
+  would have lost the whole lead. Visitors are asked to text photos instead.
+- UTM / gclid / fbclid, page URL and referrer travel with every submission.
 
-## To turn it on
+## Analytics
 
-Add **one** of the following to every page's `<head>`. Do not add both.
+Nothing is loaded until IDs are set in `tools/build-site.py`:
 
-**Google Tag Manager** — paste the container snippet. `dataLayer` is already
-being populated, so the events below are immediately available as GTM triggers.
+- `GA4_ID = "G-…"` → renders the gtag snippet on every page.
+- `GSC_TOKEN = "…"` → renders the `google-site-verification` meta tag
+  (not needed if the property is verified by DNS).
 
-**GA4 directly** — paste the `gtag.js` snippet with the real measurement ID.
-`track()` will forward to it with no further changes.
+Rebuild with `python3 tools/build-site.py`, then deploy.
 
-## Events being fired
+## Events (`main.js`, pushed to `dataLayer` and `gtag` if present)
 
 | Event | Fires when |
 |---|---|
-| `click_to_call` | Any `tel:` link is clicked — header, hero, sticky bar, footer, in-copy. |
-| `whatsapp_click` | Any WhatsApp link is clicked — drawer, footer, desktop float. |
-| `google_maps_click` | The "Open Floor Candy on Google Maps" link is clicked. |
-| `assessment_form_start` | First real interaction with either lead form. Fires once per form. |
-| `assessment_form_submit` | Formspree returns success. Fires once. |
-| `before_after_interaction` | First drag, touch or arrow-key use of any before/after slider. Once per slider; `method` records how. |
-| `project_view` | A project link in the recent-work grid is clicked. |
-| `assessment_cta_*` | Which assessment CTA was clicked — `hero`, `header`, `sticky`, `offer`, `problem`, `project`, `final`, `extended`. |
+| `generate_lead` | Formspree accepted a quote form. **Mark as a key event.** |
+| `form_start` | First focus into a quote form (once per form). |
+| `form_error` | Formspree or the network rejected a submission. |
+| `click_call` | Any `tel:` link. **Mark as a key event.** |
+| `click_sms` | Any `sms:` link. |
+| `click_email` | Any `mailto:` link. |
+| `click_whatsapp` | Any `wa.me` link. |
+| `quote_cta_click` | Any link to `/contact` or `#quote`. |
 
-Every event carries `page_path`; link events also carry `link_text` and `link_url`.
-
-## Recommended GA4 conversions
-
-Mark `assessment_form_submit`, `click_to_call` and `whatsapp_click` as key
-events. `assessment_form_start` is the denominator for form drop-off, and the
-`assessment_cta_*` split shows which placement actually drives bookings.
-
-## Form delivery
-
-Both forms post to the same Formspree endpoint (`xqerqnyv`), unchanged. UTM,
-GCLID and referrer are captured on landing into `sessionStorage` and merged into
-the payload at submit, so lead source survives a multi-page visit.
-
-**Double submission** is now blocked by an in-flight flag on each form, in
-addition to the disabled button — the flag is cleared only on failure, so a slow
-network cannot produce two leads.
-
-## Secrets
-
-None. The Formspree endpoint is a public form ID by design. No keys or private
-endpoints appear in client-side code.
+Click events carry `link_url` and `page_path`.

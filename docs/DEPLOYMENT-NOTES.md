@@ -73,7 +73,7 @@ Roll back with `vercel rollback`, or `git revert` the merge commit.
 ## Pre-launch checklist
 
 - [ ] **Google Business Profile alignment.** The profile currently shows Tallwoods Village NSW 2430. The site says "servicing Newcastle and the Hunter Region" and claims no premises, so the two do not contradict — but the profile's address and service-area settings should be reviewed before driving traffic. This also determines whether the Newcastle map pack is reachable at all.
-- [ ] **Test the form end-to-end.** The Formspree endpoint `https://formspree.io/f/xqerqnyv` was carried over from the previous site and **has not been test-submitted** — sending test data to a live client endpoint would create a junk lead. Submit one real test and confirm it arrives before launch.
+- [ ] **Test the form end-to-end.** The Formspree endpoint `https://formspree.io/f/mrpeeawq` was carried over from the previous site and **has not been test-submitted** — sending test data to a live client endpoint would create a junk lead. Submit one real test and confirm it arrives before launch.
 - [ ] **Confirm the review count is still 5.0 from 3.** Verified 10 August 2026. If it has changed, update the figure in `index.html`, `tools/build-pages.js` (`reviewsBlock`), and the landing page, then regenerate.
 - [ ] Verify redirects resolve: `/services`, `/gallery`, `/contact` → new URLs.
 - [ ] Submit `sitemap.xml` in Search Console.

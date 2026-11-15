@@ -185,3 +185,253 @@ No stock photography, no AI-generated imagery and no competitor photographs were
 added in this pass. The hero (Higgsfield still) and the four before/after images
 (Higgsfield 2K upscales) are unchanged from the previous build — their entries
 above still stand.
+
+---
+
+## Update — 21 September 2026 (production rebuild)
+
+The site was rebuilt. **Every image referenced by the built HTML is now genuine
+Floor Candy photography.** Verified mechanically:
+
+```
+grep -rho 'src="/assets/img/[^"]*"' . --include="*.html"
+```
+
+returns 26 distinct files, all from the genuine set listed above.
+
+### Generated imagery removed from the site
+
+| Asset | Was | Now |
+|---|---|---|
+| `hero-garage-*` (Higgsfield text-to-image) | Homepage hero background | **Not referenced on any page** |
+| `hero-poster-*` | Hero poster frame | **Not referenced** |
+| `og-floor-candy.jpg` (crop of the generated hero) | `og:image` on every page, and `image` in LocalBusiness schema | **Not referenced** |
+
+The homepage hero is now `garage-flake-finished-*` — a genuine photograph of a
+completed Floor Candy flake garage floor. `og:image` sitewide, and the `image`
+property of the business schema, now point at the same genuine photograph.
+
+This resolves question 4.6 in `QUESTIONS-FOR-JARROD.md`: the undisclosed
+generated hero is no longer on the site, so there is nothing left to disclose.
+The files remain in `assets/img/` and in git history; they are simply unused.
+
+### Still carrying a caveat
+
+`ba-garage-before/after-414` and `ba-drive-before/after-414` are **genuine job
+photographs that were AI-upscaled** from 414px social exports (recorded above).
+The content is real and was verified against source for invented detail. They
+are used in the before/after sliders on the homepage and `/projects`.
+
+**Action:** replace with original-resolution photographs off Jarrod's phone when
+available. The `garage-epoxy-floor-before/after-*` pair (client-supplied,
+1024×768, not upscaled) is the better asset and is the one used as the primary
+before/after on the homepage.
+
+### Rule unchanged
+
+Only genuine Floor Candy photography may be presented as project proof. The
+build has no code path that renders a stock or generated image as a project —
+`tools/build-site.py` draws project imagery from a fixed table of verified files.
+
+---
+
+## Update 2 — 21 September 2026 (logo + hero, on Zach's instruction)
+
+> **Superseded in part.** The first pass used the wrong file
+> (`floor_candy_logo_design.png` — an isometric FC hexagon with a pink→orange
+> gradient). The correct artwork is
+> `~/Downloads/floor candy/new logo new logo.png`. See Update 3.
+
+### Superseded logo attempt
+
+Source: `~/Downloads/floor_candy_logo_design.png` (1254×1254, opaque dark ground).
+Two transparent assets were cut from it and are now used sitewide:
+
+| File | Use | Size |
+|---|---|---|
+| `assets/logo-mark.{webp,png}` | Header, 40×34 | 4.2 KB / 13.5 KB |
+| `assets/logo-lockup.{webp,png}` | Footer, 480px wide | 20.6 KB / 92.7 KB |
+
+The dark ground was removed by ramping alpha on the max channel (background is
+`#0C0B0C`, everything in the mark is either white or saturated), so both assets
+sit on any surface. WebP is served with a PNG fallback.
+
+**Colourway, sampled from the source rather than estimated:**
+
+| Token | Value | Where it came from |
+|---|---|---|
+| `--ink` | `#0C0B0C` | logo background |
+| `--pink` | `#F33852` | start of the wordmark gradient |
+| `--orange` | `#FA721E` | end of the wordmark gradient |
+| `--grad` | `linear-gradient(100deg, #F33852, #F7522F, #FA721E)` | the CANDY wordmark and the hexagon C |
+
+The site header is now dark so the full-colour mark sits in its native context,
+and the gradient drives primary CTAs, the offer flag, eyebrow rules, the
+after tag on before/after sliders and the sticky mobile quote button.
+
+### Hero reverted to the generated still
+
+The homepage hero is the **Higgsfield text-to-image** `hero-garage-*` again, on
+Zach's explicit instruction of 21 September 2026. This reverses the change made
+earlier the same day.
+
+Guard rails kept in place, so the illustration is never passed off as a job:
+
+- `alt=""` — it is decorative, not a project, and carries no project caption
+- **`og:image` remains `garage-flake-finished-1440.jpg`**, a genuine Floor Candy
+  flake floor, so link previews show real work
+- The `image` property of the LocalBusiness schema likewise remains the genuine
+  photograph
+- It appears in no gallery, no project block and no before/after
+
+Every other image on the site remains genuine Floor Candy photography. The only
+generated asset referenced anywhere is this hero backdrop.
+
+
+---
+
+## Update 3 — 21 September 2026 (correct logo)
+
+**Source: `~/Downloads/floor candy/new logo new logo.png`** (1254×1254, already
+has an alpha channel). Brush-script wordmark with a crown, plus an
+`EPOXY FLOORING` strapline.
+
+| File | Use | Size |
+|---|---|---|
+| `assets/logo-head.{webp,png}` | Header — crown + FLOOR CANDY, strapline cropped off so it stays legible at 108px | 23.1 KB / 72.9 KB |
+| `assets/logo-full.{webp,png}` | Footer — full lockup including the strapline | 56.6 KB / 231.4 KB |
+
+Both are straight crops at display resolution; the source already had
+transparency, so no background removal was needed. WebP with PNG fallback.
+
+**Colourway, measured from the artwork by histogram of saturated pixels — a
+single flat hot magenta, no gradient:**
+
+| Token | Value | Contrast |
+|---|---|---|
+| `--ink` | `#0C0B0C` | — |
+| `--pink` | `#F9019F` | 5.18:1 on ink · 4.90:1 for near-black labels on it |
+| `--pink-deep` | `#C7007F` | 5.62:1 on white · 5.12:1 on off-white — the only magenta used as text on light |
+
+`#F9019F` is **3.80:1 on white**, so it is never used for text on a light
+surface. The earlier `#F33852 → #FA721E` gradient was taken from the wrong
+artwork and has been removed entirely.
+
+The logo carries a dark outline around the white lettering, so it is used only
+on dark surfaces (header and footer), which is how it was drawn.
+
+---
+
+## Update 4 — 21 September 2026 (new job photographs)
+
+Nine files were added to `~/Downloads/floor candy` on 21 Sep 2026, 09:54–11:44.
+They are **not** all job photography — sorted before use:
+
+### Genuine job photographs — now on the site ✅
+
+One commercial shop fit-out, documented through the job. Same room in all of
+them, matched by the pendant lights, the window and the white brick wall.
+
+| Source | Shows | Used as |
+|---|---|---|
+| `BA291B76…jpeg` (1242×897) | Old tiled floor, dust extractor in shot | `shopfit-tiled-before-*` — **before** frame of the homepage/projects slider |
+| `B762C6AC…jpeg` (1218×885) | Finished cream and tan flake floor | `shopfit-flake-after-*` — **after** frame, and the work grid |
+| `BB6CE6D1…jpeg` (1242×897) | Same room part-way through preparation | `shopfit-prepped-*` — available, not yet placed |
+| `0A07FEA9…jpeg` (1206×1599) | Floor ground back, extractor in shot | `shopfit-substrate-*` — work grid |
+| `2AB9CA11…jpeg` (1242×1609) | Tiled floor, masking up | `shopfit-masked-*` — available, not yet placed |
+| `F9A175FE…jpeg` (1218×1593) | Shop frontage, tiled floor | `shopfit-frontage-*` — **not placed**, see note |
+
+These are the **highest-resolution genuine photographs the project has** — 885 to
+1609px against the 414px social exports everything else came from. Derived with
+`tools/add-photos.py` (headless-Chrome canvas; PIL is unavailable and `sips`
+cannot write WebP), so this set is **JPEG + WebP, no AVIF**. The three landscape
+frames were centre-cropped to a shared 1.385 aspect so the slider frames align;
+nothing else was altered.
+
+**The driveway before/after has been retired from the sliders** and replaced by
+this pair, at Zach's request. The retired pair (`ba-drive-before/after-414`) were
+AI-upscaled 414px exports; these are native resolution, which is a straight
+upgrade in evidence quality.
+
+**Caption honesty.** The two slider frames are *not* the same camera position —
+the finished shot is closer to the floor. The caption says so rather than
+claiming a matched viewpoint. The work-grid caption for `shopfit-substrate` says
+"existing floor ground back", not "tiles removed", because the photograph does
+not establish which.
+
+### Not job photography — deliberately excluded ❌
+
+| Source | What it is | Why excluded |
+|---|---|---|
+| `8940C69C…jpeg` | Marketing flyer: AI-generated red Ferrari in a neon garage | Generated interior, not a Floor Candy job |
+| `BF598EF3…jpeg` | Marketing flyer: real "BEFORE" garage against an AI-generated Porsche "AFTER" captioned *"SAME GARAGE. TOTAL TRANSFORMATION."* | **The after is generated and is not that garage.** Using it would be a fabricated before/after |
+| `1d64148e…png` | Duplicate of the logo | Already in use as `logo-head` / `logo-full` |
+
+The flyers are flagged in the build report — they are a credibility risk if run
+as advertising, independent of this website.
+
+---
+
+## Update 5 — 21 September 2026 (premium imagery + hero video)
+
+All generated with Higgsfield on Zach's instruction, to lift the visual tier.
+**Every item below is decorative. None carries a project caption, none appears
+in a gallery, before/after or case study, and none is used as `og:image`.**
+
+| Asset | Model | Use | Notes |
+|---|---|---|---|
+| `hero-garage-portrait-{414,600,752,1128}.{jpg,webp}` | `gpt_image_2_5`, 9:16 | Phone hero backdrop | Luxury garage interior, high-gloss flake floor. Art-directed: serves only at ≤860px; desktop keeps the earlier landscape still |
+| `flake-macro-{600,900,1344}.{jpg,webp}` | `gpt_image_2_5`, 16:9 | Closing CTA band | Abstract macro of a flake surface. `aria-hidden`, behind a heavy scrim |
+| `assets/videos/hero-portrait.mp4` | **`seedance_2_5`**, 9:16, 720p, 5s, no audio | Phone hero loop | Image-to-video from the hero still, so the poster and first frame match |
+
+### How the video is shipped
+
+3.24 MB against a ~58 KB critical path, so it is gated rather than assumed:
+
+- The `<picture>` still remains the **LCP** and always paints. The video is a
+  separate layer that fades in only once it can actually play.
+- `main.js` attaches the source only when: `prefers-reduced-motion` is not
+  `reduce`, `navigator.connection.saveData` is false, and `effectiveType` is
+  not 2g/3g. It waits for `requestIdleCallback` so it never competes with the
+  poster.
+- `preload="none"`, `muted loop playsinline`, `aria-hidden`, `tabindex="-1"`.
+- With JS off, or on a metered connection, the still simply stays. Nothing
+  breaks and nothing is downloaded.
+
+`unlim.available` was **false** for `seedance_2_5`, so this drew credits rather
+than the free-trial allowance.
+
+### What was deliberately NOT replaced
+
+Service-page imagery, the gallery, both before/after sliders and both case
+studies remain **genuine Floor Candy photography**, including the 414px social
+exports. Generated imagery is better looking than some of those photographs;
+using it there would trade the one thing the positioning rests on — that the
+proof is real — for a nicer picture. The rule holds: real work outranks
+decorative imagery.
+
+---
+
+## Update 6 — 21 September 2026 (Ferrari hero, trimmed footer, rebuilt drawer)
+
+The phone hero imagery was regenerated again on Zach's instruction: hyper-real,
+with a Ferrari and a spectacular flake floor.
+
+| Asset | Model | Notes |
+|---|---|---|
+| `hero-garage-portrait-*.{jpg,webp}` | `gpt_image_2_5`, 9:16 | Replaces the previous luxury-garage still. Red Ferrari parked back-right, its reflection running the full length of a mirror-gloss charcoal/silver/bronze flake floor with individual chips readable in the foreground |
+| `assets/videos/hero-portrait.mp4` | `seedance_2_5`, 9:16, 720p, 5s, no audio, **3.07 MB** | Regenerated image-to-video from the Ferrari still so poster and first frame match |
+
+**Trademark note for Zach:** the car is a recognisable Ferrari. Using a
+recognisable marque in advertising imagery for an unrelated business is a
+small but real trademark exposure. It is decorative and makes no endorsement
+claim, but it is his call whether to keep it. Swapping the prompt to an
+unbadged supercar removes the question entirely.
+
+Unchanged: this is a decorative backdrop. It carries `alt=""`, no project
+caption, and `og:image` remains a genuine Floor Candy photograph.
+
+**A trap worth recording.** The video layer sits over the still, so after
+regenerating the hero image the page still showed the *old* car — the stale
+video was playing on top. Regenerating the still without regenerating the video
+will silently show the wrong image. Both must move together.

@@ -4,7 +4,8 @@ assets/images
 tools
 docs
 
-# Superseded by the hero-garage-* still. Retained in git history, not shipped.
+# Superseded, retained in git history, not shipped.
+# NOTE: assets/videos/hero-portrait.mp4 IS shipped - it is the hero loop.
 assets/videos/hero-loop.mp4
 assets/img/hero-poster-*
 

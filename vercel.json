@@ -3,35 +3,110 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/services.html", "destination": "/garage-floor-coating", "permanent": true },
-    { "source": "/services", "destination": "/garage-floor-coating", "permanent": true },
-    { "source": "/gallery.html", "destination": "/projects", "permanent": true },
-    { "source": "/gallery", "destination": "/projects", "permanent": true },
-    { "source": "/contact.html", "destination": "/floor-assessment", "permanent": true },
-    { "source": "/contact", "destination": "/floor-assessment", "permanent": true }
+    {
+      "source": "/garage-floor-coating",
+      "destination": "/garage-epoxy-flooring",
+      "permanent": true
+    },
+    {
+      "source": "/garage-floor-coating.html",
+      "destination": "/garage-epoxy-flooring",
+      "permanent": true
+    },
+    {
+      "source": "/floor-assessment",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/floor-assessment.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/process",
+      "destination": "/concrete-preparation-crack-repair",
+      "permanent": true
+    },
+    {
+      "source": "/process.html",
+      "destination": "/concrete-preparation-crack-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lp/garage-floors-newcastle",
+      "destination": "/service-areas/newcastle",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/premium-flake-flooring",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/premium-flake-flooring",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/gallery.html",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/shop-fit-out-tiled-floor-to-flake",
+      "destination": "/projects/tiled-floor-to-flake",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
       ]
     },
     {
       "source": "/assets/fonts/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/assets/img/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/assets/videos/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
