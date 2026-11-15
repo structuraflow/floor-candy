@@ -8,7 +8,7 @@ dependency: the deployed artefact is static files. Run from the repo root:
 
 Design rules enforced here, not by hand:
   * Any field whose value is None is NOT rendered. Credentials and project
-    specifications we cannot verify simply do not appear — there is no way to
+    specifications we cannot verify simply do not appear, there is no way to
     ship "TBC", "XXm2" or a placeholder to production.
   * Every page gets a unique title, meta description, canonical, OG data,
     one H1, breadcrumbs (except home) and the shared header/footer/CTA.
@@ -20,10 +20,11 @@ import json
 import os
 import re
 import shutil
+from urllib.parse import quote_plus
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.floorcandyepoxy.com"
-ASSET_V = 17  # bump on any CSS/JS change or returning visitors keep the old file
+ASSET_V = 18  # bump on any CSS/JS change or returning visitors keep the old file
 
 # --------------------------------------------------------------------------
 # VERIFIED BUSINESS FACTS
@@ -117,6 +118,47 @@ OFFER = {"saving": 250, "label": "New customers save $250"}
 FORM_ENDPOINT = "https://formspree.io/f/mrpeeawq"
 GA4_ID = None        # e.g. "G-XXXXXXXXXX" from GA4 > Admin > Data streams
 GSC_TOKEN = None     # content value of the google-site-verification meta tag
+PIXEL_ID = None      # Meta Pixel ID (digits) from Events Manager. None = no pixel.
+
+# --------------------------------------------------------------------------
+# JOB FACTS, pending Jarrod. None = the sentence that needs it is not
+# rendered. Fill a value in (plain words, e.g. "2 days", "24 hours") and it
+# appears in the hero, process timeline, FAQ and thank-you page.
+# --------------------------------------------------------------------------
+JOB_FACTS = {
+    "days_on_site": None,    # TODO_DAYS_ON_SITE   e.g. "2 days"
+    "walk_on": None,         # TODO_WALK_ON        e.g. "24 hours"
+    "drive_on": None,        # TODO_DRIVE_ON       e.g. "72 hours"
+    "response_time": None,   # TODO_RESPONSE_TIME  e.g. "one business day"
+    "booking_month": None,   # TODO_BOOKING_MONTH  e.g. "January" (capacity line)
+}
+
+# --------------------------------------------------------------------------
+# HEADLINE VARIANTS for the Meta ads. Each ad links to /?h=a, /?h=b or /?h=c.
+# The variant is swapped in before first paint and sent with the lead.
+# "A" is the default and what search engines see.
+# --------------------------------------------------------------------------
+HEADLINES = {
+    "a": "A garage floor you’ll actually want to show off.",
+    "b": "Mid North Coast garage floors from $2,450. New customers save $250.",
+    "c": "Sick of a cracked, oil-stained garage floor?",
+}
+
+# Quote-form step 1. (value sent to Formspree, label, icon key)
+FLOOR_TYPES = [
+    ("Single garage", "Single garage", "g1"),
+    ("Double garage", "Double garage", "g2"),
+    ("Triple garage", "Triple garage", "g3"),
+    ("Patio or alfresco", "Patio or alfresco", "patio"),
+    ("Shed or workshop", "Shed or workshop", "shed"),
+    ("Inside the home", "Inside the home", "home"),
+    ("Commercial", "Commercial", "comm"),
+    ("Other", "Something else", "other"),
+]
+SIZES = ["Under 20m²", "20 to 40m²", "40 to 60m²", "Over 60m²", "Not sure"]
+TIMINGS = ["ASAP", "Within a month", "1 to 3 months", "Just researching"]
+HEARD = ["Facebook or Instagram ad", "Google search", "Google Maps", "Friend or family",
+         "Saw a job or the van", "Other"]
 
 REVIEWS = [
     {
@@ -141,6 +183,7 @@ REVIEWS = [
         "name": "Miranda Bell",
         "source": "Google review",
         "stars": 5,
+        "topic": "stone",  # stone polishing, not a floor coating: kept off the landing page
         "text": "I recently had the pleasure of working with Jarred from Floor Candy "
                 "and I couldn’t be happier with the results. His expertise in natural "
                 "stone polishing is outstanding—he restored our stone surfaces to a "
@@ -149,7 +192,7 @@ REVIEWS = [
 ]
 
 # --------------------------------------------------------------------------
-# IMAGES — genuine Floor Candy photography only.
+# IMAGES, genuine Floor Candy photography only.
 # See docs/ASSET-PROVENANCE.md. Nothing generated is used as project proof.
 # --------------------------------------------------------------------------
 IMG = {
@@ -182,7 +225,7 @@ IMG = {
                     "alt": "Solid colour coating on an alfresco slab, masking still down"},
 }
 
-# Square 414px work photos — all genuine.
+# Square 414px work photos, all genuine.
 HERO_PICTURE = """<picture>
 <source media="(max-width: 860px)" type="image/webp" srcset="/assets/img/hero-garage-portrait-414.webp 414w, /assets/img/hero-garage-portrait-600.webp 600w, /assets/img/hero-garage-portrait-752.webp 752w, /assets/img/hero-garage-portrait-1128.webp 1128w" sizes="100vw">
 <source media="(max-width: 860px)" type="image/jpeg" srcset="/assets/img/hero-garage-portrait-414.jpg 414w, /assets/img/hero-garage-portrait-600.jpg 600w, /assets/img/hero-garage-portrait-752.jpg 752w, /assets/img/hero-garage-portrait-1128.jpg 1128w" sizes="100vw">
@@ -205,14 +248,14 @@ WORK = [
 ]
 
 # --------------------------------------------------------------------------
-# BEFORE / AFTER — verified pairs only.
+# BEFORE / AFTER, verified pairs only.
 # Any spec left None is omitted from the caption. No placeholders ship.
 # --------------------------------------------------------------------------
 BA = {
     "garage": {
         "before": "garage-epoxy-floor-before", "after": "garage-epoxy-floor-after",
         "w": [400, 600, 800, 1024], "avif": True, "ratio": (1024, 768),
-        "title": "Garage — flake epoxy floor",
+        "title": "Garage: flake epoxy floor",
         "before_label": "Before", "after_label": "Completed",
         "alt_before": "Bare, stained concrete garage slab before coating",
         "alt_after": "The same garage finished in a grey flake epoxy floor",
@@ -223,12 +266,12 @@ BA = {
     "prep": {
         "before": "ba-garage-before", "after": "ba-garage-after",
         "w": [414], "avif": True, "ratio": (414, 414),
-        "title": "Garage — during preparation, then finished",
+        "title": "Garage: during preparation, then finished",
         "before_label": "During prep", "after_label": "Completed",
         "alt_before": "Garage floor part-way through mechanical preparation",
         "alt_after": "The same garage floor finished in flake epoxy",
         "note": "The first frame is labelled during prep because the dust extractor "
-                "is still in shot — it is not an untouched before.",
+                "is still in shot, it is not an untouched before.",
         "specs": {"Service": "Flake epoxy", "Suburb": None, "Floor size": None},
     },
     "shopfit": {
@@ -239,8 +282,8 @@ BA = {
         "alt_before": "Old tiled floor before work started, dust extractor in shot",
         "alt_after": "The same room finished in a cream and tan flake floor",
         "note": "The same room, before the job and after it. The two frames are from "
-                "slightly different positions — the finished shot is closer to the "
-                "floor — so read it as the same space, not the same camera mark.",
+                "slightly different positions, the finished shot is closer to the "
+                "floor, so read it as the same space, not the same camera mark.",
         "specs": {"Service": "Flake epoxy", "Suburb": None, "Floor size": None,
                   "System": None, "Existing condition": None},
     },
@@ -249,7 +292,7 @@ BA = {
 # --------------------------------------------------------------------------
 # CASE STUDIES
 # The reusable project record. Every field below may be None, and the renderer
-# omits anything without a value — so an unconfirmed suburb or floor size is
+# omits anything without a value, so an unconfirmed suburb or floor size is
 # structurally incapable of reaching the page. Fill a field in, rebuild, done.
 # Suburbs are blank because these photographs came off a phone with no job
 # record attached. Jarrod's Facebook page attributes jobs to Taree, Forster and
@@ -262,7 +305,7 @@ CASES = [
         "h1": "A tiled floor taken back and re-laid in flake",
         "meta_title": "Case Study: Tiled Floor to Flake | Floor Candy",
         "meta": "A tiled floor ground back and finished in a cream and tan flake "
-                "system \u2014 photographed at four stages, start to finish.",
+                "system, photographed at four stages, start to finish.",
         "lede": "The most completely documented job we have. A tired tiled floor, "
                 "photographed before anything was touched, part-way through "
                 "preparation, back to bare substrate, and finished.",
@@ -274,7 +317,7 @@ CASES = [
         "finish": "A cream and tan flake blend with a clear topcoat.",
         "ba": "shopfit",
         "stages": [
-            ("shopfit-masked", "Before \u2014 the tiled floor as we found it",
+            ("shopfit-masked", "Before: the tiled floor as we found it",
              "The floor before anything was touched. Tiles across the full floor, with the "
              "extraction gear staged in the back corner ready to start."),
             ("shopfit-prepped", "Part-way through preparation",
@@ -283,17 +326,17 @@ CASES = [
              "problem nor the result."),
             ("shopfit-substrate", "Back to substrate",
              "The old surface taken back so the new system had something real to bond "
-             "to. Dust extraction running throughout \u2014 the extractor is visible at "
+             "to. Dust extraction running throughout, the extractor is visible at "
              "the back of frame."),
-            ("shopfit-flake-after", "Finished \u2014 cream and tan flake",
+            ("shopfit-flake-after", "Finished: cream and tan flake",
              "The completed floor. One seamless surface across the room, with no grout "
              "lines left to collect anything."),
         ],
         "why": ("Why this one is worth showing",
                 "<p>Because it is the argument this business is built on, in "
-                "photographs. The finished floor took hours. Everything before it \u2014 "
+                "photographs. The finished floor took hours. Everything before it, "
                 "the tiles coming off, the substrate being taken back, the dust being "
-                "pulled out of the air \u2014 is what decides whether that floor is still "
+                "pulled out of the air, is what decides whether that floor is still "
                 "there in ten years.</p>"
                 "<p>It is also an honest answer to a question we get asked constantly: "
                 "can you coat over tiles? We do not. Tiles move in ways coatings do not "
@@ -302,7 +345,7 @@ CASES = [
     },
     {
         "slug": "garage-bare-slab-to-flake",
-        "title": "Garage \u2014 bare slab to flake",
+        "title": "Garage: bare slab to flake",
         "h1": "Garage: a stained slab finished in grey flake",
         "meta_title": "Case Study: Garage Floor, Bare Slab to Flake | Floor Candy",
         "meta": "A stained, bare garage slab prepared and finished in a grey flake "
@@ -312,7 +355,7 @@ CASES = [
         "service": "garage-epoxy-flooring",
         "suburb": None, "region": None, "floor_size": None, "system": None,
         "install_date": None, "testimonial": None,
-        "existing": "A bare, stained slab of the kind most garages have \u2014 never "
+        "existing": "A bare, stained slab of the kind most garages have, never "
                     "sealed, and carrying everything that had been spilled on it.",
         "finish": "A grey flake blend with a clear topcoat.",
         "ba": "garage",
@@ -346,7 +389,7 @@ SERVICES = [
                 "Forster and the Mid North Coast. Double garages from $2,450*. "
                 "Free on-site quote.",
         "lede": "The finish most people picture when they think of a coated garage "
-                "floor — a hard-wearing base, flake broadcast through it, and a "
+                "floor, a hard-wearing base, flake broadcast through it, and a "
                 "clear topcoat over the lot.",
         "img": "flake_wide",
         "intent": "premium flake flooring",
@@ -356,13 +399,13 @@ SERVICES = [
              ["<p>A flake floor is built in layers. The coating goes down, decorative "
               "flake is broadcast into it while it is still wet, and a clear topcoat "
               "seals everything in. The flake is what gives the floor its depth and "
-              "its texture underfoot — it is not a pattern printed on the surface, it "
+              "its texture underfoot, it is not a pattern printed on the surface, it "
               "is suspended in the floor itself.</p>",
               "<p>It is the most popular choice for garages because it hides the "
               "ordinary marks a working garage collects, gives grip underfoot, and "
               "does not show every speck of dust the way a plain colour does.</p>"]),
             ("Choosing a colour and blend",
-             ["<p>Flake comes in blends rather than single colours — greys, creams, "
+             ["<p>Flake comes in blends rather than single colours: greys, creams, "
               "tans and mixes of them. We will bring what we have to the on-site "
               "quote so you can look at the options against your own walls and light, "
               "which is the only way to judge it properly. Photographs of floors on a "
@@ -384,7 +427,7 @@ SERVICES = [
              "so you can see them in your own space rather than on a screen."),
             ("Will it hide marks in the concrete?",
              "A flake floor is much better at disguising ordinary variation in a slab "
-             "than a solid colour is. It does not make structural problems disappear — "
+             "than a solid colour is. It does not make structural problems disappear, "
              "cracks and damage are dealt with during preparation, and we will tell you "
              "at the quote what can be repaired and what will still be visible."),
         ],
@@ -399,7 +442,7 @@ SERVICES = [
         "meta": "Epoxy garage floor coatings across Taree, Forster, Harrington and the "
                 "Mid North Coast. Double garages from $2,450*. Mechanically prepared "
                 "concrete, fixed written price.",
-        "lede": "Garage floors are the bulk of what we do — single, double and "
+        "lede": "Garage floors are the bulk of what we do, single, double and "
                 "oversized, in new builds and in slabs that have been worked on for "
                 "twenty years.",
         "img": "flake_hero",
@@ -408,7 +451,7 @@ SERVICES = [
             ("What a garage floor has to survive",
              ["<p>A garage slab takes more abuse than almost any other floor in a "
               "house. Hot tyres sit on it, oil and fuel land on it, things get dropped "
-              "on it, and it is usually the least sealed concrete on the property — so "
+              "on it, and it is usually the least sealed concrete on the property, so "
               "it holds dust and stains.</p>",
               "<p>A coating fixes all of that, but only if it stays stuck down. Tyre "
               "pickup, peeling and lifting are almost always a preparation problem, "
@@ -426,7 +469,7 @@ SERVICES = [
              "depends on floor size, existing condition, preparation requirements, "
              "finish and location."),
             ("Do I need to empty the garage?",
-             "Yes. The floor needs to be completely clear — vehicles, shelving, "
+             "Yes. The floor needs to be completely clear, vehicles, shelving, "
              "anything standing on the slab. We will tell you at the quote how much "
              "time to allow."),
             ("Can you coat over an existing epoxy or paint?",
@@ -445,7 +488,7 @@ SERVICES = [
         "meta": "Epoxy and concrete floor coatings for interiors, sheds and converted "
                 "spaces across the Mid North Coast and NSW. Free on-site assessment, "
                 "fixed written price.",
-        "lede": "Interiors, sheds, studios and converted spaces — anywhere the concrete "
+        "lede": "Interiors, sheds, studios and converted spaces, anywhere the concrete "
                 "is the floor you are keeping rather than something you cover up.",
         "img": "polished",
         "intent": "residential epoxy flooring",
@@ -469,7 +512,7 @@ SERVICES = [
             ("Can you coat over tiles or timber?",
              "We coat concrete. Tiles and timber move in ways that coatings do not "
              "cope with, so if there is something over the slab we will tell you at "
-             "the quote what the options are — in most cases the existing surface needs "
+             "the quote what the options are, in most cases the existing surface needs "
              "to come up first."),
             ("How long before we can use the room?",
              "It depends on the system and the conditions on the day. We will give you "
@@ -486,7 +529,7 @@ SERVICES = [
         "title": "Outdoor Concrete Coatings Taree & Forster | Floor Candy",
         "meta": "Driveways, paths, patios and alfresco slabs sealed and coated across "
                 "Taree, Forster and the Mid North Coast. Free on-site assessment.",
-        "lede": "Driveways, paths, patios and alfresco slabs — the concrete that takes "
+        "lede": "Driveways, paths, patios and alfresco slabs, the concrete that takes "
                 "the weather and usually looks it.",
         "img": "driveway",
         "intent": "outdoor concrete coating",
@@ -501,7 +544,7 @@ SERVICES = [
               "under trees.</p>"]),
             ("Grip matters more outside",
              ["<p>An outdoor surface gets wet, so finish and texture are a safety "
-              "decision rather than a style one. We will talk through it on site — a "
+              "decision rather than a style one. We will talk through it on site, a "
               "pool surround, a steep driveway and a covered alfresco are three "
               "different problems.</p>"]),
         ],
@@ -512,7 +555,7 @@ SERVICES = [
              "during preparation, and we will tell you honestly which ones will still "
              "be visible."),
             ("Can you do pool surrounds and patios?",
-             "Yes — those are outdoor concrete like any other, though grip and finish "
+             "Yes, those are outdoor concrete like any other, though grip and finish "
              "need more thought. Send photos and we will tell you whether it suits."),
         ],
         "related": ["concrete-preparation-crack-repair", "solid-colour-epoxy-flooring", "premium-flake-flooring"],
@@ -526,14 +569,14 @@ SERVICES = [
         "meta": "Solid colour epoxy floors for garages, sheds and alfresco slabs across "
                 "the Mid North Coast and NSW. Free on-site assessment, fixed written price.",
         "lede": "A single, even colour with nothing broadcast through it. Cleaner and "
-                "more uniform than flake — and less forgiving, which is worth knowing "
+                "more uniform than flake, and less forgiving, which is worth knowing "
                 "before you choose it.",
         "img": "solid",
         "intent": "solid colour epoxy flooring",
         "body": [
             ("When solid colour is the right call",
              ["<p>Solid colour suits spaces where you want the floor to read as one "
-              "clean surface — an alfresco slab, a laundry, a shed you want to feel "
+              "clean surface, an alfresco slab, a laundry, a shed you want to feel "
               "finished rather than industrial.</p>",
               "<p>It is worth being straight about the trade-off: a solid colour shows "
               "dust, marks and any variation in the slab more than a flake floor does. "
@@ -565,7 +608,7 @@ SERVICES = [
             ("Why coatings fail",
              ["<p>When a coated floor lifts, peels or picks up under tyres, the cause "
               "is almost never the coating itself. It is that the coating was put onto "
-              "a surface it could not properly key into — a sealed slab, a dusty slab, "
+              "a surface it could not properly key into, a sealed slab, a dusty slab, "
               "a slab with an old coating still on it, or one with moisture moving "
               "through it.</p>",
               "<p>Preparation is how that is dealt with. The slab is mechanically "
@@ -591,7 +634,7 @@ SERVICES = [
              "change what the slab is doing structurally, and it can still be visible "
              "in the finished floor. We tell you which is which at the quote."),
             ("What preparation is required on my floor?",
-             "That depends entirely on the slab — its age, whether anything has been "
+             "That depends entirely on the slab, its age, whether anything has been "
              "put on it before, how it has been used and whether there is any moisture "
              "moving through it. It is the main thing the free on-site assessment is "
              "for, and it is why we do not quote from a photo alone."),
@@ -622,7 +665,7 @@ LOCATIONS = [
             "the travel loading that a job three hours away does. If you are in town "
             "or anywhere in the Manning Valley, we can usually get to you for an "
             "on-site look without much notice.</p>",
-            "<p>Most of what we are asked for here is garage floors — both in the "
+            "<p>Most of what we are asked for here is garage floors, both in the "
             "newer estates on the edges of town and in older houses where the slab has "
             "been bare for decades. Those are quite different jobs, and the difference "
             "shows up in the preparation rather than in the coating.</p>",
@@ -631,7 +674,7 @@ LOCATIONS = [
                   "<p>Older Taree garages often have a slab that has never been sealed "
                   "and has spent years absorbing whatever landed on it. Newer builds "
                   "more often have a curing compound on the surface that has to be "
-                  "removed before anything will bond. Neither is a problem — but they "
+                  "removed before anything will bond. Neither is a problem, but they "
                   "need different preparation, and that is decided on site, not from a "
                   "photograph.</p>"),
         "nearby": ["Wingham", "Old Bar", "Cundletown", "Tinonee", "Harrington", "Forster"],
@@ -660,7 +703,7 @@ LOCATIONS = [
                 "commercial spaces across Forster, Tuncurry and surrounding areas.",
         "intro": [
             "<p>Forster and Tuncurry sit either side of the water, and between them "
-            "they cover most of what we get asked for in the Great Lakes — garages in "
+            "they cover most of what we get asked for in the Great Lakes, garages in "
             "permanent homes, floors in holiday houses being tidied up between "
             "seasons, and outdoor concrete that has taken more salt air than it was "
             "ever sealed for.</p>",
@@ -672,7 +715,7 @@ LOCATIONS = [
                   "<p>Two things come up repeatedly in Forster. The first is moisture: "
                   "a slab that never fully dries out is a slab a coating can lift off, "
                   "so it is one of the things we look for before quoting. The second is "
-                  "access — a lot of Forster and Tuncurry work is in houses that are "
+                  "access, a lot of Forster and Tuncurry work is in houses that are "
                   "only occupied part of the year, and it is usually easier to do a "
                   "floor properly when nobody is living around it.</p>"),
         "nearby": ["Tuncurry", "Pacific Palms", "Blueys Beach", "Smiths Lake", "Green Point", "Taree"],
@@ -680,7 +723,7 @@ LOCATIONS = [
                      "residential-epoxy-flooring"],
         "faqs": [
             ("Do you cover Tuncurry as well as Forster?",
-             "Yes — Forster and Tuncurry are the same trip for us, and both are core "
+             "Yes, Forster and Tuncurry are the same trip for us, and both are core "
              "service areas."),
             ("Can you work on a holiday house while we are not there?",
              "Usually, yes, provided access is arranged and the floor is clear. Tell "
@@ -700,7 +743,7 @@ LOCATIONS = [
                 "commercial spaces in Harrington and the lower Manning.",
         "intro": [
             "<p>Harrington is a small town, and small towns are often badly served for "
-            "trades like this — the work is real but there is not enough of it in one "
+            "trades like this, the work is real but there is not enough of it in one "
             "spot to interest an operator based two hours away. We are close enough "
             "that a Harrington job is a normal job.</p>",
             "<p>Being at the river mouth, a lot of the concrete here is exposed and "
@@ -718,7 +761,7 @@ LOCATIONS = [
         "faqs": [
             ("Is Harrington too small a job to bother with?",
              "No. Harrington is inside our core service area and is priced as such."),
-            ("My driveway is weathered rather than cracked — is that fixable?",
+            ("My driveway is weathered rather than cracked, is that fixable?",
              "Often, yes. Surface weathering on a slab that is otherwise sound is "
              "exactly what sealing is for. We will look at it and tell you honestly "
              "whether it is worth doing."),
@@ -745,7 +788,7 @@ LOCATIONS = [
             "call.</p>",
         ],
         "local": ("Floors that sit empty, then get hammered",
-                  "<p>A holiday-house floor has an unusual life — long quiet periods, "
+                  "<p>A holiday-house floor has an unusual life, long quiet periods, "
                   "then heavy use. It is a good argument for doing the preparation "
                   "properly, because the failure mode on a neglected slab tends to show "
                   "up exactly when the house is full.</p>"),
@@ -775,7 +818,7 @@ LOCATIONS = [
                 "concrete across Pacific Palms and the surrounding coast.",
         "intro": [
             "<p>Pacific Palms covers a scattered run of houses between the lake and the "
-            "beaches, and access is often the first thing worth talking about — steep "
+            "beaches, and access is often the first thing worth talking about, steep "
             "driveways, long approaches and tight garages are normal here.</p>",
             "<p>Outdoor work comes up as often as garages: driveways that drop away "
             "sharply, and alfresco slabs that are the main living space for half "
@@ -790,11 +833,11 @@ LOCATIONS = [
         "services": ["outdoor-epoxy-flooring", "premium-flake-flooring", "garage-epoxy-flooring",
                      "solid-colour-epoxy-flooring"],
         "faqs": [
-            ("My driveway is steep — will a sealed surface be slippery?",
+            ("My driveway is steep, will a sealed surface be slippery?",
              "It is the right question to ask. Finish and texture are chosen with the "
              "slope and the weather in mind, and we will raise it at the quote."),
             ("Do you cover Boomerang and Elizabeth Beach?",
-             "Yes — they are the same trip as Pacific Palms and Blueys."),
+             "Yes, they are the same trip as Pacific Palms and Blueys."),
         ],
     },
     {
@@ -806,7 +849,7 @@ LOCATIONS = [
                 "Newcastle and the Hunter. Garage floors and concrete coatings. Talk to "
                 "us about size and timing.",
         "h1": "Epoxy flooring Newcastle",
-        "lede": "We take selected projects in Newcastle and the Hunter — decided by job "
+        "lede": "We take selected projects in Newcastle and the Hunter, decided by job "
                 "size and timing rather than offered as a standing local service.",
         "intro": [
             "<p>We should be straight about how Newcastle works for us. Floor Candy is "
@@ -823,7 +866,7 @@ LOCATIONS = [
                   "Newcastle and Hunter jobs generally start around $2,600 and larger "
                   "floors are easier to make work than small ones. If you have "
                   "neighbours or a couple of properties wanting the same thing, that "
-                  "changes the maths considerably — it is worth mentioning when you "
+                  "changes the maths considerably, it is worth mentioning when you "
                   "call.</p>"),
         "nearby": ["Maitland", "Lake Macquarie", "Port Stephens", "Hunter Region"],
         "services": ["premium-flake-flooring", "garage-epoxy-flooring",
@@ -867,11 +910,11 @@ _LOCAL_EXTRA = {
         "faqs": [
             ("Do you do shed and workshop floors, not just garages?",
              "Yes. Shed and workshop slabs are common around Taree and the "
-             "Manning Valley, and they are the same job as a garage floor \u2014 the "
+             "Manning Valley, and they are the same job as a garage floor, the "
              "preparation is what changes, because a shed slab has often had a "
              "harder life than a house garage."),
             ("Can you work around a slab that is still in use?",
-             "Not really \u2014 the floor needs to be clear and stay clear while the "
+             "Not really, the floor needs to be clear and stay clear while the "
              "system cures. What we can do is plan the timing around you, which "
              "is easier in Taree than anywhere else we work because we are not "
              "travelling in."),
@@ -879,7 +922,7 @@ _LOCAL_EXTRA = {
     },
     "forster": {
         "intro3": "<p>Forster also has a lot of double and oversized garages "
-                  "used as genuine storage \u2014 boats, trailers, fishing gear \u2014 "
+                  "used as genuine storage (boats, trailers, fishing gear) "
                   "rather than just parking. That changes what the floor has to "
                   "put up with, and it is worth mentioning when you call.</p>",
         "who": ("Who calls us in Forster and Tuncurry",
@@ -907,7 +950,7 @@ _LOCAL_EXTRA = {
     "harrington": {
         "intro3": "<p>It is also a town where word travels. If a neighbour has "
                   "had a driveway done and you are considering the same, mention "
-                  "it \u2014 doing two nearby properties in one trip is genuinely "
+                  "it, doing two nearby properties in one trip is genuinely "
                   "easier for us and we would rather pass that on.</p>",
         "who": ("Who calls us in Harrington",
                 "<p>Mostly long-term residents and retirees, and the work skews "
@@ -947,7 +990,7 @@ _LOCAL_EXTRA = {
                 "that actually gets used, and it is also the part taking the most "
                 "weather.</p>"),
         "faqs": [
-            ("We only get to the house occasionally \u2014 can you still quote?",
+            ("We only get to the house occasionally, can you still quote?",
              "Yes. Send photos and your suburb first, and we will tell you what "
              "else we need. We will still want to see the slab before a final "
              "price, but we can do a lot of the groundwork before you are up."),
@@ -959,15 +1002,15 @@ _LOCAL_EXTRA = {
     },
     "pacific-palms": {
         "intro3": "<p>Because properties here are spread out, we will usually "
-                  "ask a couple of questions about access before booking a look "
-                  "\u2014 not to put you off, just so we arrive with the right "
+                  "ask a couple of questions about access before booking a look, "
+                  "not to put you off, just so we arrive with the right "
                   "gear.</p>",
         "who": ("Who calls us at Pacific Palms",
                 "<p>A mix of permanent residents and part-time owners, and the "
                 "work splits fairly evenly between garages and outdoor concrete. "
                 "Houses here often sit below or above the road, so the driveway "
                 "is a real piece of infrastructure rather than a strip of "
-                "concrete \u2014 and it is frequently the thing people want "
+                "concrete, and it is frequently the thing people want "
                 "addressed first.</p>"
                 "<p>Alfresco slabs are the other common one. They tend to be the "
                 "main living space through summer, which makes finish and grip a "
@@ -994,7 +1037,7 @@ _LOCAL_EXTRA = {
                 "and renovators with more than one slab to coat are the easiest "
                 "fit, because the travel is spread across the work.</p>"
                 "<p>What rarely works is a single small garage on its own. It is "
-                "not that we do not want it \u2014 it is that we would have to price "
+                "not that we do not want it, it is that we would have to price "
                 "it in a way that is not fair to you, and you will get a better "
                 "deal from someone based in the Hunter. We will say that plainly "
                 "rather than quote a number designed to be declined.</p>"),
@@ -1026,7 +1069,7 @@ AREA_LINKS = {"Taree": "taree", "Forster": "forster", "Harrington": "harrington"
 
 # --------------------------------------------------------------------------
 # GUIDES
-# Called "Guides", not "Blog" — see docs/CONTENT-BRIEFS.md. House rules from
+# Called "Guides", not "Blog", see docs/CONTENT-BRIEFS.md. House rules from
 # that brief are enforced here: no guide quotes a product name, a cure time or
 # a warranty, because QUESTIONS-FOR-JARROD.md section 3 is unanswered. The one
 # price that appears is the confirmed $2,450 double-garage starting figure.
@@ -1037,10 +1080,10 @@ GUIDES = [
         "title": "What Changes the Price of an Epoxy Garage Floor | Floor Candy",
         "h1": "What changes the price of an epoxy garage floor",
         "meta": "Double garages start from approximately $2,450. Here is what moves "
-                "the number up or down \u2014 size, existing condition, preparation, "
+                "the number up or down: size, existing condition, preparation, "
                 "finish and location.",
         "lede": "Double garage floors start from approximately $2,450. That is a real "
-                "starting point, not a teaser \u2014 but five things move it, and it is "
+                "starting point, not a teaser, but five things move it, and it is "
                 "worth knowing which before you compare quotes.",
         "img": "flake_wide",
         "img_alt": "Finished flake epoxy garage floor by Floor Candy",
@@ -1051,7 +1094,7 @@ GUIDES = [
               "lands near that or well above it comes down to five variables, and any "
               "quote that ignores them is guessing.</p>",
               "<p>We give you a fixed written price after looking at the slab. Not "
-              "before \u2014 because until someone has stood on your concrete, nobody can "
+              "before, because until someone has stood on your concrete, nobody can "
               "tell you what it needs.</p>"]),
             ("1. Floor size",
              ["<p>The obvious one, and the least interesting. A bigger floor costs more, "
@@ -1077,7 +1120,7 @@ GUIDES = [
             ("4. The finish you choose",
              ["<p>A flake floor and a solid colour are different amounts of work. So is "
               "a floor that has to match something already in the space. We bring the "
-              "options to the on-site quote so you can see them in your own light \u2014 "
+              "options to the on-site quote so you can see them in your own light, "
               "screens are not a reliable guide to a floor.</p>"]),
             ("5. Where you are",
              ["<p>Taree, Forster, Tuncurry, Harrington, Blueys Beach and Pacific Palms "
@@ -1089,7 +1132,7 @@ GUIDES = [
               "It says what preparation is included rather than leaving it vague. And "
               "it does not change on the day.</p>",
               "<p>If a quote arrives without anyone seeing the floor, what you have is "
-              "an estimate with a price attached \u2014 and the gap between the two usually "
+              "an estimate with a price attached, and the gap between the two usually "
               "appears once work starts.</p>"]),
         ],
         "related": ["garage-epoxy-flooring", "premium-flake-flooring",
@@ -1110,7 +1153,7 @@ GUIDES = [
         "body": [
             ("Failure is a bonding problem, not a product problem",
              ["<p>Coatings are engineered to stick to concrete. What they cannot do is "
-              "stick to something sitting on top of concrete \u2014 a sealer, a curing "
+              "stick to something sitting on top of concrete, a sealer, a curing "
               "compound, an old coating, dust, or a film of oil worked into the surface "
               "over years.</p>",
               "<p>Put a good system onto any of those and it will bond to the layer "
@@ -1149,7 +1192,7 @@ GUIDES = [
         "meta": "Flake hides marks and adds grip; solid colour reads cleaner but shows "
                 "more. An honest comparison for garages, sheds and alfresco slabs.",
         "lede": "The two finishes people choose between most often. They are not better "
-                "and worse \u2014 they are suited to different rooms, and the wrong one in "
+                "and worse, they are suited to different rooms, and the wrong one in "
                 "the right room is the usual regret.",
         "img": "flake_wide",
         "img_alt": "Flake epoxy floor finished by Floor Candy",
@@ -1165,7 +1208,7 @@ GUIDES = [
               "variation in a slab, hides the marks a busy floor collects, and the "
               "texture helps underfoot compared with a smooth gloss.</p>",
               "<p>It is also more forgiving of a slab that is sound but not "
-              "beautiful \u2014 which describes most garage floors.</p>"]),
+              "beautiful, which describes most garage floors.</p>"]),
             ("Where solid colour wins",
              ["<p>Alfresco slabs, laundries, studios, and anywhere you want the floor "
               "to read as one clean surface rather than a texture.</p>",
@@ -1174,14 +1217,14 @@ GUIDES = [
               "garage that gets used, most people are happier with flake, and we will "
               "say so at the quote even when solid colour was the original plan.</p>"]),
             ("Choosing a blend",
-             ["<p>Flake comes in blends rather than single colours \u2014 greys, creams, "
+             ["<p>Flake comes in blends rather than single colours: greys, creams, "
               "tans and mixes of them. We bring what we have to the on-site quote, "
               "because the only reliable way to judge a floor finish is against your own "
               "walls, in your own light.</p>",
               "<p>A blend that looks perfect on a phone screen can read completely "
               "differently in a north-facing room.</p>"]),
             ("If you are still unsure",
-             ["<p>Tell us how the space is actually used \u2014 parked on, worked in, "
+             ["<p>Tell us how the space is actually used, parked on, worked in, "
               "entertained in, hosed down. That answers the question faster than a "
               "colour chart does.</p>"]),
         ],
@@ -1192,10 +1235,10 @@ GUIDES = [
         "slug": "questions-to-ask-before-accepting-an-epoxy-quote",
         "title": "7 Questions to Ask Before Accepting an Epoxy Quote | Floor Candy",
         "h1": "Seven questions to ask before you accept an epoxy quote",
-        "meta": "How to compare epoxy flooring quotes properly \u2014 the questions that "
+        "meta": "How to compare epoxy flooring quotes properly, the questions that "
                 "separate a real price from a number designed to win the job.",
         "lede": "Most epoxy quotes look alike on paper. These are the questions that "
-                "tell you which one has actually been thought about \u2014 and you should "
+                "tell you which one has actually been thought about, and you should "
                 "ask us the same ones.",
         "img": "prep_extract",
         "img_alt": "Floor grinder and dust extractor in use on a Floor Candy job",
@@ -1244,7 +1287,7 @@ PROCESS = [
      "Call, or send the form and text us a couple of photos. Photos help us understand the "
      "existing floor and the preparation it is likely to need before we turn up."),
     ("We assess what it needs",
-     "A free on-site look at the slab — its condition, any existing coating, cracks, "
+     "A free on-site look at the slab, its condition, any existing coating, cracks, "
      "and how the space is used. You get a written read on your concrete and a fixed "
      "price, whether or not you go ahead with us."),
     ("Preparation comes first",
@@ -1271,7 +1314,7 @@ HOME_FAQS = [
      "condition, preparation requirements, finish and location. Regional and "
      "travel-heavy jobs generally start around $2,600."),
     ("How long does installation take?",
-     "It varies with the size of the floor, its condition and the weather — "
+     "It varies with the size of the floor, its condition and the weather, "
      "preparation on a difficult slab can take longer than the coating does. You get "
      "the timeline for your floor in writing with your quote rather than a general "
      "figure here."),
@@ -1281,24 +1324,24 @@ HOME_FAQS = [
       "Our written warranty terms: " + WARRANTY_TERMS) if WARRANTY_TERMS else
      ("A properly prepared floor lasts for many years. We are not putting a number on "
       "it, because the honest answer depends almost entirely on the preparation "
-      "underneath and how the floor is used — and because we have no written warranty "
+      "underneath and how the floor is used, and because we have no written warranty "
       "terms to point you at yet.")),
     ("Is epoxy flooring slippery?",
      "A smooth gloss finish is more slippery wet than dry. A flake floor has texture "
      "through it, which helps. Tell us how the space is used and we will talk through "
-     "the finish that suits it — it matters more outdoors and on slopes."),
+     "the finish that suits it, it matters more outdoors and on slopes."),
     ("Do you repair cracks first?",
      "Cracks are repaired where appropriate as part of preparation. A repair stops the "
      "crack being an open path through the coating, but it does not change what the "
      "slab is doing structurally and it can still be visible. We tell you which is "
      "which before you commit."),
     ("What preparation is required?",
-     "That depends on your slab — its age, whether anything has been applied to it "
+     "That depends on your slab, its age, whether anything has been applied to it "
      "before, how it has been used, and whether moisture is moving through it. "
      "Establishing that is the main purpose of the free on-site assessment, and it is "
      "why we will not quote a floor from photos alone."),
     ("Can I choose colours or flake finishes?",
-     "Yes. Flake comes in blends — greys, creams, tans and mixes — and solid colours "
+     "Yes. Flake comes in blends of greys, creams, tans and mixes, and solid colours "
      "are available too. We bring the options to the on-site quote so you can see them "
      "in your own space and light."),
     ("What areas do you service?",
@@ -1307,7 +1350,7 @@ HOME_FAQS = [
      "the Hunter, decided by job size and timing. Not sure if we cover you? Send your "
      "postcode."),
     ("Can I send photos for a quote?",
-     "Please do — text them to 0435 193 845 or attach them to an email. Photos help us understand "
+     "Please do. Text them to 0435 193 845 or attach them to an email. Photos help us understand "
      "the existing floor and the preparation required, and they make the on-site visit "
      "faster. They do not replace it: we quote off the slab, not off a picture."),
 ]
@@ -1385,7 +1428,7 @@ def square(base, alt, sizes="(min-width:900px) 260px, 45vw"):
             % (base, sizes, base, esc(alt)))
 
 
-def ba_block(key, heading_level="h3", sizes="(min-width:900px) 560px, 92vw"):
+def ba_block(key, heading_level="h3", sizes="(min-width:900px) 560px, 92vw", lazy=True):
     """Before/after comparison. Specs with a None value are omitted entirely."""
     d = BA[key]
     w, ratio = d["w"], d["ratio"]
@@ -1401,11 +1444,13 @@ def ba_block(key, heading_level="h3", sizes="(min-width:900px) 560px, 92vw"):
                 % (srcset(name, "avif"), sizes)) if d.get("avif") else ""
         return ("<picture>" + avif +
                 '<source type="image/webp" srcset="%s" sizes="%s">'
-                '<img srcset="%s" sizes="%s" src="%s" width="%d" height="%d" alt="%s" '
-                'loading="lazy" decoding="async"%s></picture>'
+                '<img srcset="%s" sizes="%s" src="%s" width="%d" height="%d" alt="%s"'
+                '%s%s></picture>'
                 % (srcset(name, "webp"), sizes,
                    srcset(name, "jpg"), sizes, sfx(name, "jpg"),
-                   ratio[0], ratio[1], esc(alt), (' class="%s"' % cls) if cls else ""))
+                   ratio[0], ratio[1], esc(alt),
+                   ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"',
+                   (' class="%s"' % cls) if cls else ""))
 
     specs = [(k, val) for k, val in d["specs"].items() if val]
     spec_html = ""
@@ -1433,58 +1478,140 @@ def ba_block(key, heading_level="h3", sizes="(min-width:900px) 560px, 92vw"):
                 esc(d["note"]))
 
 
-def quote_form(form_id="quote", compact=False):
-    """Lead form. Posts to FORM_ENDPOINT (Formspree). main.js submits it with
-    fetch and shows an inline confirmation; without JS it posts normally.
-    No file field: Formspree only accepts uploads on paid plans, and a
+ICONS = {
+    # 24x24 line icons, stroke = currentColor. Decorative only.
+    "g1": '<path d="M3 10 12 4l9 6v10H3z"/><rect x="7" y="12" width="10" height="8"/>',
+    "g2": '<path d="M2 10 12 4l10 6v10H2z"/><rect x="4.5" y="12" width="6.5" height="8"/><rect x="13" y="12" width="6.5" height="8"/>',
+    "g3": '<path d="M1.5 10 12 4l10.5 6v10h-21z"/><rect x="3" y="12" width="5" height="8"/><rect x="9.5" y="12" width="5" height="8"/><rect x="16" y="12" width="5" height="8"/>',
+    "patio": '<path d="M3 20h18M5 20v-6h14v6M4 14l8-6 8 6M12 8V4"/>',
+    "shed": '<path d="M4 20V9l8-5 8 5v11zM9 20v-6h6v6"/>',
+    "home": '<path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/>',
+    "comm": '<path d="M3 20V8h18v12zM3 8l3-4h12l3 4M8 20v-6h8v6"/>',
+    "other": '<circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/>',
+}
+
+
+def icon(key):
+    return ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
+            'stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" '
+            'focusable="false">%s</svg>' % ICONS[key])
+
+
+def chips(name, options, required=False):
+    return "".join(
+        '<label class="chip"><input type="radio" name="%s" value="%s"%s><span>%s</span></label>'
+        % (name, esc(o), " required" if required and i == 0 else "", esc(o))
+        for i, o in enumerate(options))
+
+
+def quote_form(form_id="quote", heading="Get my free quote"):
+    """Four-step lead form, under a minute on a phone.
+
+    Progressive enhancement: without JS every step is visible and the form
+    posts to Formspree like any other form. main.js turns it into a stepper,
+    saves progress to localStorage, sends with fetch, and redirects to
+    /thank-you. No file field: Formspree's free plan rejects uploads, and a
     rejected upload would lose the whole lead. Photos go by text instead."""
-    return """<form class="form-card" id="%s" data-quote action="%s" method="POST" novalidate>
-<h2>Get my free quote</h2>
-<p class="small muted" style="margin-bottom:1.25rem">Free on-site assessment. Fixed written price before you commit.</p>
+    fid = form_id
+    cards = "".join(
+        '<label class="tcard"><input type="radio" name="floor_type" value="%s"%s>'
+        '<span class="tcard-in">%s<span>%s</span></span></label>'
+        % (esc(val), " required" if i == 0 else "", icon(ic), esc(lab))
+        for i, (val, lab, ic) in enumerate(FLOOR_TYPES))
+    towns = "".join('<option value="%s">' % esc(t) for t in
+                    ["Taree", "Forster", "Tuncurry", "Harrington", "Old Bar", "Wingham",
+                     "Blueys Beach", "Pacific Palms", "Hallidays Point", "Diamond Beach",
+                     "Tallwoods Village", "Coopernook", "Krambach", "Gloucester",
+                     "Newcastle", "Port Macquarie"])
+    heard = "".join('<option value="%s">%s</option>' % (esc(h), esc(h)) for h in HEARD)
+    ballpark = ("Ballpark: double garages start from <strong>$%s</strong>, before your $%d "
+                "new-customer saving. Your exact price comes after a free on-site look."
+                % ("{:,}".format(PRICING["double_garage_from"]), OFFER["saving"]))
+    return """<form class="qform" id="%(fid)s" data-quote data-steps action="%(action)s" method="POST" novalidate>
+<div class="qform-head">
+<h2 class="qform-title">%(heading)s</h2>
+<p class="qform-sub">Four quick taps. Under a minute. No obligation.</p>
+<div class="qprog" aria-hidden="true"><span class="qprog-bar"></span></div>
+<p class="qstep-count" aria-live="polite">Step <span data-step-now>1</span> of 4</p>
+</div>
+
+<fieldset class="qstep" data-step="1">
+<legend class="qstep-q">What are we coating?</legend>
+<div class="tcards">%(cards)s</div>
+</fieldset>
+
+<fieldset class="qstep" data-step="2">
+<legend class="qstep-q">Roughly how big, and when?</legend>
+<p class="qlab" id="%(fid)s-size-l">Rough size</p>
+<div class="chips" role="radiogroup" aria-labelledby="%(fid)s-size-l">%(sizes)s</div>
+<p class="qlab" id="%(fid)s-when-l">When are you after it?</p>
+<div class="chips" role="radiogroup" aria-labelledby="%(fid)s-when-l">%(timings)s</div>
+<p class="ballpark" data-ballpark>%(ballpark)s</p>
+</fieldset>
+
+<fieldset class="qstep" data-step="3">
+<legend class="qstep-q">Where is the floor?</legend>
+<div class="field"><label for="%(fid)s-suburb">Suburb or postcode <span class="req">*</span></label>
+<input id="%(fid)s-suburb" name="suburb" type="text" list="%(fid)s-towns" autocomplete="address-level2" required>
+<datalist id="%(fid)s-towns">%(towns)s</datalist></div>
+<div class="field"><label for="%(fid)s-detail">Anything we should know? <span class="hint">Optional. Old coating, cracks, oil stains, how it&rsquo;s used.</span></label>
+<textarea id="%(fid)s-detail" name="project_details" rows="3"></textarea></div>
+<p class="qnote">Got photos? Text them to <a href="sms:%(phone_href)s"><strong>%(phone)s</strong></a> after you send this. It speeds up the quote.</p>
+</fieldset>
+
+<fieldset class="qstep" data-step="4">
+<legend class="qstep-q">Where should Jarrod send your quote?</legend>
 <div class="field-row">
-<div class="field"><label for="%s-name">Name <span class="req">*</span></label>
-<input id="%s-name" name="name" type="text" autocomplete="name" required></div>
-<div class="field"><label for="%s-mobile">Mobile <span class="req">*</span></label>
-<input id="%s-mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required></div>
+<div class="field"><label for="%(fid)s-name">First name <span class="req">*</span></label>
+<input id="%(fid)s-name" name="name" type="text" autocomplete="given-name" required></div>
+<div class="field"><label for="%(fid)s-mobile">Mobile <span class="req">*</span></label>
+<input id="%(fid)s-mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required pattern="^\\s*(\\+?61|0)\\s*4(\\s*\\d){8}\\s*$" data-msg="Please enter an Australian mobile number starting with 04."></div>
 </div>
-<div class="field-row">
-<div class="field"><label for="%s-email">Email</label>
-<input id="%s-email" name="email" type="email" autocomplete="email"></div>
-<div class="field"><label for="%s-suburb">Suburb or postcode <span class="req">*</span></label>
-<input id="%s-suburb" name="suburb" type="text" autocomplete="address-level2" required></div>
+<div class="field"><label for="%(fid)s-email">Email <span class="hint">Optional</span></label>
+<input id="%(fid)s-email" name="email" type="email" autocomplete="email"></div>
+<p class="qlab" id="%(fid)s-pref-l">Best way to reach you</p>
+<div class="chips" role="radiogroup" aria-labelledby="%(fid)s-pref-l">
+<label class="chip"><input type="radio" name="contact_preference" value="Call" checked><span>Call</span></label>
+<label class="chip"><input type="radio" name="contact_preference" value="SMS"><span>Text</span></label>
+<label class="chip"><input type="radio" name="contact_preference" value="WhatsApp"><span>WhatsApp</span></label>
 </div>
-<div class="field">
-<label id="%s-area-l">What are we quoting? <span class="req">*</span></label>
-<div class="radio-set" role="radiogroup" aria-labelledby="%s-area-l">
-%s
-</div>
-</div>
-<div class="field"><label for="%s-size">Approximate size <span class="hint">Optional — e.g. double garage, or 36m&sup2; if you know it.</span></label>
-<input id="%s-size" name="approx_size" type="text"></div>
-<div class="field"><label for="%s-detail">About the floor</label>
-<textarea id="%s-detail" name="project_details" rows="4" placeholder="Existing coating, cracks, how the space is used…"></textarea></div>
-<div class="field">
-<label id="%s-pref-l">Preferred contact</label>
-<div class="radio-set" role="radiogroup" aria-labelledby="%s-pref-l">
-<label><input type="radio" name="contact_preference" value="Call" checked><span>Call</span></label>
-<label><input type="radio" name="contact_preference" value="Text"><span>Text</span></label>
-<label><input type="radio" name="contact_preference" value="Email"><span>Email</span></label>
-</div>
-</div>
-<input type="hidden" name="_subject" value="New quote request — floorcandyepoxy.com">
+<div class="field"><label for="%(fid)s-heard">How did you hear about us? <span class="hint">Optional</span></label>
+<select id="%(fid)s-heard" name="heard_about"><option value="">Choose one</option>%(heard)s</select></div>
+</fieldset>
+
+<input type="hidden" name="_subject" value="New quote request: floorcandyepoxy.com">
 <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 <input type="hidden" name="page_url" value="">
 <input type="hidden" name="referrer" value="">
-<button class="btn btn--primary btn--full" type="submit">Get my free quote</button>
-<p class="form-foot">Got photos of the floor? Text them to <a href="sms:%s"><strong>%s</strong></a> after you send this. Or just call — %s.</p>
+<input type="hidden" name="landing_page" value="">
+<input type="hidden" name="headline_variant" value="">
+<input type="hidden" name="event_id" value="">
+
+<div class="qnav">
+<button class="btn btn--ghost qback" type="button" data-back hidden>Back</button>
+<button class="btn btn--primary qnext" type="button" data-next hidden>Next</button>
+<button class="btn btn--primary qsubmit" type="submit">Get my free quote</button>
+</div>
+<p class="qfoot">Free on-site assessment &middot; Fixed written price &middot; Or call <a href="tel:%(phone_href)s">%(phone)s</a></p>
 <p class="form-status" role="status" aria-live="polite"></p>
-</form>""" % (form_id, FORM_ENDPOINT, form_id, form_id, form_id, form_id, form_id, form_id,
-              form_id, form_id, form_id, form_id,
-              "".join('<label><input type="radio" name="area_type" value="%s"%s><span>%s</span></label>'
-                      % (a, ' required' if i == 0 else '', a)
-                      for i, a in enumerate(["Garage", "Home", "Outdoor", "Commercial", "Other"])),
-              form_id, form_id, form_id, form_id, form_id, form_id,
-              BIZ["phone_href"], BIZ["phone_display"], BIZ["hours"])
+</form>""" % {
+        "fid": fid, "action": FORM_ENDPOINT, "heading": esc(heading), "cards": cards,
+        "sizes": chips("approx_size", SIZES), "timings": chips("timing", TIMINGS),
+        "ballpark": ballpark, "towns": towns, "heard": heard,
+        "phone_href": BIZ["phone_href"], "phone": BIZ["phone_display"]}
+
+
+def quote_entry(heading="Get a free quote on your floor"):
+    """Compact entry: the step-1 cards as links into the full form on /contact.
+    Used on every service, area, project and guide page via closer()."""
+    links = "".join(
+        '<a class="tcard tcard--link" href="/contact?type=%s#quote" data-ev="quote_entry">'
+        '<span class="tcard-in">%s<span>%s</span></span></a>'
+        % (quote_plus(val), icon(ic), esc(lab)) for val, lab, ic in FLOOR_TYPES)
+    return """<div class="qentry">
+<p class="qentry-q">%s <span>What are we coating?</span></p>
+<div class="tcards tcards--entry">%s</div>
+</div>""" % (esc(heading), links)
 
 
 def faq_block(items, heading="Common questions", eyebrow_num=None, lede=None):
@@ -1515,7 +1642,7 @@ def faq_schema(items):
 MAP_EMBED = """<div class="map-frame">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.609637146134!2d152.50482557524393!3d-32.052756027302344!2m3!1f0!2f0!3f0!3m2!1i1024!1i768!4f13.1!3m3!1m2!1s0x6b7435ea57496b4d%%3A0x46112d2c436f2682!2sFloor%%20Candy!5e0!3m2!1sen!2sau!4v1788943461550!5m2!1sen!2sau" loading="lazy" title="Floor Candy on Google Maps" width="100%%" height="300" style="border:0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
-<p class="small muted mt-3"><a class="tlink" href="%s" rel="noopener">Get directions / see reviews</a> &middot; Floor Candy is a mobile operation with no public showroom \u2014 we come to the floor.</p>""" % GOOGLE_REVIEWS_URL
+<p class="small muted mt-3"><a class="tlink" href="%s" rel="noopener">Get directions / see reviews</a> &middot; Floor Candy is a mobile operation with no public showroom, we come to the floor.</p>""" % GOOGLE_REVIEWS_URL
 
 
 def map_section(heading="Floor Candy on Google"):
@@ -1551,9 +1678,11 @@ def areas_block(current=None, dark=False, heading="Where we work", num=None,
                  ('<div class="mt-4">%s</div>' % MAP_EMBED) if show_map else "")
 
 
-def reviews_block(num=None):
+def reviews_block(num=None, coatings_only=False, heading="What our customers say"):
     cards = []
     for r in REVIEWS:
+        if coatings_only and r.get("topic"):
+            continue
         cards.append("""<article class="review">
 <div class="review-top">%s<span class="stars" aria-label="%d out of 5 stars">%s</span></div>
 <blockquote>&ldquo;%s&rdquo;</blockquote>
@@ -1563,7 +1692,7 @@ def reviews_block(num=None):
     return """<section class="section" aria-labelledby="rev-h">
 <div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Reviews</p>
-<h2 id="rev-h">What our customers say</h2></div>
+<h2 id="rev-h">%s</h2></div>
 <div><p class="lede">Verified reviews from our Google Business Profile.</p></div></div>
 
 <div class="rating-bar">
@@ -1583,7 +1712,7 @@ def reviews_block(num=None):
 
 <div class="reviews">%s</div>
 </div>
-</section>""" % (GOOGLE_G_LG, BIZ["rating"], BIZ["rating"], "\u2605" * 5,
+</section>""" % (esc(heading), GOOGLE_G_LG, BIZ["rating"], BIZ["rating"], "\u2605" * 5,
                  GOOGLE_REVIEWS_URL, GOOGLE_WRITE_REVIEW_URL, "".join(cards))
 
 
@@ -1613,25 +1742,33 @@ def price_block(num=None, regional=True):
                  esc(PRICING["qualifier"]), reg, OFFER["saving"], OFFER["saving"])
 
 
-def closer(title="Get a fixed price on your floor", lede=None):
+def closer(title="Get a fixed price on your floor", lede=None, ps=False):
+    """Closing CTA on every page. Carries the compact quote entry (step-1 cards
+    linking into the full form), so every service and area page has a one-tap
+    route into the quote. The homepage passes ps=True for the P.S. recap."""
     lede = lede or ("Free on-site assessment. A written read on your concrete and a "
                     "fixed price, whether or not you go ahead with us.")
+    ps_html = ""
+    if ps:
+        ps_html = ("""<div class="ps"><p><strong>P.S.</strong> Quick recap, in case you skipped
+to the bottom: double garages start from <strong>$%s</strong>, new customers save
+<strong>$%d</strong> on their first floor, and the on-site quote is free with a fixed written
+price. Tap what you want coated above and it takes under a minute.</p></div>"""
+                   % ("{:,}".format(PRICING["double_garage_from"]), OFFER["saving"]))
     return """<section class="section closer">
 <div class="closer-media"><picture>
 <source type="image/webp" srcset="/assets/img/flake-macro-600.webp 600w, /assets/img/flake-macro-900.webp 900w, /assets/img/flake-macro-1344.webp 1344w" sizes="100vw">
-<img src="/assets/img/flake-macro-1344.jpg" width="1344" height="752" alt="Close-up illustration of a flake epoxy floor surface" loading="lazy" decoding="async">
+<img src="/assets/img/flake-macro-1344.jpg" width="1344" height="752" alt="" loading="lazy" decoding="async">
 </picture></div>
 <div class="wrap">
 <h2>%s</h2>
 <p class="lede">%s</p>
-<div class="btn-row">
-<a class="btn btn--primary" href="/contact">Get a free quote</a>
-<a class="btn btn--ghost" href="tel:%s">Call %s</a>
+%s
+<p class="closer-note">Rather talk? <a href="tel:%s">Call %s</a> &middot; %s &middot; New customers save $%d</p>
+%s
 </div>
-<p class="closer-note">%s · New customers save $%d</p>
-</div>
-</section>""" % (esc(title), esc(lede), BIZ["phone_href"], BIZ["phone_display"],
-                 BIZ["hours"], OFFER["saving"])
+</section>""" % (esc(title), esc(lede), quote_entry(""), BIZ["phone_href"], BIZ["phone_display"],
+                 BIZ["hours"], OFFER["saving"], ps_html)
 
 
 # ---------------------------------------------------------------- chrome ---
@@ -1732,7 +1869,7 @@ def footer():
 <div class="footer-grid">
 <div class="footer-brand">
 <h2 class="visually-hidden">Floor Candy</h2>
-<picture><source type="image/webp" srcset="/assets/logo-full.webp"><img class="footer-logo" src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy \u2014 epoxy flooring" loading="lazy" decoding="async"></picture>
+<picture><source type="image/webp" srcset="/assets/logo-full.webp"><img class="footer-logo" src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy epoxy flooring" loading="lazy" decoding="async"></picture>
 <p class="small">Epoxy and concrete floor coatings across Taree, Forster, Harrington, Blueys Beach and the Mid North Coast.</p>
 %s
 </div>
@@ -1774,10 +1911,11 @@ def footer():
 </a>
 <div class="mobar">
 <a href="tel:%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>Call</a>
-<a href="/contact">Get a quote</a>
+<a href="sms:%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Text</a>
+<a class="mobar-cta" href="/contact#quote" data-quote-link>Get my free quote</a>
 </div>""" % (cred_html, BIZ["phone_href"], BIZ["phone_display"], BIZ["email"], BIZ["email"],
              WHATSAPP, BIZ["hours"], SOCIAL["facebook"], FACEBOOK_ICON,
-             GOOGLE_REVIEWS_URL, GOOGLE_G, WHATSAPP, BIZ["phone_href"])
+             GOOGLE_REVIEWS_URL, GOOGLE_G, WHATSAPP, BIZ["phone_href"], BIZ["phone_href"])
 
 
 def crumbs(trail):
@@ -1858,7 +1996,7 @@ def person_schema(context=True):
 
 
 def page(path, title, meta, body, schemas=(), og_image="/assets/img/garage-flake-finished-1440.jpg",
-         og_type="website", active="", preload=None):
+         og_type="website", active="", preload=None, noindex=False, head_extra=""):
     """Write one page. path '' = home; otherwise 'slug' or 'a/b'."""
     canonical = SITE + ("/" if not path else "/" + path)
     schema_html = "".join(
@@ -1872,6 +2010,18 @@ def page(path, title, meta, body, schemas=(), og_image="/assets/img/garage-flake
         measure += ('<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>\n'
                     '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}'
                     'gtag("js",new Date());gtag("config","%s");</script>\n' % (GA4_ID, GA4_ID))
+    if PIXEL_ID:
+        # Meta Pixel base code + PageView. Lead fires only on /thank-you, with
+        # an eventID so a later Conversions API event can be deduplicated.
+        measure += ("<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?"
+                    "n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;"
+                    "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;"
+                    "t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,"
+                    "document,'script','https://connect.facebook.net/en_US/fbevents.js');"
+                    "fbq('init','%s');fbq('track','PageView');</script>\n" % esc(PIXEL_ID))
+    if noindex:
+        measure += '<meta name="robots" content="noindex, follow">\n'
+    measure += head_extra
 
     doc = """<!DOCTYPE html>
 <html lang="en-AU" class="no-js">
@@ -1931,185 +2081,335 @@ def page(path, title, meta, body, schemas=(), og_image="/assets/img/garage-flake
 # ==========================================================================
 # PAGES
 # ==========================================================================
+LAYERS_SVG = """<svg class="layers" viewBox="0 0 560 300" role="img" aria-labelledby="layers-t layers-d">
+<title id="layers-t">The five layers of a Floor Candy floor</title>
+<desc id="layers-d">Cross-section from the bottom up: ground concrete slab, crack repair, base coat, flake, clear topcoat.</desc>
+<defs>
+<pattern id="agg" width="22" height="18" patternUnits="userSpaceOnUse"><circle cx="5" cy="6" r="2.2" class="l-agg"/><circle cx="15" cy="13" r="1.6" class="l-agg"/><circle cx="18" cy="4" r="1" class="l-agg"/></pattern>
+<pattern id="flk" width="16" height="10" patternUnits="userSpaceOnUse"><rect x="1" y="2" width="5" height="2.4" rx=".6" class="l-f1" transform="rotate(-12 3 3)"/><rect x="9" y="5" width="4" height="2" rx=".6" class="l-f2" transform="rotate(18 11 6)"/><rect x="5" y="7" width="3" height="1.6" rx=".5" class="l-f3"/></pattern>
+</defs>
+<g class="l-stack">
+<rect x="20" y="196" width="330" height="84" class="l-slab"/><rect x="20" y="196" width="330" height="84" fill="url(#agg)"/>
+<path d="M150 280 L158 250 L150 226 L160 196" class="l-crack"/>
+<rect x="20" y="178" width="330" height="18" class="l-base" data-layer="3"/>
+<rect x="20" y="160" width="330" height="18" class="l-flakebg" data-layer="4"/><rect x="20" y="160" width="330" height="18" fill="url(#flk)"/>
+<rect x="20" y="140" width="330" height="20" class="l-top" data-layer="5"/>
+<path d="M30 146 H340" class="l-sheen"/>
+</g>
+<g class="l-labels">
+<line x1="350" y1="150" x2="380" y2="150"/><text x="388" y="146">5 &middot; Clear topcoat</text><text x="388" y="162" class="l-sub">seals it, wipes clean</text>
+<line x1="350" y1="169" x2="380" y2="186"/><text x="388" y="190">4 &middot; Flake</text><text x="388" y="206" class="l-sub">colour, texture, grip</text>
+<line x1="350" y1="187" x2="380" y2="226"/><text x="388" y="230">3 &middot; Base coat</text><text x="388" y="246" class="l-sub">the structural layer</text>
+<line x1="158" y1="240" x2="380" y2="262" class="l-dash"/><text x="388" y="266">2 &middot; Crack repair</text>
+<line x1="350" y1="276" x2="380" y2="290"/><text x="388" y="294">1 &middot; Ground slab</text>
+</g>
+</svg>"""
+
+
+HOME_FAQS_LP = [
+    ("How much does it cost?",
+     "Double garages start from approximately $2,450, and new customers save $250 on "
+     "their first floor. Your exact price depends on size, the condition of the slab, "
+     "how much preparation it needs, the finish and where you are. You get it as a "
+     "fixed written price after a free on-site look."),
+    ("How long does it take?",
+     ("Most floors are done in %s on site. A difficult slab can take longer, and "
+      "you get the timeline for your floor in writing with your quote." % JOB_FACTS["days_on_site"])
+     if JOB_FACTS["days_on_site"] else
+     ("It depends on the size of the floor, its condition and the weather. Preparing "
+      "a difficult slab can take longer than coating it. You get the timeline for "
+      "your floor in writing with your quote.")),
+    ("When can I walk and drive on it?",
+     ("Usually walk on it after %s and drive on it after %s. Cure times move with "
+      "temperature, so we confirm yours on the day."
+      % (JOB_FACTS["walk_on"], JOB_FACTS["drive_on"]))
+     if JOB_FACTS["walk_on"] and JOB_FACTS["drive_on"] else
+     ("Cure times depend on the system and the temperature on the day. Jarrod tells "
+      "you exactly when it is ready for feet and when it is ready for the car before "
+      "he leaves.")),
+    ("Will it peel or lift under hot tyres?",
+     "Hot tyre lifting is almost always a preparation failure: a coating rolled onto "
+     "dusty or sealed concrete never properly bonds. That is why every slab is "
+     "mechanically ground before anything goes down."),
+    ("What about oil stains and cracks?",
+     "Both get looked at during the free assessment. Cracks are repaired where "
+     "appropriate before coating. A repair stops a crack being an open path through "
+     "the floor, but it does not change what the slab is doing structurally, and we "
+     "tell you which is which before you commit."),
+    ("Is it slippery when wet?",
+     "A smooth gloss finish is more slippery wet than dry. A flake floor has texture "
+     "through it, which helps. If the floor gets wet often or sits on a slope, tell "
+     "us and we will talk through the right finish."),
+    ("Do I need to empty the garage?",
+     "The floor has to be clear to be ground and coated. If that is a problem, "
+     "mention it when you book and we will work it out with you."),
+    ("Which areas do you cover?",
+     "Taree, Forster, Tuncurry, Harrington, Blueys Beach, Pacific Palms and the "
+     "Mid North Coast are our core areas. We take selected projects in Newcastle and "
+     "the Hunter, depending on job size and timing. Not sure? Send your postcode."),
+    ("Can I choose the colour?",
+     "Yes. Flake comes in blends of greys, creams, tans and mixes, and solid colours "
+     "are available too. We bring real samples to the on-site quote so you pick in "
+     "your own light, not off a screen."),
+    ("Is there a warranty?",
+     ("Yes. " + WARRANTY_TERMS) if WARRANTY_TERMS else
+     ("We are not publishing warranty terms until they are written down properly. "
+      "Ask Jarrod at the quote and he will tell you exactly what he stands behind.")),
+]
+
+
 def build_home():
-    flake = SERVICE_BY_SLUG["premium-flake-flooring"]
     svc_rows = []
     for i, s in enumerate(SERVICES, 1):
-        thumb = ""
-        if s["img"] in IMG and IMG[s["img"]]["w"]:
-            b = IMG[s["img"]]["base"]
-            wd = IMG[s["img"]]["w"][0]
-            thumb = ('<div class="svc-thumb"><img src="/assets/img/%s-%d.jpg" width="132" '
-                     'height="99" alt="" loading="lazy" decoding="async"></div>' % (b, wd))
-        elif s["img"] == "solid":
-            thumb = ('<div class="svc-thumb"><img src="/assets/img/finish-solid-414.jpg" '
-                     'width="132" height="99" alt="" loading="lazy" decoding="async"></div>')
-        svc_rows.append("""<a class="svc" href="/%s">
-<span class="svc-n">%02d</span>%s
-<span><h3>%s</h3><p>%s</p></span>
+        svc_rows.append("""<a class="svc svc--compact" href="/%s">
+<span class="svc-n">%02d</span>
+<span><h3>%s</h3></span>
 <span class="svc-go" aria-hidden="true">&rarr;</span>
-</a>""" % (s["slug"], i, thumb, esc(s["short"]), esc(s["lede"].split(".")[0] + ".")))
+</a>""" % (s["slug"], i, esc(s["short"])))
 
     steps = "".join("""<div class="step"><span class="step-n">%02d</span>
 <div><h3>%s</h3><p>%s</p></div></div>""" % (i, esc(t), esc(d))
                     for i, (t, d) in enumerate(PROCESS, 1))
 
     work = "".join('<figure class="proj">%s<figcaption class="proj-meta">%s</figcaption></figure>'
-                   % (square(b, a), esc(a)) for b, a in WORK[:8])
+                   % (square(b, a), esc(a)) for b, a in WORK[:6])
 
-    body = """<section class="hero">
-<div class="hero-media">%s
-<video class="hero-video" data-hero-video data-src="/assets/videos/hero-portrait.mp4" poster="/assets/img/hero-garage-portrait-752.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-</div>
-<div class="wrap hero-inner">
-<h1 class="hero-h1">Epoxy &amp; flake garage floors in Taree, Forster &amp; the Mid North Coast</h1>
-<p class="hero-sub">Epoxy floors worth showing off</p>
-<p class="lede">Premium flake and epoxy garage floors, home floors and suitable commercial spaces across Taree, Forster, Harrington, Blueys Beach and the Mid North Coast.</p>
+    jf = JOB_FACTS
+    timeline = ""
+    bits = []
+    if jf["days_on_site"]:
+        bits.append("<li><strong>%s</strong><span>on site</span></li>" % esc(jf["days_on_site"]))
+    if jf["walk_on"]:
+        bits.append("<li><strong>%s</strong><span>to walk on</span></li>" % esc(jf["walk_on"]))
+    if jf["drive_on"]:
+        bits.append("<li><strong>%s</strong><span>to drive on</span></li>" % esc(jf["drive_on"]))
+    if bits:
+        timeline = '<ul class="timeline">%s</ul>' % "".join(bits)
+
+    hero_days = (" Done in %s." % esc(jf["days_on_site"])) if jf["days_on_site"] else ""
+    capacity = ('<p class="capacity"><span class="dot" aria-hidden="true"></span>Now booking '
+                '%s jobs</p>' % esc(jf["booking_month"])) if jf["booking_month"] else ""
+    reply = ("within %s" % esc(jf["response_time"])) if jf["response_time"] else "to book a time"
+    warranty_li = ('<li><h3>Written warranty</h3><p>%s</p></li>' % esc(WARRANTY_TERMS)) \
+        if WARRANTY_TERMS else ""
+
+    price = "{:,}".format(PRICING["double_garage_from"])
+    swap = ("<script>(function(){try{var H=%s,q=new URLSearchParams(location.search).get('h');"
+            "if(q&&H[q]){sessionStorage.setItem('fc_h',q)}else{q=sessionStorage.getItem('fc_h')}"
+            "if(q&&H[q]&&q!=='a'){document.getElementById('hero-h1').textContent=H[q]}"
+            "}catch(e){}})()</script>" % json.dumps(HEADLINES, ensure_ascii=False))
+
+    body = """<section class="hero hero--lp">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">Garage, patio &amp; shed floors &middot; Taree, Forster &amp; the Mid North Coast</p>
+<h1 id="hero-h1">%(h1)s</h1>
+%(swap)s
+<p class="lede">Ground back, cracks repaired, flake broadcast through a tough base coat and sealed under a clear topcoat.%(hero_days)s You deal directly with Jarrod, the owner.</p>
 <div class="hero-price">
-<span class="price-tag">Double garages from $%s<sup>*</sup></span>
-<span class="offer-flag">New customers save $%d</span>
+<span class="price-tag">Double garages from $%(price)s<sup>*</sup></span>
+<span class="offer-flag">New customers save $%(save)d</span>
 </div>
 <div class="btn-row">
-<a class="btn btn--primary" href="#quote">Get a free quote</a>
-<a class="btn btn--ghost" href="tel:%s">Call Floor Candy</a>
+<a class="btn btn--primary btn--lg" href="#quote">Get my free quote</a>
+<a class="btn btn--ghost btn--lg" href="tel:%(tel)s">Call %(phone)s</a>
 </div>
-<p class="hero-proof"><span><a href="%s" rel="noopener"><strong>%s on Google</strong></a></span><span>Free on-site assessment</span><span>Fixed written price</span><span>%s</span></p>
-</div>
-</section>
-
-<section class="trust section--tight">
-<div class="wrap">
-<div class="trust-grid">
-<div class="trust-item"><span class="t-val">%s<span class="star">&starf;</span></span><span class="t-lab">Rated on Google</span></div>
-<div class="trust-item"><span class="t-val">Free</span><span class="t-lab">On-site assessment</span></div>
-<div class="trust-item"><span class="t-val">Fixed</span><span class="t-lab">Written price</span></div>
-<div class="trust-item"><span class="t-val">Owner-led</span><span class="t-lab">Jarrod on the tools</span></div>
-</div>
-</div>
-</section>
-
-<section class="section band--paper2" id="quote" aria-labelledby="quote-h">
-<div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Free quote</p>
-<h2 id="quote-h">Tell us about the floor</h2></div>
-<div><p class="lede">Photos help us understand the existing floor and the preparation required. We still quote off the slab, not the photo &mdash; the on-site look is free either way.</p></div></div>
-<div class="quote-shell">
-%s
-<ul class="quote-points">
-<li><span class="qp-n">01</span><div><h3>You get a written read on your concrete</h3><p>What condition the slab is in, what preparation it needs, and what that costs &mdash; whether or not you go ahead with us.</p></div></li>
-<li><span class="qp-n">02</span><div><h3>A fixed price before you commit</h3><p>The price is written down after we&rsquo;ve seen the floor. No variations invented on the day.</p></div></li>
-<li><span class="qp-n">03</span><div><h3>We walk it with you at the end</h3><p>The finished floor gets checked together before the balance is paid.</p></div></li>
-<li><span class="qp-n">04</span><div><h3>First job? Save $%d</h3><p>New customers save $%d on their first floor. Mention it when you get in touch.</p></div></li>
+%(capacity)s
+<ul class="hero-proof">
+<li><a href="%(greviews)s" rel="noopener">%(gmark)s<strong>%(rating)s</strong> on Google</a></li>
+<li>Free on-site assessment</li>
+<li>Fixed written price</li>
+<li>Owner-led</li>
 </ul>
 </div>
+<div class="hero-ba">
+%(hero_ba)s
+</div>
 </div>
 </section>
 
-<section class="section" aria-labelledby="ba-h">
+<section class="section pain" aria-labelledby="pain-h">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Sound familiar?</p>
+<h2 id="pain-h">The garage is the biggest room in the house. <em>It&rsquo;s also the worst floor.</em></h2></div></div>
+<ul class="pain-grid reveal-group">
+<li class="reveal"><span class="pain-n">01</span><h3>Cracked, stained concrete</h3><p>Oil drips, tyre marks and hairline cracks that no amount of pressure washing shifts.</p></li>
+<li class="reveal"><span class="pain-n">02</span><h3>Dust through the house</h3><p>Bare concrete sheds a fine grey dust that ends up on shoes, in the car and on the hallway floor.</p></li>
+<li class="reveal"><span class="pain-n">03</span><h3>A room you keep shut</h3><p>The door stays down when people come over, and the space never gets used the way it could be.</p></li>
+</ul>
+<p class="pain-turn">A properly prepared flake floor deals with all three. Here&rsquo;s what that looks like on real Floor Candy jobs.</p>
+</div>
+</section>
+
+<section class="section band--paper2" aria-labelledby="ba-h">
 <div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Real before &amp; after</p>
 <h2 id="ba-h">The same floor, twice</h2></div>
-<div><p class="lede">Our own jobs, photographed from the same position. Nothing staged, nothing brightened, and nobody else&rsquo;s work.</p></div></div>
-<div class="grid-3" style="gap:2rem">
-%s
-%s
+<div><p class="lede">Our own jobs. Nothing staged, nothing brightened, nobody else&rsquo;s work. Drag the handle.</p></div></div>
+<div class="grid-2 ba-pair">
+%(ba1)s
+%(ba2)s
 </div>
 </div>
 </section>
 
-<section class="section band--ink" aria-labelledby="flake-h">
+<section class="section" aria-labelledby="offer-h">
 <div class="wrap">
-<div class="split">
-<div class="split-media">%s</div>
-<div class="split-body">
-<p class="eyebrow">Premium flake</p>
-<h2 id="flake-h">The finish most people picture</h2>
-<p class="lede">A hard-wearing base, flake broadcast through it while it&rsquo;s still wet, and a clear topcoat over the lot. The flake sits <em>in</em> the floor, not on it.</p>
-<ul class="tick">
-<li>Hides the ordinary marks a working garage collects</li>
-<li>Texture through the surface, so it&rsquo;s better underfoot than a smooth gloss</li>
-<li>Blends in greys, creams and tans &mdash; seen in your own light at the quote</li>
-<li>Suits garages, sheds, alfresco slabs and converted spaces</li>
+<div class="sec-head"><div><p class="eyebrow">What you get</p>
+<h2 id="offer-h">Everything that goes into your floor. <em>One fixed price.</em></h2></div>
+<div><p class="lede">No cheap kit, no shortcuts on the part you can&rsquo;t see. This is what&rsquo;s in every Floor Candy flake floor.</p></div></div>
+<div class="offer">
+<ol class="inc reveal-group">
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Free on-site assessment</h3><p>A written read on your slab and what it needs, whether or not you go ahead.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Mechanical grind</h3><p>Opens up the concrete so the coating bonds to the slab, not to dust or old sealer.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Crack repair, where it&rsquo;s needed</h3><p>Stops cracks becoming open paths through your new floor.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Tough base coat</h3><p>The layer that does the structural work.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Flake broadcast through it</h3><p>Colour and texture right through the surface. Hides the marks a working garage collects and grips better than smooth gloss.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Clear topcoat</h3><p>Locks the flake in. Spills and tyre marks wipe off.</p></div></li>
+<li class="reveal"><span class="tick-i" aria-hidden="true"></span><div><h3>Walkthrough before the balance</h3><p>We check the finished floor together before you pay the balance.</p></div></li>
+</ol>
+<aside class="price-box" aria-labelledby="pb-h">
+<p class="pb-lab" id="pb-h">Double garage, all of the above</p>
+<p class="pb-num">From $%(price)s<sup>*</sup></p>
+<div class="pb-save"><span>New customer saving</span><strong>&minus;$%(save)d</strong></div>
+<a class="btn btn--primary btn--full btn--lg" href="#quote">Get my free quote</a>
+<p class="pb-fine">*%(qualifier)s %(regional)s</p>
+</aside>
+</div>
+</div>
+</section>
+
+<section class="section band--ink" aria-labelledby="prep-h">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Why floors fail</p>
+<h2 id="prep-h">Epoxy floors don&rsquo;t fail. <em>Poor preparation does.</em></h2></div>
+<div><p class="lede">When a coated floor lifts, peels or picks up under hot tyres, the coating is almost never the problem. The problem is what it was asked to stick to.</p></div></div>
+<div class="vs reveal-group">
+<div class="vs-col vs-col--them reveal">
+<h3>DIY kit or a cheap quote</h3>
+<ul>
+<li>Rolled onto the slab with little or no preparation</li>
+<li>A thin coat over dust, sealer or old paint, so it never properly bonds</li>
+<li>Hot tyres pull it up where it hasn&rsquo;t stuck</li>
+<li>Your weekend, your knees, and your problem when it fails</li>
 </ul>
-<div class="btn-row"><a class="btn btn--primary" href="/premium-flake-flooring">Get a flake floor quote</a></div>
 </div>
+<div class="vs-col vs-col--us reveal">
+<h3>A Floor Candy floor</h3>
+<ul>
+<li>Slab mechanically ground first, so the system has something to bond to</li>
+<li>Cracks repaired where appropriate before anything goes down</li>
+<li>Base coat, flake and clear topcoat, built as one system</li>
+<li>Fixed written price, and a walkthrough before you pay the balance</li>
+</ul>
+</div>
+</div>
+<div class="prep-strip">
+<div class="prep-img">%(prep_img)s</div>
+<p>Preparation is the stage nobody photographs and the stage a cheap quote leaves out. It&rsquo;s also the stage that decides whether your floor is still stuck down in ten years. <a class="tlink" href="/concrete-preparation-crack-repair">How we prepare concrete</a></p>
 </div>
 </div>
 </section>
 
-<section class="section" aria-labelledby="prep-h">
+<section class="section" aria-labelledby="proc-h">
 <div class="wrap">
-<div class="split split--reverse">
-<div class="split-media">%s</div>
-<div class="split-body">
-<p class="eyebrow">Preparation</p>
-<h2 id="prep-h">Epoxy floors don&rsquo;t fail.<br>Poor preparation does.</h2>
-<p>When a coated floor lifts, peels or picks up under tyres, the coating is almost never the problem. The problem is what it was asked to stick to.</p>
-<p>The coating is only the visible layer. Underneath it is a slab that may be sealed, dusty, still carrying an old coating, or moving moisture through it &mdash; and none of those let a new system bond properly. Preparing the concrete mechanically is how that gets dealt with.</p>
-<p>It is the stage nobody photographs, the stage a cheap quote leaves out, and the stage that decides whether your floor is still there in ten years.</p>
-<div class="btn-row"><a class="btn btn--ink" href="/concrete-preparation-crack-repair">How we prepare concrete</a></div>
+<div class="sec-head"><div><p class="eyebrow">How it works</p>
+<h2 id="proc-h">Five layers. <em>Five steps. No surprises.</em></h2></div></div>
+<div class="proc">
+<div class="proc-art">%(layers)s%(timeline)s</div>
+<div class="steps steps--light">%(steps)s</div>
+</div>
+</div>
+</section>
+
+<section class="section band--paper2" aria-labelledby="work-h">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Recent work</p>
+<h2 id="work-h">Genuine Floor Candy floors</h2></div>
+<div><p class="lede">Every photograph in this section is our own work. <a class="tlink" href="/projects">See the projects</a>.</p></div></div>
+<div class="grid-3 work-grid">%(work)s</div>
+</div>
+</section>
+
+%(reviews)s
+
+<section class="section band--paper2" aria-labelledby="promise-h">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">No surprises</p>
+<h2 id="promise-h">What you get before you commit</h2></div></div>
+<ul class="promise reveal-group">
+<li class="reveal"><h3>A free, honest assessment</h3><p>Jarrod looks at the actual slab and tells you what it needs, whether or not you go ahead.</p></li>
+<li class="reveal"><h3>A fixed written price</h3><p>Written down after we&rsquo;ve seen the floor. No variations invented on the day.</p></li>
+<li class="reveal"><h3>A walkthrough at the end</h3><p>The finished floor gets checked together before the balance is paid.</p></li>
+%(warranty_li)s
+</ul>
+</div>
+</section>
+
+%(faq)s
+
+<section class="section band--ink quote-band" id="quote" aria-label="Free quote">
+<div class="wrap">
+<div class="quote-shell">
+%(form)s
+<div class="quote-side">
+<p class="eyebrow">What happens next</p>
+<h2 class="qs-h">Three steps to a fixed price</h2>
+<ol class="next-steps">
+<li><span>1</span><div><h3>Jarrod gets in touch</h3><p>A call or text %(reply)s, whichever you prefer.</p></div></li>
+<li><span>2</span><div><h3>A free look at the floor</h3><p>On site, at a time that suits you. Real flake samples in your own light.</p></div></li>
+<li><span>3</span><div><h3>Your fixed written price</h3><p>With the $%(save)d new-customer saving taken off. No pressure, no obligation.</p></div></li>
+</ol>
+%(capacity)s
+<p class="qs-call">Rather talk now? <a href="tel:%(tel)s">%(phone)s</a><br><span>%(hours)s</span></p>
 </div>
 </div>
 </div>
 </section>
 
-<section class="section band--paper2" aria-labelledby="svc-h">
+%(areas)s
+
+<section class="section" aria-labelledby="svc-h">
 <div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">What we do</p>
 <h2 id="svc-h">Services</h2></div>
 <div><p class="lede">Six things, done properly, on concrete. If your floor needs something we don&rsquo;t do, we&rsquo;ll tell you.</p></div></div>
-<div class="svc-list">%s</div>
+<div class="svc-list svc-list--compact">%(svc)s</div>
 </div>
 </section>
 
-<section class="section band--ink" aria-labelledby="proc-h">
-<div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Process</p>
-<h2 id="proc-h">How a job runs</h2></div>
-<div><p class="lede">Five stages, no surprises. The third one is the one that matters.</p></div></div>
-<div class="steps">%s</div>
-</div>
-</section>
+%(closer)s
+""" % {
+        "h1": esc(HEADLINES["a"]), "swap": swap, "hero_days": hero_days,
+        "price": price, "save": OFFER["saving"], "tel": BIZ["phone_href"],
+        "phone": BIZ["phone_display"], "hours": esc(BIZ["hours"]), "capacity": capacity,
+        "greviews": GOOGLE_REVIEWS_URL, "gmark": GOOGLE_G, "rating": BIZ["rating"],
+        "hero_ba": ba_block("garage", heading_level="p", sizes="(min-width:960px) 520px, 92vw", lazy=False),
+        "ba1": ba_block("shopfit", sizes="(min-width:900px) 560px, 92vw"),
+        "ba2": ba_block("prep", sizes="(min-width:900px) 560px, 92vw"),
+        "qualifier": esc(PRICING["qualifier"]), "regional": esc(PRICING["regional_note"]),
+        "prep_img": picture("prep_grind", "(min-width:900px) 320px, 92vw"),
+        "layers": LAYERS_SVG, "timeline": timeline, "steps": steps, "work": work,
+        "reviews": reviews_block(coatings_only=True,
+                                 heading="What customers say about Jarrod"),
+        "warranty_li": warranty_li,
+        "faq": faq_block(HOME_FAQS_LP, "Straight answers"),
+        "form": quote_form("home-quote"), "reply": reply,
+        "areas": areas_block(dark=False, show_map=True),
+        "svc": "".join(svc_rows),
+        "closer": closer("Get a floor worth showing off", ps=True),
+    }
 
-<section class="section" aria-labelledby="work-h">
-<div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Recent work</p>
-<h2 id="work-h">Genuine Floor Candy floors</h2></div>
-<div><p class="lede">Every photograph here is our own work. <a class="tlink" href="/projects">See the projects</a>.</p></div></div>
-<div class="grid-3">%s</div>
-</div>
-</section>
-
-%s
-%s
-%s
-%s
-%s
-""" % (HERO_PICTURE,
-       "{:,}".format(PRICING["double_garage_from"]), OFFER["saving"], BIZ["phone_href"],
-       GOOGLE_REVIEWS_URL, BIZ["rating"], BIZ["hours"],
-       BIZ["rating"],
-       quote_form("home-quote"), OFFER["saving"], OFFER["saving"],
-       ba_block("garage"), ba_block("shopfit"),
-       picture("flake_wide", "(min-width:900px) 560px, 92vw",
-               alt="Finished flake epoxy garage floor by Floor Candy"),
-       picture("prep_grind", "(min-width:900px) 560px, 92vw"),
-       "".join(svc_rows), steps, work,
-       price_block(num="08"), reviews_block(num="09"),
-       areas_block(dark=True, show_map=True),
-       faq_block(HOME_FAQS, "Questions we actually get asked", eyebrow_num="11"),
-       closer("Floors worth showing off"))
-
-    page("", "Epoxy Flooring Taree, Forster & Mid North Coast | Floor Candy",
-         "Premium flake and epoxy flooring for garages and homes across Taree, Forster and "
-         "the Mid North Coast. Double garages from $2,450*. Free on-site quote.",
+    page("", "Epoxy Garage Floors Taree, Forster & Mid North Coast | Floor Candy",
+         "Flake epoxy garage, patio and shed floors across Taree, Forster and the Mid North "
+         "Coast. Double garages from $2,450, new customers save $250. Free on-site quote.",
          body,
          schemas=[business_schema(),
                   {"@context": "https://schema.org", "@type": "WebSite",
                    "@id": SITE + "/#website", "url": SITE + "/", "name": "Floor Candy",
                    "publisher": {"@id": SITE + "/#business"}},
-                  faq_schema(HOME_FAQS)],
-         active="/", preload="/assets/img/hero-garage-portrait-752.webp")
+                  faq_schema(HOME_FAQS_LP)],
+         active="/", preload=None)
 
 
 SERVICE_CASES = {
@@ -2198,7 +2498,7 @@ def build_service(s):
 <div class="split-media">%s</div>
 <div class="split-body">
 <h2>Epoxy floors don&rsquo;t fail.<br>Poor preparation does.</h2>
-<p>The coating is the visible layer. What decides whether it lasts is the slab underneath it &mdash; whether it was sealed, dusty, already coated, or moving moisture. Preparing it mechanically is how a system gets something real to bond to.</p>
+<p>The coating is the visible layer. What decides whether it lasts is the slab underneath it, whether it was sealed, dusty, already coated, or moving moisture. Preparing it mechanically is how a system gets something real to bond to.</p>
 <div class="btn-row"><a class="btn btn--primary" href="/concrete-preparation-crack-repair">How we prepare concrete</a></div>
 </div>
 </div>
@@ -2282,7 +2582,7 @@ def build_location(l):
     body = """%s
 <section class="page-hero">
 <div class="wrap">
-<p class="eyebrow">Service area &mdash; %s</p>
+<p class="eyebrow">Service area: %s</p>
 <h1>%s</h1>
 <p class="lede">%s</p>
 <div class="btn-row">
@@ -2324,7 +2624,7 @@ def build_location(l):
 <div class="split-media">%s</div>
 <div class="split-body">
 <h2>Epoxy floors don&rsquo;t fail.<br>Poor preparation does.</h2>
-<p>Whatever the slab is doing in %s &mdash; sealed, dusty, already coated, or holding moisture &mdash; it has to be dealt with before a coating goes anywhere near it. That is what the free on-site assessment is for, and it is why we won&rsquo;t quote your floor from a photograph alone.</p>
+<p>Whatever the slab is doing in %s, sealed, dusty, already coated, or holding moisture, it has to be dealt with before a coating goes anywhere near it. That is what the free on-site assessment is for, and it is why we won&rsquo;t quote your floor from a photograph alone.</p>
 <div class="btn-row"><a class="btn btn--primary" href="/concrete-preparation-crack-repair">How we prepare concrete</a></div>
 </div>
 </div>
@@ -2408,7 +2708,7 @@ def build_areas_index():
 <section class="section">
 <div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Towns</p><h2>Pick your area</h2></div>
-<div><p class="lede">Each page covers what we actually see on slabs in that area &mdash; they&rsquo;re not the same page with the name swapped.</p></div></div>
+<div><p class="lede">Each page covers what we actually see on slabs in that area, they&rsquo;re not the same page with the name swapped.</p></div></div>
 <div class="svc-list">%s</div>
 </div>
 </section>
@@ -2417,7 +2717,7 @@ def build_areas_index():
 <div class="wrap">
 <div class="prose">
 <h2>Somewhere else?</h2>
-<p>The list above is where we work regularly, not a boundary fence. Floor Candy is a mobile operation with no public showroom &mdash; we come to the floor.</p>
+<p>The list above is where we work regularly, not a boundary fence. Floor Candy is a mobile operation with no public showroom, we come to the floor.</p>
 <p>If you&rsquo;re outside these towns, send us your postcode and a couple of photos. We&rsquo;ll tell you honestly whether the job works. Travel-heavy jobs need to be commercially viable and generally start around $%s, so larger floors travel better than small ones.</p>
 </div>
 </div>
@@ -2573,7 +2873,7 @@ def build_projects():
 <div class="wrap"><div class="prose">
 <h2>Why there are no suburbs on these</h2>
 <p>Most flooring sites caption their gallery with a town. We only publish a detail we can stand behind, and the job records behind these photographs don&rsquo;t all carry a confirmed suburb yet.</p>
-<p>Rather than guess, or quietly attribute a floor to whichever town we&rsquo;d like to rank for, we leave it off — the same reason we publish <a href="/about">what we will and won&rsquo;t claim</a>. As job records are confirmed, individual project pages will be added here with the service, suburb, floor size, existing condition, preparation performed and finished system &mdash; and not before.</p>
+<p>Rather than guess, or quietly attribute a floor to whichever town we&rsquo;d like to rank for, we leave it off, the same reason we publish <a href="/about">what we will and won&rsquo;t claim</a>. As job records are confirmed, individual project pages will be added here with the service, suburb, floor size, existing condition, preparation performed and finished system, and not before.</p>
 </div></div>
 </section>
 
@@ -2587,7 +2887,7 @@ def build_projects():
                for i, c in enumerate(CASES, 1)),
        work, reviews_block(), closer())
     page("projects", "Projects | Genuine Floor Candy Epoxy & Concrete Work",
-         "Real Floor Candy projects — flake epoxy garage floors, sealed driveways and "
+         "Real Floor Candy projects, flake epoxy garage floors, sealed driveways and "
          "coated alfresco slabs, with genuine before and after photography.",
          body, schemas=[bc], active="/projects")
 
@@ -2633,7 +2933,7 @@ def build_about():
 <div class="split-media">%s</div>
 <div class="split-body">
 <h2>A small operation, on purpose</h2>
-<p>Floor Candy coats concrete on the Mid North Coast &mdash; garages, driveways, alfresco slabs and interiors. It is owner-led, and Jarrod is on the tools rather than running a sales team.</p>
+<p>Floor Candy coats concrete on the Mid North Coast, garages, driveways, alfresco slabs and interiors. It is owner-led, and Jarrod is on the tools rather than running a sales team.</p>
 <p>We use subcontractors on some jobs. We mention that because a lot of flooring sites promise the opposite and it is rarely true. What we will say is that the standard doesn&rsquo;t change with who is holding the grinder.</p>
 <p>We are a mobile operation with no public showroom. We come to the floor, look at the slab, and price it from what is actually there.</p>
 </div>
@@ -2662,7 +2962,7 @@ def build_about():
 <div class="split-media">%s</div>
 <div class="split-body">
 <h2>Preparation is the whole argument</h2>
-<p>If there is one idea this business is built on, it is that a coated floor succeeds or fails underneath the coating. Everything else &mdash; the flake blend, the sheen, the colour &mdash; is chosen after that is sorted.</p>
+<p>If there is one idea this business is built on, it is that a coated floor succeeds or fails underneath the coating. Everything else, the flake blend, the sheen, the colour, is chosen after that is sorted.</p>
 <div class="btn-row"><a class="btn btn--ink" href="/concrete-preparation-crack-repair">How we prepare concrete</a></div>
 </div>
 </div>
@@ -2690,11 +2990,11 @@ def build_contact():
 <div class="wrap">
 <p class="eyebrow">Contact</p>
 <h1>Get a free quote</h1>
-<p class="lede">Free on-site assessment, a written read on your concrete, and a fixed price before you commit &mdash; whether or not you go ahead with us.</p>
+<p class="lede">Free on-site assessment, a written read on your concrete, and a fixed price before you commit, whether or not you go ahead with us.</p>
 </div>
 </section>
 
-<section class="section">
+<section class="section" id="quote">
 <div class="wrap">
 <div class="quote-shell">
 %s
@@ -2790,7 +3090,7 @@ def build_guide(g):
 """ % (nav, esc(g["h1"]), esc(g["lede"]),
        esc(owner_name()), g["date"], human_date(g["date"]),
        picture(g["img"], "(min-width:900px) 720px, 92vw", alt=g["img_alt"]),
-       esc(g["img_alt"] + " \u2014 a genuine Floor Candy job."),
+       esc(g["img_alt"] + ". A genuine Floor Candy job."),
        sections, BIZ["phone_href"], BIZ["phone_display"], rel, more,
        closer())
 
@@ -2828,7 +3128,7 @@ def build_guides_index():
 <div class="wrap">
 <p class="eyebrow">Guides</p>
 <h1>Straight answers about concrete floors</h1>
-<p class="lede">What a floor costs, why coatings fail, how to choose a finish, and what to ask before you accept anyone&rsquo;s quote \u2014 including ours.</p>
+<p class="lede">What a floor costs, why coatings fail, how to choose a finish, and what to ask before you accept anyone&rsquo;s quote, including ours.</p>
 </div>
 </section>
 
@@ -2853,9 +3153,51 @@ def build_guides_index():
 %s
 """ % (nav, rows, areas_block(), closer())
     page("guides", "Epoxy Flooring Guides | Floor Candy",
-         "Straight answers about concrete floors \u2014 what changes the price, why epoxy "
+         "Straight answers about concrete floors, what changes the price, why epoxy "
          "floors fail, flake versus solid colour, and what to ask before accepting a quote.",
          body, schemas=[bc], active="/guides")
+
+
+def build_thankyou():
+    """Lead confirmation. noindex, not in the sitemap. main.js redirects here
+    after a successful Formspree submit, passing first name + event_id in
+    sessionStorage (never the URL). The Lead event fires here only."""
+    jf = JOB_FACTS
+    when = ("within %s" % esc(jf["response_time"])) if jf["response_time"] else "shortly"
+    heard = "".join('<button class="chip chip--btn" type="button" data-heard="%s">%s</button>'
+                    % (esc(h), esc(h)) for h in HEARD)
+    body = """<section class="page-hero ty">
+<div class="wrap">
+<p class="eyebrow">Quote request received</p>
+<h1 data-ty-name>Thanks, your quote request is in.</h1>
+<p class="lede">Jarrod will be in touch %s by your preferred method. Want it faster? Text a few photos of the floor to <a href="sms:%s"><strong>%s</strong></a>.</p>
+<div class="btn-row">
+<a class="btn btn--primary" href="sms:%s">Text photos now</a>
+<a class="btn btn--ghost" href="tel:%s">Call %s</a>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">What happens now</p><h2>Three steps to a fixed price</h2></div></div>
+<ol class="next-steps next-steps--light">
+<li><span>1</span><div><h3>We call or text you</h3><p>To book a time for the free on-site look.</p></div></li>
+<li><span>2</span><div><h3>Free on-site assessment</h3><p>Jarrod looks at the slab, talks finishes and brings real flake samples.</p></div></li>
+<li><span>3</span><div><h3>Your fixed written price</h3><p>With your $%d new-customer saving taken off.</p></div></li>
+</ol>
+<div class="ty-heard" data-ty-heard hidden>
+<h2 class="h3">One quick question: how did you hear about us?</h2>
+<div class="chips">%s</div>
+<p class="small muted" data-ty-heard-done hidden>Thanks, that helps.</p>
+</div>
+</div>
+</section>
+""" % (when, BIZ["phone_href"], BIZ["phone_display"], BIZ["phone_href"],
+       BIZ["phone_href"], BIZ["phone_display"], OFFER["saving"], heard)
+    page("thank-you", "Thanks, your quote request is in | Floor Candy",
+         "Your Floor Candy quote request has been received. Jarrod will be in touch to book "
+         "your free on-site assessment.", body,
+         noindex=True, head_extra='<meta name="fc-endpoint" content="%s">\n' % FORM_ENDPOINT)
 
 
 def build_404():
@@ -2922,8 +3264,8 @@ def build_legal():
     for slug, title, heading, paras in [
         ("privacy", "Privacy Policy | Floor Candy", "Privacy policy", [
             "<p>Floor Candy collects the details you send through the quote form or by "
-            "phone and email &mdash; your name, contact details, suburb and whatever you tell "
-            "us about your floor, including photographs &mdash; for the sole purpose of "
+            "phone and email, your name, contact details, suburb and whatever you tell "
+            "us about your floor, including photographs, for the sole purpose of "
             "quoting and carrying out flooring work.</p>",
             "<p>We do not sell your details to anyone. We do not share them except where "
             "it is necessary to do the job you have asked us to do.</p>",
@@ -3067,6 +3409,7 @@ def main():
     build_contact()
     build_legal()
     build_404()
+    build_thankyou()
     urls = build_sitemap_robots()
     build_vercel()
     print("Built %d pages (asset v=%d)" % (len(urls) + 1, ASSET_V))

@@ -28,6 +28,9 @@ def pages():
         out["/" + os.path.relpath(p, ROOT)[: -len("/index.html")]] = p
     for p in glob.glob(os.path.join(ROOT, "*", "*", "index.html")):
         out["/" + os.path.relpath(p, ROOT)[: -len("/index.html")]] = p
+    # /thank-you is a noindex utility page reached only after a form submit,
+    # like 404.html. It is deliberately out of the sitemap and the link graph.
+    out.pop("/thank-you", None)
     return dict(sorted(out.items()))
 
 
@@ -37,6 +40,8 @@ def visible_text(html_src):
     # strip shared chrome so uniqueness measures the page body, not the nav
     s = re.sub(r"<header.*?</header>", " ", s, flags=re.S | re.I)
     s = re.sub(r"<footer.*?</footer>", " ", s, flags=re.S | re.I)
+    # the closing CTA (quote-entry cards + phone line) is identical sitewide
+    s = re.sub(r'<section class="section closer">.*?</section>', " ", s, flags=re.S | re.I)
     s = re.sub(r'<div class="drawer".*?</div>\s*(?=<main)', " ", s, flags=re.S | re.I)
     s = re.sub(r"<[^>]+>", " ", s)
     s = re.sub(r"&[a-z]+;|&#\d+;", " ", s)

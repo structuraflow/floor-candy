@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="preconnect" href="https://www.floorcandyepoxy.com">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/archivo-var-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=17">
+<link rel="stylesheet" href="/styles.css?v=18">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/assets/favicon-16.png" type="image/png" sizes="16x16">
@@ -83,52 +83,79 @@
 <div class="wrap">
 <p class="eyebrow">Contact</p>
 <h1>Get a free quote</h1>
-<p class="lede">Free on-site assessment, a written read on your concrete, and a fixed price before you commit &mdash; whether or not you go ahead with us.</p>
+<p class="lede">Free on-site assessment, a written read on your concrete, and a fixed price before you commit, whether or not you go ahead with us.</p>
 </div>
 </section>
 
-<section class="section">
+<section class="section" id="quote">
 <div class="wrap">
 <div class="quote-shell">
-<form class="form-card" id="contact-quote" data-quote action="https://formspree.io/f/mrpeeawq" method="POST" novalidate>
-<h2>Get my free quote</h2>
-<p class="small muted" style="margin-bottom:1.25rem">Free on-site assessment. Fixed written price before you commit.</p>
-<div class="field-row">
-<div class="field"><label for="contact-quote-name">Name <span class="req">*</span></label>
-<input id="contact-quote-name" name="name" type="text" autocomplete="name" required></div>
-<div class="field"><label for="contact-quote-mobile">Mobile <span class="req">*</span></label>
-<input id="contact-quote-mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required></div>
+<form class="qform" id="contact-quote" data-quote data-steps action="https://formspree.io/f/mrpeeawq" method="POST" novalidate>
+<div class="qform-head">
+<h2 class="qform-title">Get my free quote</h2>
+<p class="qform-sub">Four quick taps. Under a minute. No obligation.</p>
+<div class="qprog" aria-hidden="true"><span class="qprog-bar"></span></div>
+<p class="qstep-count" aria-live="polite">Step <span data-step-now>1</span> of 4</p>
 </div>
-<div class="field-row">
-<div class="field"><label for="contact-quote-email">Email</label>
-<input id="contact-quote-email" name="email" type="email" autocomplete="email"></div>
+
+<fieldset class="qstep" data-step="1">
+<legend class="qstep-q">What are we coating?</legend>
+<div class="tcards"><label class="tcard"><input type="radio" name="floor_type" value="Single garage" required><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 10 12 4l9 6v10H3z"/><rect x="7" y="12" width="10" height="8"/></svg><span>Single garage</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Double garage"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M2 10 12 4l10 6v10H2z"/><rect x="4.5" y="12" width="6.5" height="8"/><rect x="13" y="12" width="6.5" height="8"/></svg><span>Double garage</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Triple garage"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M1.5 10 12 4l10.5 6v10h-21z"/><rect x="3" y="12" width="5" height="8"/><rect x="9.5" y="12" width="5" height="8"/><rect x="16" y="12" width="5" height="8"/></svg><span>Triple garage</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Patio or alfresco"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 20h18M5 20v-6h14v6M4 14l8-6 8 6M12 8V4"/></svg><span>Patio or alfresco</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Shed or workshop"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 20V9l8-5 8 5v11zM9 20v-6h6v6"/></svg><span>Shed or workshop</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Inside the home"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/></svg><span>Inside the home</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Commercial"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 20V8h18v12zM3 8l3-4h12l3 4M8 20v-6h8v6"/></svg><span>Commercial</span></span></label><label class="tcard"><input type="radio" name="floor_type" value="Other"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>Something else</span></span></label></div>
+</fieldset>
+
+<fieldset class="qstep" data-step="2">
+<legend class="qstep-q">Roughly how big, and when?</legend>
+<p class="qlab" id="contact-quote-size-l">Rough size</p>
+<div class="chips" role="radiogroup" aria-labelledby="contact-quote-size-l"><label class="chip"><input type="radio" name="approx_size" value="Under 20m²"><span>Under 20m²</span></label><label class="chip"><input type="radio" name="approx_size" value="20 to 40m²"><span>20 to 40m²</span></label><label class="chip"><input type="radio" name="approx_size" value="40 to 60m²"><span>40 to 60m²</span></label><label class="chip"><input type="radio" name="approx_size" value="Over 60m²"><span>Over 60m²</span></label><label class="chip"><input type="radio" name="approx_size" value="Not sure"><span>Not sure</span></label></div>
+<p class="qlab" id="contact-quote-when-l">When are you after it?</p>
+<div class="chips" role="radiogroup" aria-labelledby="contact-quote-when-l"><label class="chip"><input type="radio" name="timing" value="ASAP"><span>ASAP</span></label><label class="chip"><input type="radio" name="timing" value="Within a month"><span>Within a month</span></label><label class="chip"><input type="radio" name="timing" value="1 to 3 months"><span>1 to 3 months</span></label><label class="chip"><input type="radio" name="timing" value="Just researching"><span>Just researching</span></label></div>
+<p class="ballpark" data-ballpark>Ballpark: double garages start from <strong>$2,450</strong>, before your $250 new-customer saving. Your exact price comes after a free on-site look.</p>
+</fieldset>
+
+<fieldset class="qstep" data-step="3">
+<legend class="qstep-q">Where is the floor?</legend>
 <div class="field"><label for="contact-quote-suburb">Suburb or postcode <span class="req">*</span></label>
-<input id="contact-quote-suburb" name="suburb" type="text" autocomplete="address-level2" required></div>
+<input id="contact-quote-suburb" name="suburb" type="text" list="contact-quote-towns" autocomplete="address-level2" required>
+<datalist id="contact-quote-towns"><option value="Taree"><option value="Forster"><option value="Tuncurry"><option value="Harrington"><option value="Old Bar"><option value="Wingham"><option value="Blueys Beach"><option value="Pacific Palms"><option value="Hallidays Point"><option value="Diamond Beach"><option value="Tallwoods Village"><option value="Coopernook"><option value="Krambach"><option value="Gloucester"><option value="Newcastle"><option value="Port Macquarie"></datalist></div>
+<div class="field"><label for="contact-quote-detail">Anything we should know? <span class="hint">Optional. Old coating, cracks, oil stains, how it&rsquo;s used.</span></label>
+<textarea id="contact-quote-detail" name="project_details" rows="3"></textarea></div>
+<p class="qnote">Got photos? Text them to <a href="sms:+61435193845"><strong>0435 193 845</strong></a> after you send this. It speeds up the quote.</p>
+</fieldset>
+
+<fieldset class="qstep" data-step="4">
+<legend class="qstep-q">Where should Jarrod send your quote?</legend>
+<div class="field-row">
+<div class="field"><label for="contact-quote-name">First name <span class="req">*</span></label>
+<input id="contact-quote-name" name="name" type="text" autocomplete="given-name" required></div>
+<div class="field"><label for="contact-quote-mobile">Mobile <span class="req">*</span></label>
+<input id="contact-quote-mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required pattern="^\s*(\+?61|0)\s*4(\s*\d){8}\s*$" data-msg="Please enter an Australian mobile number starting with 04."></div>
 </div>
-<div class="field">
-<label id="contact-quote-area-l">What are we quoting? <span class="req">*</span></label>
-<div class="radio-set" role="radiogroup" aria-labelledby="contact-quote-area-l">
-<label><input type="radio" name="area_type" value="Garage" required><span>Garage</span></label><label><input type="radio" name="area_type" value="Home"><span>Home</span></label><label><input type="radio" name="area_type" value="Outdoor"><span>Outdoor</span></label><label><input type="radio" name="area_type" value="Commercial"><span>Commercial</span></label><label><input type="radio" name="area_type" value="Other"><span>Other</span></label>
+<div class="field"><label for="contact-quote-email">Email <span class="hint">Optional</span></label>
+<input id="contact-quote-email" name="email" type="email" autocomplete="email"></div>
+<p class="qlab" id="contact-quote-pref-l">Best way to reach you</p>
+<div class="chips" role="radiogroup" aria-labelledby="contact-quote-pref-l">
+<label class="chip"><input type="radio" name="contact_preference" value="Call" checked><span>Call</span></label>
+<label class="chip"><input type="radio" name="contact_preference" value="SMS"><span>Text</span></label>
+<label class="chip"><input type="radio" name="contact_preference" value="WhatsApp"><span>WhatsApp</span></label>
 </div>
-</div>
-<div class="field"><label for="contact-quote-size">Approximate size <span class="hint">Optional — e.g. double garage, or 36m&sup2; if you know it.</span></label>
-<input id="contact-quote-size" name="approx_size" type="text"></div>
-<div class="field"><label for="contact-quote-detail">About the floor</label>
-<textarea id="contact-quote-detail" name="project_details" rows="4" placeholder="Existing coating, cracks, how the space is used…"></textarea></div>
-<div class="field">
-<label id="contact-quote-pref-l">Preferred contact</label>
-<div class="radio-set" role="radiogroup" aria-labelledby="contact-quote-pref-l">
-<label><input type="radio" name="contact_preference" value="Call" checked><span>Call</span></label>
-<label><input type="radio" name="contact_preference" value="Text"><span>Text</span></label>
-<label><input type="radio" name="contact_preference" value="Email"><span>Email</span></label>
-</div>
-</div>
-<input type="hidden" name="_subject" value="New quote request — floorcandyepoxy.com">
+<div class="field"><label for="contact-quote-heard">How did you hear about us? <span class="hint">Optional</span></label>
+<select id="contact-quote-heard" name="heard_about"><option value="">Choose one</option><option value="Facebook or Instagram ad">Facebook or Instagram ad</option><option value="Google search">Google search</option><option value="Google Maps">Google Maps</option><option value="Friend or family">Friend or family</option><option value="Saw a job or the van">Saw a job or the van</option><option value="Other">Other</option></select></div>
+</fieldset>
+
+<input type="hidden" name="_subject" value="New quote request: floorcandyepoxy.com">
 <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 <input type="hidden" name="page_url" value="">
 <input type="hidden" name="referrer" value="">
-<button class="btn btn--primary btn--full" type="submit">Get my free quote</button>
-<p class="form-foot">Got photos of the floor? Text them to <a href="sms:+61435193845"><strong>0435 193 845</strong></a> after you send this. Or just call — Mon–Fri, 7am–7pm.</p>
+<input type="hidden" name="landing_page" value="">
+<input type="hidden" name="headline_variant" value="">
+<input type="hidden" name="event_id" value="">
+
+<div class="qnav">
+<button class="btn btn--ghost qback" type="button" data-back hidden>Back</button>
+<button class="btn btn--primary qnext" type="button" data-next hidden>Next</button>
+<button class="btn btn--primary qsubmit" type="submit">Get my free quote</button>
+</div>
+<p class="qfoot">Free on-site assessment &middot; Fixed written price &middot; Or call <a href="tel:+61435193845">0435 193 845</a></p>
 <p class="form-status" role="status" aria-live="polite"></p>
 </form>
 <div>
@@ -163,22 +190,23 @@
 <div class="mt-4"><div class="map-frame">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.609637146134!2d152.50482557524393!3d-32.052756027302344!2m3!1f0!2f0!3f0!3m2!1i1024!1i768!4f13.1!3m3!1m2!1s0x6b7435ea57496b4d%3A0x46112d2c436f2682!2sFloor%20Candy!5e0!3m2!1sen!2sau!4v1788943461550!5m2!1sen!2sau" loading="lazy" title="Floor Candy on Google Maps" width="100%" height="300" style="border:0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
-<p class="small muted mt-3"><a class="tlink" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Get directions / see reviews</a> &middot; Floor Candy is a mobile operation with no public showroom — we come to the floor.</p></div>
+<p class="small muted mt-3"><a class="tlink" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Get directions / see reviews</a> &middot; Floor Candy is a mobile operation with no public showroom, we come to the floor.</p></div>
 </div>
 </section>
 <section class="section closer">
 <div class="closer-media"><picture>
 <source type="image/webp" srcset="/assets/img/flake-macro-600.webp 600w, /assets/img/flake-macro-900.webp 900w, /assets/img/flake-macro-1344.webp 1344w" sizes="100vw">
-<img src="/assets/img/flake-macro-1344.jpg" width="1344" height="752" alt="Close-up illustration of a flake epoxy floor surface" loading="lazy" decoding="async">
+<img src="/assets/img/flake-macro-1344.jpg" width="1344" height="752" alt="" loading="lazy" decoding="async">
 </picture></div>
 <div class="wrap">
 <h2>Send the floor over</h2>
 <p class="lede">Free on-site assessment. A written read on your concrete and a fixed price, whether or not you go ahead with us.</p>
-<div class="btn-row">
-<a class="btn btn--primary" href="/contact">Get a free quote</a>
-<a class="btn btn--ghost" href="tel:+61435193845">Call 0435 193 845</a>
+<div class="qentry">
+<p class="qentry-q"> <span>What are we coating?</span></p>
+<div class="tcards tcards--entry"><a class="tcard tcard--link" href="/contact?type=Single+garage#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 10 12 4l9 6v10H3z"/><rect x="7" y="12" width="10" height="8"/></svg><span>Single garage</span></span></a><a class="tcard tcard--link" href="/contact?type=Double+garage#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M2 10 12 4l10 6v10H2z"/><rect x="4.5" y="12" width="6.5" height="8"/><rect x="13" y="12" width="6.5" height="8"/></svg><span>Double garage</span></span></a><a class="tcard tcard--link" href="/contact?type=Triple+garage#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M1.5 10 12 4l10.5 6v10h-21z"/><rect x="3" y="12" width="5" height="8"/><rect x="9.5" y="12" width="5" height="8"/><rect x="16" y="12" width="5" height="8"/></svg><span>Triple garage</span></span></a><a class="tcard tcard--link" href="/contact?type=Patio+or+alfresco#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 20h18M5 20v-6h14v6M4 14l8-6 8 6M12 8V4"/></svg><span>Patio or alfresco</span></span></a><a class="tcard tcard--link" href="/contact?type=Shed+or+workshop#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 20V9l8-5 8 5v11zM9 20v-6h6v6"/></svg><span>Shed or workshop</span></span></a><a class="tcard tcard--link" href="/contact?type=Inside+the+home#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/></svg><span>Inside the home</span></span></a><a class="tcard tcard--link" href="/contact?type=Commercial#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 20V8h18v12zM3 8l3-4h12l3 4M8 20v-6h8v6"/></svg><span>Commercial</span></span></a><a class="tcard tcard--link" href="/contact?type=Other#quote" data-ev="quote_entry"><span class="tcard-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>Something else</span></span></a></div>
 </div>
-<p class="closer-note">Mon–Fri, 7am–7pm · New customers save $250</p>
+<p class="closer-note">Rather talk? <a href="tel:+61435193845">Call 0435 193 845</a> &middot; Mon–Fri, 7am–7pm &middot; New customers save $250</p>
+
 </div>
 </section>
 
@@ -188,7 +216,7 @@
 <div class="footer-grid">
 <div class="footer-brand">
 <h2 class="visually-hidden">Floor Candy</h2>
-<picture><source type="image/webp" srcset="/assets/logo-full.webp"><img class="footer-logo" src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy — epoxy flooring" loading="lazy" decoding="async"></picture>
+<picture><source type="image/webp" srcset="/assets/logo-full.webp"><img class="footer-logo" src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy epoxy flooring" loading="lazy" decoding="async"></picture>
 <p class="small">Epoxy and concrete floor coatings across Taree, Forster, Harrington, Blueys Beach and the Mid North Coast.</p>
 
 </div>
@@ -230,8 +258,9 @@
 </a>
 <div class="mobar">
 <a href="tel:+61435193845"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>Call</a>
-<a href="/contact">Get a quote</a>
+<a href="sms:+61435193845"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Text</a>
+<a class="mobar-cta" href="/contact#quote" data-quote-link>Get my free quote</a>
 </div>
-<script src="/main.js?v=17" defer></script>
+<script src="/main.js?v=18" defer></script>
 </body>
 </html>
