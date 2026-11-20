@@ -11,7 +11,7 @@
 <script>(function(d){d.className=d.className.replace("no-js","js");try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" can-anim"}catch(e){}})(document.documentElement)</script>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-wght-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/source-sans-3-wght-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/fc.css?v=2">
+<link rel="stylesheet" href="/fc.css?v=4">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -85,31 +85,26 @@
 </div>
 </div>
 
-<div class="trustbar">
-<ul class="wrap">
-<li>Every photo on this page is our own work</li>
-<li>Mechanical grind before any coating</li>
-<li>Mobile service, we come to the floor</li>
-<li>Mon-Fri, 7am-7pm</li>
-</ul>
-</div>
-
 <main id="main">
 
 <!-- HERO: social proof + problem headline + visual proof + one CTA -->
 <section class="hero" aria-labelledby="hero-h1">
 <div class="wrap hero-grid">
 <div class="hero-text">
-<a class="badge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><span class="stars" aria-hidden="true">★</span> 5.0 on Google <small>&middot; 5 reviews</small></a>
+<a class="badge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><span class="stars" aria-hidden="true">★</span> 5.0 on Google</a>
 <p class="eyebrow">Sound familiar?</p>
 <h1 id="hero-h1">The garage is the biggest room in the house. <span class="slab">It&rsquo;s also the worst floor.</span></h1>
 <p class="hero-sub">A garage floor worth showing off. It starts with a free look &mdash; and a fixed written price.</p>
 <p class="hero-price"><span>Double garages from <b>$2,450</b></span> &middot; <span>New customers save <b>$250</b></span></p>
 <div class="hero-cta">
 <a class="btn btn--pink" href="#quote" data-ev="hero_cta">Get my fixed price in 60 seconds <span aria-hidden="true">&rarr;</span></a>
-<a class="tlink" href="tel:0435193845">Or call Jarrod on 0435 193 845</a>
+<a class="btn btn--line" href="tel:0435193845" data-ev="hero_call"><svg class="btn-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.2 2.5 8 6.6 6.4 8a10 10 0 0 0 5.6 5.6l1.4-1.6 4.1 1.8-.6 3.1A1.7 1.7 0 0 1 15.2 18 13.2 13.2 0 0 1 2 4.8a1.7 1.7 0 0 1 1.1-1.7z" fill="currentColor"/></svg>Call 0435 193 845</a>
 </div>
-<p class="hero-micro">4 taps &middot; Under a minute &middot; Free on-site assessment &middot; Fixed written price</p>
+<ul class="hero-ticks">
+<li>Free on-site assessment</li>
+<li>Fixed written price</li>
+<li>Mobile service, we come to you</li>
+</ul>
 </div>
 <figure class="hero-media">
 <div class="cmp" data-cmp data-cmp-sweep>
@@ -202,6 +197,23 @@
 </section>
 
 <!-- FINISH PICKER + PRICE CARD -->
+<!-- WHY FLOOR CANDY: six reasons, only claims already true on this site -->
+<section class="sec" aria-labelledby="why-h">
+<div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Why Floor Candy</p><h2 id="why-h">Why our floors last.</h2></div>
+<p>Rolling a coating onto concrete is the easy part. What happens before and after it is what you are paying for.</p></div>
+<ul class="why">
+<li><span class="why-n">01</span><h3>Preparation comes first</h3><p>Every slab is mechanically ground before anything goes down, and cracks are repaired where appropriate.</p></li>
+<li><span class="why-n">02</span><h3>A fixed written price</h3><p>Jarrod looks at the floor and gives you one fixed price in writing. No obligation, no surprise extras.</p></li>
+<li><span class="why-n">03</span><h3>Real samples, your light</h3><p>Pick flake, metallic or solid colour from real samples at your floor, not off a phone screen.</p></li>
+<li><span class="why-n">04</span><h3>A free look before anything</h3><p>The on-site assessment is free. You see the plan for your floor before you commit to a thing.</p></li>
+<li><span class="why-n">05</span><h3>Walkthrough before the balance</h3><p>We check the finished floor together before you pay the balance.</p></li>
+<li><span class="why-n">06</span><h3>We come to you</h3><p>A mobile service across Taree, Forster and the Mid North Coast. No showroom visit needed.</p></li>
+</ul>
+<div class="why-cta"><a class="btn btn--pink" href="#quote">Get my fixed price <span aria-hidden="true">&rarr;</span></a><a class="btn btn--line" href="tel:0435193845"><svg class="btn-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.2 2.5 8 6.6 6.4 8a10 10 0 0 0 5.6 5.6l1.4-1.6 4.1 1.8-.6 3.1A1.7 1.7 0 0 1 15.2 18 13.2 13.2 0 0 1 2 4.8a1.7 1.7 0 0 1 1.1-1.7z" fill="currentColor"/></svg>Call 0435 193 845</a></div>
+</div>
+</section>
+
 <section class="sec" id="finishes" aria-labelledby="fin-h">
 <div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Services</p><h2 id="fin-h">Pick your finish.</h2></div>
@@ -216,7 +228,7 @@
 </button>
 <button class="fin" type="button" aria-pressed="false" data-finish="Metallic">
 <!-- TODO — ASK JARROD: confirm he offers metallic, plus a photo of his own metallic job -->
-<span class="fin-img blk"><picture><source type="image/webp" srcset="/assets/img/metallic-concept-800.webp"><img src="/assets/img/metallic-concept-800.jpg" width="800" height="534" alt="Grey and bronze marbled metallic epoxy floor" loading="lazy" decoding="async"></picture><span class="img-tag">Concept image</span></span>
+<span class="fin-img blk"><picture><source type="image/webp" srcset="/assets/img/metallic-concept-800.webp"><img src="/assets/img/metallic-concept-800.jpg" width="800" height="534" alt="Grey and bronze marbled metallic epoxy floor" loading="lazy" decoding="async"></picture></span>
 <span class="fin-body"><span class="fin-h">Metallic</span><span class="fin-p">A glossy, marbled feature finish. Ask Jarrod at your free look.</span><span class="fin-pick" data-pick>Choose metallic</span></span>
 </button>
 <button class="fin" type="button" aria-pressed="false" data-finish="Solid Colour">
@@ -362,7 +374,7 @@
 <div class="wrap">
 <div class="rv-head">
 <h2 id="rev-h">Rated <span class="uline">5 stars<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 10C50 4 120 2 197 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span> on Google.</h2>
-<a class="gbadge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><svg class="g-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg><strong>5.0</strong><span><span class="stars" aria-hidden="true">★★★★★</span><small>5 reviews on Google</small></span></a>
+<a class="gbadge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><svg class="g-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg><strong>5.0</strong><span><span class="stars" aria-hidden="true">★★★★★</span><small>Rated on Google</small></span></a>
 </div>
 <div class="rv-list">
 <figure class="rv">
@@ -485,32 +497,16 @@
 
 <footer class="ft">
 <div class="wrap">
-<div class="ft-grid">
-<div class="ft-brand">
-<picture><source type="image/webp" srcset="/assets/logo-full.webp"><img src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy Epoxy Flooring" loading="lazy" decoding="async"></picture>
-<p>Flake epoxy and concrete floor coatings across Taree, Forster and the Mid North Coast, NSW.</p>
+<div class="ft-top">
+<a class="ft-logo" href="/"><picture><source type="image/webp" srcset="/assets/logo-full.webp"><img src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy Epoxy Flooring" loading="lazy" decoding="async"></picture></a>
+<p class="ft-line">Flake epoxy and concrete floor coatings across Taree, Forster and the Mid North Coast. Mon-Fri, 7am-7pm.</p>
+<div class="ft-contact"><a class="ft-tel" href="tel:0435193845">0435 193 845</a><a href="mailto:floorcandyepoxy@gmail.com">floorcandyepoxy@gmail.com</a></div>
 </div>
-<div>
-<h2 class="ft-h">Services</h2>
-<ul><li><a href="/premium-flake-flooring">Premium flake flooring</a></li><li><a href="/garage-epoxy-flooring">Garage epoxy flooring</a></li><li><a href="/residential-epoxy-flooring">Residential epoxy flooring</a></li><li><a href="/outdoor-epoxy-flooring">Outdoor epoxy flooring</a></li><li><a href="/solid-colour-epoxy-flooring">Solid colour epoxy</a></li><li><a href="/concrete-preparation-crack-repair">Concrete preparation &amp; crack repair</a></li></ul>
-</div>
-<div>
-<h2 class="ft-h">Explore</h2>
-<ul><li><a href="/projects">Projects</a></li><li><a href="/guides">Guides</a></li><li><a href="/service-areas">Service areas</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul>
-</div>
-<div>
-<h2 class="ft-h">Get in touch</h2>
-<ul>
-<li><a class="ft-tel" href="tel:0435193845">0435 193 845</a></li>
-<li><a href="mailto:floorcandyepoxy@gmail.com">floorcandyepoxy@gmail.com</a></li>
-<li><a href="https://wa.me/61435193845" rel="noopener">WhatsApp</a> &middot; <a href="sms:0435193845">Text</a></li>
-<li>Mon-Fri, 7am-7pm</li>
-<li>Mobile service, no showroom</li>
-</ul>
-</div>
-</div>
+<nav class="ft-nav" aria-label="Footer"><ul>
+<li><a href="/garage-epoxy-flooring">Garage floors</a></li><li><a href="/premium-flake-flooring">Flake</a></li><li><a href="/projects">Projects</a></li><li><a href="/service-areas">Service areas</a></li><li><a href="/guides">Guides</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li>
+</ul></nav>
 <div class="ft-base">
-<p>&copy; 2026 Floor Candy. All rights reserved.</p>
+<p>&copy; 2026 Floor Candy &middot; Mobile service, no showroom</p>
 <ul><li><a href="https://www.facebook.com/p/FLOOR-CANDY-61585930480462/" rel="noopener">Facebook</a></li><li><a href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Google</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul>
 </div>
 </div>
@@ -523,6 +519,6 @@
 
 <script src="/main.js?v=19" defer></script>
 <script src="/home.js?v=1" defer></script>
-<script src="/fc.js?v=2" defer></script>
+<script src="/fc.js?v=3" defer></script>
 </body>
 </html>
