@@ -123,8 +123,7 @@ var FC_AREAS = {
     if (cur === 2) {
       var size = form.querySelector('[name="approx_size"]:checked');
       var when = form.querySelector('[name="timing"]:checked');
-      magnet.hidden = !(when && when.value === "Just researching");
-      if (size && when && when.value !== "Just researching") setTimeout(function () { if (cur === 2) show(3, true); }, 260);
+      if (size && when) setTimeout(function () { if (cur === 2) show(3, true); }, 260);
     }
   });
 
