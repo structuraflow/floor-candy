@@ -435,3 +435,25 @@ caption, and `og:image` remains a genuine Floor Candy photograph.
 regenerating the hero image the page still showed the *old* car — the stale
 video was playing on top. Regenerating the still without regenerating the video
 will silently show the wrong image. Both must move together.
+
+## Update 21 Nov 2026: homepage photos enhanced with Higgsfield (on Zach's instruction)
+
+Eight genuine job photos shown on the homepage were upscaled to 2K with **Higgsfield → `bytedance_image_upscale`**
+(2 credits each). Each result was compared side by side with its source before use: same scene, same objects, no
+added or removed features. Fine surface texture (concrete speckle, flake edges) is smoothed or sharpened by the model,
+which is invisible at display size. The ba-garage pair was already a Higgsfield 2K upscale (25 Aug) and was not redone.
+
+| Source (pre-upscale copy in `assets/_originals/pre-higgsfield-2026-11-21/`) | Job ID | 2K master (`assets/_originals/higgsfield-2k-2026-11-21/`) |
+|---|---|---|
+| garage-epoxy-floor-before-1024 | 67191cf8-83d0-4454-8308-312709a89123 | garage-epoxy-floor-before-2k.jpg (2880×2160) |
+| garage-epoxy-floor-after-1024 | bc6bcfc2-3804-40e5-9ca7-3af3e376a968 | garage-epoxy-floor-after-2k.jpg (2880×2160) |
+| shopfit-tiled-before-1242 | a5ecc68a-c743-4043-9f68-651fdf8e6527 | shopfit-tiled-before-2k.jpg (2976×2160) |
+| shopfit-flake-after-1242 | be3faa86-d2c9-4985-bb89-861ed3a3e368 | shopfit-flake-after-2k.jpg (2992×2160) |
+| garage-flake-finished-1920 | 231f6b8f-553b-47bd-bd31-b12c68ccb743 | garage-flake-finished-2k.jpg (4800×2160) |
+| work-flake-brick-414 | c55103e5-e992-412a-9847-158660201294 | work-flake-brick-2k.jpg (2160×2160) |
+| work-flake-garage-414 | 5cc7504d-e214-4f42-9003-6bd0a561d15a | work-flake-garage-2k.jpg (2160×2160) |
+| finish-solid-414 | c44d4399-adbc-4fe6-9858-d3670c1d0232 | finish-solid-2k.jpg (2160×2160) |
+
+Web variants were regenerated at the existing sizes; the homepage references them under new `-hd-` names because
+`/assets/img/*` is served `immutable` for a year (same-name replacements would never reach returning visitors).
+New sizes: `garage-epoxy-floor-{before,after}-hd-1600` and `{work-flake-brick,work-flake-garage,finish-solid}-hd-900`.
