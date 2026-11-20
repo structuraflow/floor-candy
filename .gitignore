@@ -1,3 +1,9 @@
 .DS_Store
 .vercel
 node_modules
+
+# Local QA screenshots and third-party reference material: never committed
+notes/**/qa/
+notes/**/qa-*/
+notes/redesign/references/
+notes/redesign/northcote/

@@ -235,7 +235,7 @@
       Array.prototype.forEach.call(form.querySelectorAll('[name="floor_type"]'), function (r) {
         r.addEventListener("change", function () {
           track("form_floor_type", { form_id: form.id, floor_type: r.value });
-          setTimeout(function () { show(2, true); }, 160);
+          setTimeout(function () { show(2, true); }, 250);
         });
       });
       if (nextBtn) nextBtn.addEventListener("click", next);

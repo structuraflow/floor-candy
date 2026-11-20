@@ -99,12 +99,11 @@ CREDENTIALS = {
 
 PRICING = {
     "double_garage_from": 2450,
-    "regional_from": 2600,
     "per_sqm_from": None,  # no per-m2 figure published until costed
     "qualifier": "Final pricing depends on floor size, existing condition, "
                  "preparation requirements, finish and location.",
-    "regional_note": "Regional and travel-heavy jobs need to be commercially "
-                     "viable and generally start around $2,600.",
+    "regional_note": "Travel-heavy jobs can cost more. You get the exact figure "
+                     "in your fixed written quote.",
 }
 
 OFFER = {"saving": 250, "label": "New customers save $250"}
@@ -863,7 +862,7 @@ LOCATIONS = [
         ],
         "local": ("What makes a Newcastle job work",
                   "<p>Travel has to be commercially viable, which in practice means "
-                  "Newcastle and Hunter jobs generally start around $2,600 and larger "
+                  "Newcastle and Hunter jobs can cost more than our core area, and larger "
                   "floors are easier to make work than small ones. If you have "
                   "neighbours or a couple of properties wanting the same thing, that "
                   "changes the maths considerably, it is worth mentioning when you "
@@ -876,10 +875,10 @@ LOCATIONS = [
              "We take selected projects there. It is not a standing local service, and "
              "we would rather say so than pretend otherwise. Call and we will tell you "
              "straight away whether your job works."),
-            ("Why is there a higher starting price for Newcastle?",
-             "Travel has to be commercially viable. Regional and travel-heavy jobs "
-             "generally start around $2,600, against approximately $2,450 for a double "
-             "garage in our core area."),
+            ("Why can a Newcastle job cost more?",
+             "Travel has to be commercially viable, so Newcastle and Hunter jobs can "
+             "cost more than a double garage in our core area, which starts from "
+             "approximately $2,450. You get the exact figure in your written quote."),
         ],
     },
 ]
@@ -1125,8 +1124,8 @@ GUIDES = [
             ("5. Where you are",
              ["<p>Taree, Forster, Tuncurry, Harrington, Blueys Beach and Pacific Palms "
               "are our core areas and are priced as such. Travel-heavy work, including "
-              "Newcastle and the Hunter, has to be commercially viable and generally "
-              "starts around $2,600.</p>"]),
+              "Newcastle and the Hunter, has to be commercially viable and can cost more. "
+              "You get the exact figure in writing after the on-site look.</p>"]),
             ("What a fair quote looks like",
              ["<p>It is written down. It follows someone actually looking at your slab. "
               "It says what preparation is included rather than leaving it vague. And "
@@ -1311,8 +1310,8 @@ HOME_FAQS = [
      "stand behind."),
     ("How much is a double garage?",
      "From approximately $2,450. Final pricing depends on floor size, existing "
-     "condition, preparation requirements, finish and location. Regional and "
-     "travel-heavy jobs generally start around $2,600."),
+     "condition, preparation requirements, finish and location. Travel-heavy "
+     "jobs can cost more."),
     ("How long does installation take?",
      "It varies with the size of the floor, its condition and the weather, "
      "preparation on a difficult slab can take longer than the coating does. You get "
@@ -2718,7 +2717,7 @@ def build_areas_index():
 <div class="prose">
 <h2>Somewhere else?</h2>
 <p>The list above is where we work regularly, not a boundary fence. Floor Candy is a mobile operation with no public showroom, we come to the floor.</p>
-<p>If you&rsquo;re outside these towns, send us your postcode and a couple of photos. We&rsquo;ll tell you honestly whether the job works. Travel-heavy jobs need to be commercially viable and generally start around $%s, so larger floors travel better than small ones.</p>
+<p>If you&rsquo;re outside these towns, send us your postcode and a couple of photos. We&rsquo;ll tell you honestly whether the job works. Travel-heavy jobs need to be commercially viable and can cost more, so larger floors travel better than small ones.</p>
 </div>
 </div>
 </section>
@@ -2726,7 +2725,6 @@ def build_areas_index():
 %s
 %s
 """ % (nav, BIZ["phone_href"], BIZ["phone_display"], cards,
-       "{:,}".format(PRICING["regional_from"]),
        areas_block(dark=True, show_map=True), closer())
     page("service-areas",
          "Service Areas | Epoxy Flooring Mid North Coast | Floor Candy",
@@ -3393,7 +3391,8 @@ def clean_old():
 
 def main():
     clean_old()
-    build_home()
+    # build_home() retired 20 Nov 2026: index.html is hand-built (home.css/home.js).
+    # Re-enabling this would overwrite the redesigned homepage.
     for s in SERVICES:
         build_service(s)
     for l in LOCATIONS:

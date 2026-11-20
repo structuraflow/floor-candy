@@ -11,3 +11,6 @@ assets/img/hero-poster-*
 
 # 2K upscale masters — provenance only, not shipped.
 assets/_originals
+
+# Working notes: kept in the repo, not shipped to the live site.
+notes

@@ -104,16 +104,16 @@ def main():
             time.sleep(3.2)
             ws.call("Runtime.evaluate", {"expression":
                 "document.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('is-in'));"
-                "window.scrollTo(0,document.body.scrollHeight);"})
+                "window.scrollTo({top:document.body.scrollHeight,behavior:'instant'});"})
             time.sleep(1.4)
-            ws.call("Runtime.evaluate", {"expression": "window.scrollTo(0,0)"})
+            ws.call("Runtime.evaluate", {"expression": "window.scrollTo({top:0,behavior:'instant'})"})
             time.sleep(.8)
             total = ws.call("Runtime.evaluate", {"expression":
                 "document.documentElement.scrollHeight", "returnByValue": True})["result"]["value"]
             shots = max(1, min(14, -(-total // h)))
             for i in range(shots):
                 y = i * h
-                ws.call("Runtime.evaluate", {"expression": f"window.scrollTo(0,{y})"})
+                ws.call("Runtime.evaluate", {"expression": f"window.scrollTo({{top:{y},behavior:'instant'}})"})
                 time.sleep(.45)
                 res = ws.call("Page.captureScreenshot", {"format": "png"})
                 path = os.path.join(out, f"{label}-{i:02d}.png")
