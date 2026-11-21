@@ -852,3 +852,6 @@ h1, h2 { font-weight: 800; letter-spacing: -0.045em; }
   .mobar-call { border: 1px solid rgba(247, 243, 240, .4); color: var(--ink); }
   .mobar-cta { background: var(--pink); color: var(--on-pink); }
 }
+
+/* Long-form (Sabri-style) hero headline: smaller scale so it stays above the fold */
+.hero h1.h1-long { font-size: clamp(2.1rem, 1rem + 3vw, 3.9rem); line-height: 1.02; }

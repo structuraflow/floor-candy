@@ -11,7 +11,7 @@
 <script>(function(d){d.className=d.className.replace("no-js","js");try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" can-anim"}catch(e){}})(document.documentElement)</script>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-wght-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/source-sans-3-wght-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/fc.css?v=9">
+<link rel="stylesheet" href="/fc.css?v=10">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -104,8 +104,8 @@
 <div class="wrap hero-grid">
 <div class="hero-text">
 <div class="hero-kick"><span class="now"><i aria-hidden="true"></i>Now booking Perth</span><a class="badge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><span class="stars" aria-hidden="true">★</span> 5.0 on Google</a></div>
-<p class="eyebrow">Epoxy &amp; flake floors &middot; Perth WA</p>
-<h1 id="hero-h1">A showroom garage floor. <span class="slab">Without the hassle.</span></h1>
+<p class="eyebrow">Attention Perth homeowners</p>
+<h1 id="hero-h1" class="h1-long">Turn your stained, dusty garage into a showroom epoxy floor. <span class="slab">One fixed price. No surprises.</span></h1>
 <p class="hero-sub">We grind it, fix the cracks and coat it in flake that wipes clean and hides the marks. You get one fixed price after a free look.</p>
 <p class="hero-price"><span>Double garages from <b>$2,450</b></span> &middot; <span>New customers save <b>$250</b></span></p>
 <div class="hero-cta">
@@ -362,18 +362,51 @@
 <div class="faq">
 <details name="faq"><summary>Which areas do you cover?</summary><div class="faq-a"><p>Perth metro: north and south of the river, the eastern suburbs and the Hills. Mandurah and Peel are taken on depending on job size and timing. Not sure? Send us your postcode.</p></div></details>
 <details name="faq"><summary>Can I choose the colour?</summary><div class="faq-a"><p>Yes. Pick Flake, Metallic or Solid Colour, then choose from real samples at your free on-site look, in your own light rather than off a screen.</p><!-- TODO — ASK JARROD: colour list, if he has one --></div></details>
+<details name="faq"><summary>How much does an epoxy garage floor cost?</summary><div class="faq-a"><p>Double garages start from $2,450, and new customers save $250 on their first floor. Your exact price depends on size, slab condition, preparation and finish, and you get it as one fixed written price after a free on-site look.</p></div></details>
+<details name="faq"><summary>Do I have to pay everything upfront?</summary><div class="faq-a"><p>No. A deposit books your job in, and you only pay the balance after we walk through the finished floor together.</p></div></details>
+<details name="faq"><summary>How long does it take?</summary><div class="faq-a"><p>It depends on the size of the floor and how much preparation the slab needs. Jarrod gives you the timing for your job at the free on-site look, before you commit to anything.</p></div></details>
+<details name="faq"><summary>Will it peel or lift?</summary><div class="faq-a"><p>Coatings almost always fail because of poor preparation, not the coating itself. Every slab is mechanically ground before anything goes down, so the coating bonds to the concrete, not to dust or old sealer.</p></div></details>
+<details name="faq"><summary>Can you coat over cracked or stained concrete?</summary><div class="faq-a"><p>Usually, yes. Cracks are repaired where appropriate before coating, and grinding takes off the stained top layer. Jarrod checks the slab at the free look and tells you straight if anything needs fixing first.</p></div></details>
+<details name="faq"><summary>Is a flake floor slippery?</summary><div class="faq-a"><p>Flake gives the surface texture, so it grips better than a smooth gloss coating.</p></div></details>
+<details name="faq"><summary>How do I clean it?</summary><div class="faq-a"><p>Spills and tyre marks wipe off. A sweep and a mop with warm water is all it needs day to day.</p></div></details>
 </div>
 </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="sec dark closer" aria-labelledby="close-h">
-<div class="wrap">
-<h2 id="close-h">A garage floor worth <em>showing off.</em> It starts with a free look.</h2>
-<div class="closer-act">
-<a class="btn btn--pink" href="#quote">Get my fixed price <span aria-hidden="true">&rarr;</span></a>
-<a class="btn btn--light" href="tel:0435193845">Call 0435 193 845</a>
+<!-- SIMPLE QUOTE FORM: one page, same Formspree form as the interactive quote -->
+<section class="sec" id="send" aria-labelledby="sq-h">
+<div class="wrap sq-grid">
+<div>
+<p class="eyebrow">Free quote</p>
+<h2 id="sq-h" class="h-gap">Get your free quote.</h2>
+<p class="lede">Jarrod comes back to you to book a free on-site look, then gives you one fixed price.</p>
+<p class="sq-call">Rather talk? <a href="tel:0435193845">0435 193 845</a><span>Mon-Fri, 7am-7pm</span></p>
 </div>
+<form class="sqform" id="fc-simple" action="https://formspree.io/f/mrpeeawq" method="POST" novalidate>
+<div class="sq-fields" data-sq-fields>
+<div class="field"><label for="s-name">Name</label><input id="s-name" name="name" type="text" autocomplete="name" required></div>
+<div class="field"><label for="s-mobile">Mobile</label><input id="s-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" required pattern="^\s*(\+?61|0)\s*4(\s*\d){8}\s*$" data-msg="Enter an Australian mobile starting with 04."></div>
+<div class="field"><label for="s-postcode">Postcode</label><input id="s-postcode" name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4" required pattern="^\d{4}$" data-msg="Enter a 4-digit postcode."></div>
+<div class="field field--wide"><label for="s-job">What needs doing?</label><textarea id="s-job" name="job_details" rows="4" required placeholder="e.g. Double garage, oil stains, want a grey flake" data-msg="Tell Jarrod a little about the floor."></textarea></div>
+<input type="hidden" name="_subject" value="New PERTH quote request (quick form): floorcandyepoxy.com">
+<input type="hidden" name="market" value="Perth">
+<input type="hidden" name="form_type" value="simple_quote">
+<input type="hidden" name="page_url" value="">
+<p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+<p class="err" data-sq-err role="alert"></p>
+<button class="btn btn--pink btn--full" type="submit" data-sq-send>Send <span aria-hidden="true">&rarr;</span></button>
+<p class="sq-fine">Free on-site assessment &middot; Fixed written price &middot; No obligation</p>
+</div>
+<div class="qdone" data-sq-done hidden tabindex="-1">
+<h3 data-sq-h>Thanks &mdash; Jarrod will call or text you to book your free look.</h3>
+<p data-sq-p>Want to be quicker? Send the same details straight to Jarrod.</p>
+<div class="qdone-act">
+<a class="btn btn--pink" data-sq-wa href="https://wa.me/61435193845" rel="noopener">Send my details on WhatsApp</a>
+<a class="btn" data-sq-mail href="mailto:floorcandyepoxy@gmail.com">Email my details instead</a>
+<a class="btn" href="tel:0435193845">Call 0435 193 845</a>
+</div>
+</div>
+</form>
 </div>
 </section>
 
