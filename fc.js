@@ -5,15 +5,16 @@
    postcode checker, the prep photo swap and the block reveal. */
 
 /* =====================================================================
-   SERVICE AREAS: edit here. Core towns get a yes, Newcastle/Hunter get
-   "selected projects", anything else is asked to send the postcode.
-   Matching ignores case and accepts a postcode or a town name.
+   SERVICE AREAS (Perth): edit here. Perth metro postcodes get a yes,
+   Mandurah/Peel and the Hills get "selected projects", anything else is
+   asked to send the postcode. Matching ignores case, accepts postcode or name.
+   TODO ASK JARROD: confirm the real coverage before this goes live.
    ===================================================================== */
 var FC_AREAS = {
-  core: { "2430": "Taree", "2428": "Forster, Tuncurry, Blueys Beach and Pacific Palms", "2427": "Harrington" },
-  coreNames: ["taree", "forster", "tuncurry", "harrington", "blueys beach", "pacific palms", "old bar", "mid north coast"],
-  selectedNames: ["newcastle", "hunter", "the hunter", "maitland"],
-  selectedRange: [2280, 2339] // Newcastle and the Hunter postcodes
+  coreRange: [6000, 6199], // Perth metro
+  coreNames: ["perth", "perth hills", "the hills", "kalamunda", "mundaring", "byford", "perth metro", "fremantle", "joondalup", "scarborough", "subiaco", "cannington", "midland", "rockingham", "baldivis", "wanneroo", "ellenbrook", "armadale", "morley", "canning vale", "cockburn", "stirling", "belmont", "victoria park", "south perth", "osborne park", "balcatta", "kwinana", "bayswater", "bassendean", "melville", "nedlands", "cottesloe"],
+  selectedNames: ["mandurah", "peel", "pinjarra", "falcon", "halls head", "waroona"],
+  selectedRange: [6200, 6215] // Mandurah and Peel
 };
 
 (function () {
@@ -223,7 +224,7 @@ var FC_AREAS = {
       e.preventDefault();
       var v = inp.value.trim();
       if (!v) { out.textContent = "Type your postcode or suburb first."; inp.focus(); return; }
-      var key = v.toLowerCase().replace(/\s+nsw$/, "").trim();
+      var key = v.toLowerCase().replace(/,?\s+(wa|western australia)$/, "").trim();
       var n = /^\d{4}$/.test(key) ? Number(key) : null;
       var hit = false;
       var sms = function (lead) {
@@ -233,12 +234,13 @@ var FC_AREAS = {
         a.textContent = "Text Jarrod " + v;
         out.appendChild(a);
       };
-      if (n !== null && FC_AREAS.core[key]) { hit = true; out.textContent = "Yes, " + key + " (" + FC_AREAS.core[key] + ") is one of our core areas."; }
-      else if (n === null && FC_AREAS.coreNames.indexOf(key) > -1) { hit = true; out.textContent = "Yes, " + v.replace(/\b\w/g, function (c) { return c.toUpperCase(); }) + " is one of our core areas."; }
-      else if ((n !== null && n >= FC_AREAS.selectedRange[0] && n <= FC_AREAS.selectedRange[1]) || FC_AREAS.selectedNames.indexOf(key) > -1) {
-        sms("We take selected projects in Newcastle and the Hunter, depending on job size and timing. Send Jarrod the details and he will confirm.");
+      var title = v.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      if ((n !== null && n >= FC_AREAS.coreRange[0] && n <= FC_AREAS.coreRange[1]) || (n === null && FC_AREAS.coreNames.indexOf(key) > -1)) {
+        hit = true; out.textContent = "Yes, " + title + " is in our Perth metro area.";
+      } else if ((n !== null && n >= FC_AREAS.selectedRange[0] && n <= FC_AREAS.selectedRange[1]) || FC_AREAS.selectedNames.indexOf(key) > -1) {
+        sms("We take selected projects in Mandurah and Peel, depending on job size and timing. Send Jarrod the details and he will confirm.");
       } else {
-        sms("Send us your postcode and Jarrod will confirm. Jobs outside our core areas are decided by job size and timing.");
+        sms("Send us your postcode and Jarrod will confirm. Jobs outside Perth metro are decided by job size and timing.");
       }
       track("postcode_check", { matched: hit });
     });
