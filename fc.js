@@ -12,9 +12,9 @@
    ===================================================================== */
 var FC_AREAS = {
   coreRange: [6000, 6199], // Perth metro
-  coreNames: ["perth", "perth hills", "the hills", "kalamunda", "mundaring", "byford", "perth metro", "fremantle", "joondalup", "scarborough", "subiaco", "cannington", "midland", "rockingham", "baldivis", "wanneroo", "ellenbrook", "armadale", "morley", "canning vale", "cockburn", "stirling", "belmont", "victoria park", "south perth", "osborne park", "balcatta", "kwinana", "bayswater", "bassendean", "melville", "nedlands", "cottesloe"],
-  selectedNames: ["mandurah", "peel", "pinjarra", "falcon", "halls head", "waroona"],
-  selectedRange: [6200, 6215] // Mandurah and Peel
+  coreNames: ["perth", "perth hills", "the hills", "kalamunda", "mundaring", "byford", "perth metro", "fremantle", "joondalup", "scarborough", "subiaco", "cannington", "midland", "rockingham", "baldivis", "wanneroo", "ellenbrook", "armadale", "morley", "canning vale", "cockburn", "stirling", "belmont", "victoria park", "south perth", "osborne park", "balcatta", "kwinana", "bayswater", "bassendean", "melville", "nedlands", "cottesloe", "thornlie", "gosnells", "maddington", "kelmscott", "willetton", "riverton", "bibra lake", "success", "atwell", "spearwood", "hamilton hill", "east fremantle", "north fremantle", "secret harbour", "port kennedy", "warnbro", "safety bay", "shoalwater", "wellard", "hillarys", "clarkson", "butler", "mirrabooka", "malaga", "forrestfield", "high wycombe"],
+  selectedNames: ["mandurah", "peel", "pinjarra", "falcon", "halls head", "waroona", "bunbury", "australind", "eaton", "dalyellup", "south west", "harvey"],
+  selectedRange: [6200, 6233] // Mandurah, Peel and Bunbury
 };
 
 (function () {
@@ -238,7 +238,7 @@ var FC_AREAS = {
       if ((n !== null && n >= FC_AREAS.coreRange[0] && n <= FC_AREAS.coreRange[1]) || (n === null && FC_AREAS.coreNames.indexOf(key) > -1)) {
         hit = true; out.textContent = "Yes, " + title + " is in our Perth metro area.";
       } else if ((n !== null && n >= FC_AREAS.selectedRange[0] && n <= FC_AREAS.selectedRange[1]) || FC_AREAS.selectedNames.indexOf(key) > -1) {
-        sms("We take selected projects in Mandurah and Peel, depending on job size and timing. Send Jarrod the details and he will confirm.");
+        sms("Yes, we cover Mandurah, Peel and Bunbury. Send Jarrod the details and he will lock in a time.");
       } else {
         sms("Send us your postcode and Jarrod will confirm. Jobs outside Perth metro are decided by job size and timing.");
       }
