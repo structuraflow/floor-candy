@@ -11,7 +11,7 @@
 <script>(function(d){d.className=d.className.replace("no-js","js");try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className+=" can-anim"}catch(e){}})(document.documentElement)</script>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-wght-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/source-sans-3-wght-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/fc.css?v=8">
+<link rel="stylesheet" href="/fc.css?v=9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -68,7 +68,7 @@
 <nav class="hd-nav" aria-label="Main"><ul>
 <li><a href="#finishes">Services</a></li>
 <li><a href="#work">Projects</a></li>
-<li><a href="#areas">Areas</a></li>
+<li><a href="/service-areas/">Areas</a></li>
 <li><a href="#about">About</a></li>
 <li><a href="#quote">Contact</a></li>
 </ul></nav>
@@ -85,7 +85,7 @@
 <nav aria-label="Site"><ul class="drawer-nav">
 <li><a href="#finishes">Services</a></li>
 <li><a href="#work">Projects</a></li>
-<li><a href="#areas">Areas</a></li>
+<li><a href="/service-areas/">Areas</a></li>
 <li><a href="#about">About</a></li>
 <li><a href="#quote">Contact</a></li>
 </ul></nav>
@@ -105,8 +105,8 @@
 <div class="hero-text">
 <div class="hero-kick"><span class="now"><i aria-hidden="true"></i>Now booking Perth</span><a class="badge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><span class="stars" aria-hidden="true">★</span> 5.0 on Google</a></div>
 <p class="eyebrow">Epoxy &amp; flake floors &middot; Perth WA</p>
-<h1 id="hero-h1">The biggest room in your Perth home. <span class="slab">The worst floor in it.</span></h1>
-<p class="hero-sub">A garage floor worth showing off. It starts with a free look &mdash; and a fixed written price.</p>
+<h1 id="hero-h1">A showroom garage floor. <span class="slab">Without the hassle.</span></h1>
+<p class="hero-sub">We grind it, fix the cracks and coat it in flake that wipes clean and hides the marks. You get one fixed price after a free look.</p>
 <p class="hero-price"><span>Double garages from <b>$2,450</b></span> &middot; <span>New customers save <b>$250</b></span></p>
 <div class="hero-cta">
 <a class="btn btn--pink" href="#quote" data-ev="hero_cta">Get my fixed price in 60 seconds <span aria-hidden="true">&rarr;</span></a>
@@ -119,114 +119,81 @@
 </ul>
 </div>
 <figure class="hero-media">
-<div class="cmp" data-cmp data-cmp-sweep>
+<div class="cmp" data-cmp>
 <picture><source type="image/avif" srcset="/assets/img/garage-epoxy-floor-before-hd-600.avif 600w, /assets/img/garage-epoxy-floor-before-hd-800.avif 800w, /assets/img/garage-epoxy-floor-before-hd-1024.avif 1024w, /assets/img/garage-epoxy-floor-before-hd-1600.avif 1600w" sizes="(min-width:1000px) 52vw, 92vw"><source type="image/webp" srcset="/assets/img/garage-epoxy-floor-before-hd-600.webp 600w, /assets/img/garage-epoxy-floor-before-hd-800.webp 800w, /assets/img/garage-epoxy-floor-before-hd-1024.webp 1024w, /assets/img/garage-epoxy-floor-before-hd-1600.webp 1600w" sizes="(min-width:1000px) 52vw, 92vw"><img src="/assets/img/garage-epoxy-floor-before-hd-1024.jpg" srcset="/assets/img/garage-epoxy-floor-before-hd-600.jpg 600w, /assets/img/garage-epoxy-floor-before-hd-800.jpg 800w, /assets/img/garage-epoxy-floor-before-hd-1024.jpg 1024w, /assets/img/garage-epoxy-floor-before-hd-1600.jpg 1600w" sizes="(min-width:1000px) 52vw, 92vw" width="1024" height="768" alt="Bare, stained concrete garage slab before coating" fetchpriority="high"></picture>
 <div class="cmp-after"><picture><source type="image/avif" srcset="/assets/img/garage-epoxy-floor-after-hd-600.avif 600w, /assets/img/garage-epoxy-floor-after-hd-800.avif 800w, /assets/img/garage-epoxy-floor-after-hd-1024.avif 1024w, /assets/img/garage-epoxy-floor-after-hd-1600.avif 1600w" sizes="(min-width:1000px) 52vw, 92vw"><source type="image/webp" srcset="/assets/img/garage-epoxy-floor-after-hd-600.webp 600w, /assets/img/garage-epoxy-floor-after-hd-800.webp 800w, /assets/img/garage-epoxy-floor-after-hd-1024.webp 1024w, /assets/img/garage-epoxy-floor-after-hd-1600.webp 1600w" sizes="(min-width:1000px) 52vw, 92vw"><img src="/assets/img/garage-epoxy-floor-after-hd-1024.jpg" srcset="/assets/img/garage-epoxy-floor-after-hd-600.jpg 600w, /assets/img/garage-epoxy-floor-after-hd-800.jpg 800w, /assets/img/garage-epoxy-floor-after-hd-1024.jpg 1024w, /assets/img/garage-epoxy-floor-after-hd-1600.jpg 1600w" sizes="(min-width:1000px) 52vw, 92vw" width="1024" height="768" alt="The same garage finished in a grey flake epoxy floor"></picture></div>
 <div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M7.5 5.5 3 10l4.5 4.5M12.5 5.5 17 10l-4.5 4.5"/></svg></span></div>
 <span class="cmp-tag cmp-tag--b">Before</span><span class="cmp-tag cmp-tag--a">After</span>
 <input class="cmp-range" type="range" min="0" max="100" value="50" step="1" aria-label="Drag to compare the garage before and after">
 </div>
-<figcaption><span>Same garage, same spot. Drag the handle.</span><span>Jarrod&rsquo;s own job</span></figcaption>
 </figure>
 </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><ul><li>Now in Perth</li><li>Decorative flake</li><li>Metallic</li><li>Solid colour</li><li>Mechanical grind first</li><li>Fixed written price</li><li>Walkthrough before the balance</li></ul><ul><li>Now in Perth</li><li>Decorative flake</li><li>Metallic</li><li>Solid colour</li><li>Mechanical grind first</li><li>Fixed written price</li><li>Walkthrough before the balance</li></ul></div></div>
-
-<!-- SOUND FAMILIAR? -->
-<section class="sec alt" aria-labelledby="pain-h">
-<div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">The problem</p><h2 id="pain-h">Sound familiar?</h2></div></div>
-<ol class="pain-list">
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-crack"/></svg></span><h3>Cracked, stained concrete</h3><p>Oil drips, tyre marks and hairline cracks that no amount of pressure washing shifts.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-dust"/></svg></span><h3>Dust through the house</h3><p>Bare concrete sheds a fine grey dust that ends up on shoes, in the car and on the hallway floor.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-shut"/></svg></span><h3>A room you keep shut</h3><p>The door stays down when people come over, and the space never gets used the way it could be.</p></li>
-</ol>
-<p class="pain-turn">A properly prepared flake floor deals with all three. <a class="tlink" href="#work">See it on real jobs</a></p>
-</div>
-</section>
 
 <!-- REAL FLOORS -->
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Projects</p><h2 id="work-h">Real floors. Our own jobs.</h2></div>
-<p>No stock photos. No one else&rsquo;s work. These floors were finished on the NSW coast before Jarrod moved west. Drag the handle to see each one before and after.</p></div>
+<div class="sec-head"><div><p class="eyebrow">Projects</p><h2 id="work-h">Recent floors.</h2></div></div>
 <div class="pair">
 <figure class="case">
-<div class="cmp blk" data-cmp>
-<picture><source type="image/webp" srcset="/assets/img/shopfit-tiled-before-hd-600.webp 600w, /assets/img/shopfit-tiled-before-hd-900.webp 900w, /assets/img/shopfit-tiled-before-hd-1242.webp 1242w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/shopfit-tiled-before-hd-1242.jpg" srcset="/assets/img/shopfit-tiled-before-hd-600.jpg 600w, /assets/img/shopfit-tiled-before-hd-900.jpg 900w, /assets/img/shopfit-tiled-before-hd-1242.jpg 1242w" sizes="(min-width:800px) 46vw, 92vw" width="1242" height="897" alt="Old tiled floor before work started, dust extractor in shot" loading="lazy" decoding="async"></picture>
-<div class="cmp-after"><picture><source type="image/webp" srcset="/assets/img/shopfit-flake-after-hd-600.webp 600w, /assets/img/shopfit-flake-after-hd-900.webp 900w, /assets/img/shopfit-flake-after-hd-1242.webp 1242w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/shopfit-flake-after-hd-1242.jpg" srcset="/assets/img/shopfit-flake-after-hd-600.jpg 600w, /assets/img/shopfit-flake-after-hd-900.jpg 900w, /assets/img/shopfit-flake-after-hd-1242.jpg 1242w" sizes="(min-width:800px) 46vw, 92vw" width="1242" height="897" alt="The same room finished in a cream and tan flake floor" loading="lazy" decoding="async"></picture></div>
+<div class="cmp" data-cmp>
+<picture><source type="image/webp" srcset="/assets/img/job-garage-before-600.webp 600w, /assets/img/job-garage-before-900.webp 900w, /assets/img/job-garage-before-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/job-garage-before-1200.jpg" srcset="/assets/img/job-garage-before-600.jpg 600w, /assets/img/job-garage-before-900.jpg 900w, /assets/img/job-garage-before-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="Bare concrete garage floor before coating" loading="lazy" decoding="async"></picture>
+<div class="cmp-after"><picture><source type="image/webp" srcset="/assets/img/job-garage-after-600.webp 600w, /assets/img/job-garage-after-900.webp 900w, /assets/img/job-garage-after-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/job-garage-after-1200.jpg" srcset="/assets/img/job-garage-after-600.jpg 600w, /assets/img/job-garage-after-900.jpg 900w, /assets/img/job-garage-after-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="The same garage finished in grey flake epoxy" loading="lazy" decoding="async"></picture></div>
 <div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M7.5 5.5 3 10l4.5 4.5M12.5 5.5 17 10l-4.5 4.5"/></svg></span></div>
 <span class="cmp-tag cmp-tag--b">Before</span><span class="cmp-tag cmp-tag--a">After</span>
-<input class="cmp-range" type="range" min="0" max="100" value="50" step="1" aria-label="Drag to compare the tiled floor before and after">
+<input class="cmp-range" type="range" min="0" max="100" value="50" step="1" aria-label="Drag to compare the garage before and after">
 </div>
-<figcaption><h3>Tiled floor to flake</h3><p>Same room, before and after.</p></figcaption>
+<figcaption><h3>Garage, bare concrete to flake</h3></figcaption>
 </figure>
 <figure class="case">
-<div class="cmp blk" data-cmp>
-<picture><source type="image/webp" srcset="/assets/img/ba-garage-before-600.webp 600w, /assets/img/ba-garage-before-900.webp 900w, /assets/img/ba-garage-before-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/ba-garage-before-1200.jpg" srcset="/assets/img/ba-garage-before-600.jpg 600w, /assets/img/ba-garage-before-900.jpg 900w, /assets/img/ba-garage-before-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="Garage floor part-way through mechanical preparation" loading="lazy" decoding="async"></picture>
-<div class="cmp-after"><picture><source type="image/webp" srcset="/assets/img/ba-garage-after-600.webp 600w, /assets/img/ba-garage-after-900.webp 900w, /assets/img/ba-garage-after-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/ba-garage-after-1200.jpg" srcset="/assets/img/ba-garage-after-600.jpg 600w, /assets/img/ba-garage-after-900.jpg 900w, /assets/img/ba-garage-after-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="The same garage floor finished in flake epoxy" loading="lazy" decoding="async"></picture></div>
+<div class="cmp" data-cmp>
+<picture><source type="image/webp" srcset="/assets/img/job-alfresco-before-600.webp 600w, /assets/img/job-alfresco-before-900.webp 900w, /assets/img/job-alfresco-before-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/job-alfresco-before-1200.jpg" srcset="/assets/img/job-alfresco-before-600.jpg 600w, /assets/img/job-alfresco-before-900.jpg 900w, /assets/img/job-alfresco-before-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="Alfresco slab taped up and ready for coating" loading="lazy" decoding="async"></picture>
+<div class="cmp-after"><picture><source type="image/webp" srcset="/assets/img/job-alfresco-after-600.webp 600w, /assets/img/job-alfresco-after-900.webp 900w, /assets/img/job-alfresco-after-1200.webp 1200w" sizes="(min-width:800px) 46vw, 92vw"><img src="/assets/img/job-alfresco-after-1200.jpg" srcset="/assets/img/job-alfresco-after-600.jpg 600w, /assets/img/job-alfresco-after-900.jpg 900w, /assets/img/job-alfresco-after-1200.jpg 1200w" sizes="(min-width:800px) 46vw, 92vw" width="1200" height="1200" alt="The same alfresco finished in gloss flake epoxy" loading="lazy" decoding="async"></picture></div>
 <div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M7.5 5.5 3 10l4.5 4.5M12.5 5.5 17 10l-4.5 4.5"/></svg></span></div>
-<span class="cmp-tag cmp-tag--b">During prep</span><span class="cmp-tag cmp-tag--a">After</span>
-<input class="cmp-range" type="range" min="0" max="100" value="50" step="1" aria-label="Drag to compare the garage during preparation and finished">
+<span class="cmp-tag cmp-tag--b">Before</span><span class="cmp-tag cmp-tag--a">After</span>
+<input class="cmp-range" type="range" min="0" max="100" value="50" step="1" aria-label="Drag to compare the alfresco before and after">
 </div>
-<figcaption><h3>Garage, prep to finish</h3><p>During preparation, then finished.</p></figcaption>
+<figcaption><h3>Alfresco, bare slab to gloss flake</h3></figcaption>
 </figure>
 </div>
 </div>
 </section>
 
-<!-- WHY FLOORS FAIL: Miller plan + 7-step prep, sticky photo of one real job -->
-<section class="sec dark" aria-labelledby="prep-h">
+<!-- REVIEWS -->
+<section class="sec alt" id="about" aria-labelledby="rev-h">
 <div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Why floors fail</p><h2 id="prep-h">Epoxy floors don&rsquo;t fail. Poor preparation does.</h2></div>
-<p>When a coated floor lifts, peels or picks up under hot tyres, the coating is almost never the problem. The problem is what it was asked to stick to.</p></div>
-<ol class="plan" aria-label="Your three steps">
-<li><span class="num">1</span><b>Tell us about the floor</b></li>
-<li><span class="num">2</span><b>Free on-site look</b></li>
-<li><span class="num">3</span><b>Fixed written price</b></li>
-</ol>
-<p class="plan-note">Most double garages are done quickly &mdash; timing depends on size and prep, Jarrod confirms it at your free on-site look.</p>
-<div class="prep">
-<div class="prep-media" aria-hidden="true">
-<div class="prep-frame blk">
-<img class="on" data-ph="0" src="/assets/img/garage-flake-finished-hd-1080.jpg" width="1080" height="486" alt="">
-<img data-ph="1" src="/assets/img/shopfit-flake-after-hd-900.jpg" width="900" height="650" alt="" loading="lazy">
-<img data-ph="2" src="/assets/img/ba-garage-after-900.jpg" width="900" height="1200" alt="" loading="lazy">
-<img data-ph="3" src="/assets/img/garage-epoxy-floor-after-hd-800.jpg" width="800" height="600" alt="" loading="lazy">
+<div class="rv-head">
+<h2 id="rev-h">Rated <span class="uline">5 stars<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 10C50 4 120 2 197 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span> on Google.</h2>
+<a class="gbadge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><svg class="g-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg><strong>5.0</strong><span><span class="stars" aria-hidden="true">★★★★★</span><small>Rated on Google</small></span></a>
 </div>
-<p class="prep-cap"><b data-cap>Flake garage, finished</b><span>Jarrod&rsquo;s own work</span></p>
+<div class="rv-list">
+<figure class="rv">
+<div class="rv-top"><span class="rv-av" aria-hidden="true">R</span><figcaption><b>Reece Hawes</b><small>Google review</small></figcaption><svg class="rv-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg></div>
+<span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+<blockquote class="rv-text" data-clamp>&ldquo;Jarrod and his team did a fantastic job at my house very satisfied with the results and how professional he is, would highly recommend this company&rdquo;</blockquote>
+<button class="rv-more" type="button" data-more hidden>Read more</button>
+<!-- TODO: swap for the real photo of this customer's job -->
+<span class="rv-img"><picture><source type="image/webp" srcset="/assets/img/work-flake-brick-hd-900.webp"><img src="/assets/img/work-flake-brick-hd-900.jpg" width="900" height="900" alt="Speckled flake epoxy on a covered alfresco beside a brick house" loading="lazy" decoding="async"></picture></span>
+</figure>
+<figure class="rv">
+<div class="rv-top"><span class="rv-av" aria-hidden="true">M</span><figcaption><b>Miranda</b><small>Google review</small></figcaption><svg class="rv-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg></div>
+<span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+<blockquote class="rv-text" data-clamp>&ldquo;We had an epoxy floor installed in our shed conversion and it&rsquo;s completely transformed the space. It looks great and is super easy to maintain. Jarrod was super helpful and efficient, the finish is high quality. Really happy with the result&rdquo;</blockquote>
+<button class="rv-more" type="button" data-more hidden>Read more</button>
+<!-- TODO: swap for the real photo of this customer's job -->
+<span class="rv-img"><picture><source type="image/webp" srcset="/assets/img/work-flake-garage-hd-900.webp"><img src="/assets/img/work-flake-garage-hd-900.jpg" width="900" height="900" alt="Grey flake epoxy floor in a large converted shed" loading="lazy" decoding="async"></picture></span>
+</figure>
+<div class="rv rv--cta">
+<p class="rv-cta-h">Read every review, or leave one.</p>
+<a class="btn btn--pink btn--full" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Read our Google reviews</a>
+<a class="btn btn--full" href="https://g.page/r/CYImb0MsLRFGEBM/review" rel="noopener">Leave Jarrod a Google review</a>
 </div>
-<ol class="steps">
-<li class="on" data-photo="0" data-caption="Flake garage, finished"><span class="num">01</span><div><h3>Tell us about the floor</h3><p>Call, or send the form and text us a couple of photos. Photos help us understand the existing floor and the preparation it is likely to need before we turn up.</p></div></li>
-<li data-photo="0" data-caption="Flake garage, finished"><span class="num">02</span><div><h3>Mechanical grind</h3><p>Opens up the concrete so the coating bonds to the slab, not to dust or old sealer.</p></div></li>
-<li data-photo="1" data-caption="Tiled floor, now flake"><span class="num">03</span><div><h3>Crack repair, where it&rsquo;s needed</h3><p>Stops cracks becoming open paths through your new floor.</p></div></li>
-<li data-photo="1" data-caption="Tiled floor, now flake"><span class="num">04</span><div><h3>Tough base coat</h3><p>The layer that does the structural work.</p></div></li>
-<li data-photo="2" data-caption="Double garage, finished"><span class="num">05</span><div><h3>Flake broadcast through it</h3><p>Colour and texture right through the surface. Hides the marks a working garage collects and grips better than smooth gloss.</p></div></li>
-<li data-photo="2" data-caption="Double garage, finished"><span class="num">06</span><div><h3>Clear topcoat</h3><p>Locks the flake in. Spills and tyre marks wipe off.</p></div></li>
-<li data-photo="3" data-caption="Grey flake, ready for the car"><span class="num">07</span><div><h3>Walkthrough before the balance</h3><p>We check the finished floor together before you pay the balance.</p></div></li>
-</ol>
 </div>
 </div>
 </section>
 
 <!-- FINISH PICKER + PRICE CARD -->
-<!-- WHY FLOOR CANDY: six reasons, only claims already true on this site -->
-<section class="sec" aria-labelledby="why-h">
-<div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Why Floor Candy</p><h2 id="why-h">Why our floors last.</h2></div>
-<p>Rolling a coating onto concrete is the easy part. What happens before and after it is what you are paying for.</p></div>
-<ul class="why">
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-grind"/></svg></span><span class="why-n">01</span><h3>Preparation comes first</h3><p>Every slab is mechanically ground before anything goes down, and cracks are repaired where appropriate.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-price"/></svg></span><span class="why-n">02</span><h3>A fixed written price</h3><p>Jarrod looks at the floor and gives you one fixed price in writing. No obligation, no surprise extras.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-swatch"/></svg></span><span class="why-n">03</span><h3>Real samples, your light</h3><p>Pick flake, metallic or solid colour from real samples at your floor, not off a phone screen.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-look"/></svg></span><span class="why-n">04</span><h3>A free look before anything</h3><p>The on-site assessment is free. You see the plan for your floor before you commit to a thing.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-walk"/></svg></span><span class="why-n">05</span><h3>Walkthrough before the balance</h3><p>We check the finished floor together before you pay the balance.</p></li>
-<li><span class="fun-ic" aria-hidden="true"><svg><use href="#i-sparkle"/></svg></span><span class="why-n">06</span><h3>A floor worth showing off</h3><p>Flake hides the marks a working garage collects and grips better than smooth gloss. Spills and tyre marks wipe off.</p></li>
-</ul>
-<div class="why-cta"><a class="btn btn--pink" href="#quote">Get my fixed price <span aria-hidden="true">&rarr;</span></a><a class="btn btn--line" href="tel:0435193845"><svg class="btn-ic" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.2 2.5 8 6.6 6.4 8a10 10 0 0 0 5.6 5.6l1.4-1.6 4.1 1.8-.6 3.1A1.7 1.7 0 0 1 15.2 18 13.2 13.2 0 0 1 2 4.8a1.7 1.7 0 0 1 1.1-1.7z" fill="currentColor"/></svg>Call 0435 193 845</a></div>
-</div>
-</section>
 
 <section class="sec" id="finishes" aria-labelledby="fin-h">
 <div class="wrap">
@@ -237,16 +204,16 @@
 <!-- TODO — ASK JARROD: flake colour names + photos -->
 <div class="fin-cards" role="group" aria-label="Choose a finish">
 <button class="fin" type="button" aria-pressed="false" data-finish="Decorative Flake">
-<span class="fin-img blk"><picture><source type="image/webp" srcset="/assets/img/garage-epoxy-floor-after-hd-600.webp"><img src="/assets/img/garage-epoxy-floor-after-hd-600.jpg" width="600" height="450" alt="Grey decorative flake garage floor" loading="lazy" decoding="async"></picture></span>
+<span class="fin-img"><picture><source type="image/webp" srcset="/assets/img/garage-epoxy-floor-after-hd-600.webp"><img src="/assets/img/garage-epoxy-floor-after-hd-600.jpg" width="600" height="450" alt="Grey decorative flake garage floor" loading="lazy" decoding="async"></picture></span>
 <span class="fin-body"><span class="fin-h">Decorative Flake</span><span class="fin-p">Hides the marks a working garage collects and grips better than smooth gloss.</span><span class="fin-pick" data-pick>Choose flake</span></span>
 </button>
 <button class="fin" type="button" aria-pressed="false" data-finish="Metallic">
 <!-- TODO — ASK JARROD: confirm he offers metallic, plus a photo of his own metallic job -->
-<span class="fin-img blk"><picture><source type="image/webp" srcset="/assets/img/metallic-concept-800.webp"><img src="/assets/img/metallic-concept-800.jpg" width="800" height="534" alt="Grey and bronze marbled metallic epoxy floor" loading="lazy" decoding="async"></picture></span>
+<span class="fin-img"><picture><source type="image/webp" srcset="/assets/img/metallic-concept-800.webp"><img src="/assets/img/metallic-concept-800.jpg" width="800" height="534" alt="Grey and bronze marbled metallic epoxy floor" loading="lazy" decoding="async"></picture></span>
 <span class="fin-body"><span class="fin-h">Metallic</span><span class="fin-p">A glossy, marbled feature finish. Ask Jarrod at your free look.</span><span class="fin-pick" data-pick>Choose metallic</span></span>
 </button>
 <button class="fin" type="button" aria-pressed="false" data-finish="Solid Colour">
-<span class="fin-img blk"><picture><source type="image/webp" srcset="/assets/img/finish-solid-hd-900.webp"><img src="/assets/img/finish-solid-hd-900.jpg" width="900" height="900" alt="Solid colour coating on an alfresco slab" loading="lazy" decoding="async"></picture></span>
+<span class="fin-img"><picture><source type="image/webp" srcset="/assets/img/finish-solid-hd-900.webp"><img src="/assets/img/finish-solid-hd-900.jpg" width="900" height="900" alt="Solid colour coating on an alfresco slab" loading="lazy" decoding="async"></picture></span>
 <span class="fin-body"><span class="fin-h">Solid Colour</span><span class="fin-p">Reads as one clean surface. Suits an alfresco, a laundry or a shed you want to feel finished.</span><span class="fin-pick" data-pick>Choose solid colour</span></span>
 </button>
 </div>
@@ -384,66 +351,6 @@
 </div>
 </section>
 
-<!-- REVIEWS -->
-<section class="sec" id="about" aria-labelledby="rev-h">
-<div class="wrap">
-<div class="rv-head">
-<h2 id="rev-h">Rated <span class="uline">5 stars<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 10C50 4 120 2 197 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span> on Google.</h2>
-<a class="gbadge" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener"><svg class="g-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg><strong>5.0</strong><span><span class="stars" aria-hidden="true">★★★★★</span><small>Rated on Google</small></span></a>
-</div>
-<div class="rv-list">
-<figure class="rv">
-<div class="rv-top"><span class="rv-av" aria-hidden="true">R</span><figcaption><b>Reece Hawes</b><small>Google review</small></figcaption><svg class="rv-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg></div>
-<span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-<blockquote class="rv-text" data-clamp>&ldquo;Jarrod and his team did a fantastic job at my house very satisfied with the results and how professional he is, would highly recommend this company&rdquo;</blockquote>
-<button class="rv-more" type="button" data-more hidden>Read more</button>
-<!-- TODO: swap for the real photo of this customer's job -->
-<span class="rv-img"><picture><source type="image/webp" srcset="/assets/img/work-flake-brick-hd-900.webp"><img src="/assets/img/work-flake-brick-hd-900.jpg" width="900" height="900" alt="Speckled flake epoxy on a covered alfresco beside a brick house" loading="lazy" decoding="async"></picture></span>
-</figure>
-<figure class="rv">
-<div class="rv-top"><span class="rv-av" aria-hidden="true">M</span><figcaption><b>Miranda</b><small>Google review</small></figcaption><svg class="rv-g" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.4h12.1c-.2 2-1.6 5-4.5 7l-.1.3 6.5 5 .5.1c4.1-3.8 6.6-9.4 6.6-15.8"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-.3.1-6.8 5.2-.1.2C7.9 41 15.4 46 24 46"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4v-.3l-6.9-5.3-.2.1C2.9 17 2 20.4 2 24s.9 7 2.4 10z"/><path fill="#EA4335" d="M24 10.5c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.3 29.9 2 24 2 15.4 2 7.9 7 4.4 14l7.1 5.5c1.8-5.3 6.7-9 12.5-9"/></svg></div>
-<span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-<blockquote class="rv-text" data-clamp>&ldquo;We had an epoxy floor installed in our shed conversion and it&rsquo;s completely transformed the space. It looks great and is super easy to maintain. Jarrod was super helpful and efficient, the finish is high quality. Really happy with the result&rdquo;</blockquote>
-<button class="rv-more" type="button" data-more hidden>Read more</button>
-<!-- TODO: swap for the real photo of this customer's job -->
-<span class="rv-img"><picture><source type="image/webp" srcset="/assets/img/work-flake-garage-hd-900.webp"><img src="/assets/img/work-flake-garage-hd-900.jpg" width="900" height="900" alt="Grey flake epoxy floor in a large converted shed" loading="lazy" decoding="async"></picture></span>
-</figure>
-<div class="rv rv--cta">
-<p class="rv-cta-h">Read every review, or leave one.</p>
-<a class="btn btn--pink btn--full" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Read our Google reviews</a>
-<a class="btn btn--full" href="https://g.page/r/CYImb0MsLRFGEBM/review" rel="noopener">Leave Jarrod a Google review</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- WHERE WE WORK -->
-<section class="sec alt" id="areas" aria-labelledby="areas-h">
-<div class="wrap areas-grid">
-<div>
-<p class="eyebrow">Service areas</p>
-<h2 id="areas-h" class="h-gap">Where we work.</h2>
-<p class="lede">Floor Candy is now based in Perth. Not sure if we cover you? Pop your postcode in and find out in a second.</p>
-<p class="area-k">Core areas</p>
-<ul class="area-tags"><li>Perth metro</li><li>North of the river</li><li>South of the river</li><li>Eastern suburbs &amp; Hills</li></ul>
-<p class="area-k">Selected projects</p>
-<ul class="area-tags area-tags--soft"><li>Mandurah</li><li>Peel</li></ul>
-<p class="area-note">Jobs further out are taken on depending on job size and timing.</p>
-</div>
-<form class="pc" data-pc novalidate>
-<label for="pc-in">Your postcode or suburb</label>
-<div class="pc-row"><input id="pc-in" type="text" autocomplete="postal-code" placeholder="e.g. 6018 or Perth"><button class="btn btn--pink" type="submit">Check my postcode</button></div>
-<p class="pc-out" data-pc-out role="status" aria-live="polite"></p>
-</form>
-</div>
-<div class="wrap map-wrap">
-<div class="map">
-<iframe src="https://maps.google.com/maps?q=Perth%20WA&amp;z=10&amp;output=embed" loading="lazy" title="Map of the Perth metro service area" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-<p class="map-note"><a class="tlink" href="https://www.google.com/maps?cid=5048866325392205442" rel="noopener">Open in Google Maps</a></p>
-</div>
-</section>
-
 <!-- STRAIGHT ANSWERS -->
 <section class="sec" aria-labelledby="faq-h">
 <div class="wrap faq-grid">
@@ -467,44 +374,6 @@
 <a class="btn btn--pink" href="#quote">Get my fixed price <span aria-hidden="true">&rarr;</span></a>
 <a class="btn btn--light" href="tel:0435193845">Call 0435 193 845</a>
 </div>
-<p class="ps"><b>P.S.</b> Quick recap, in case you skipped to the bottom: double garages start from $2,450, new customers save $250 on their first floor, and the on-site quote is free with a fixed written price. Four taps above and it takes under a minute.</p>
-</div>
-</section>
-
-<!-- SIMPLE QUOTE FORM: one page, same Formspree form as the interactive quote -->
-<section class="sec" id="send" aria-labelledby="sq-h">
-<div class="wrap sq-grid">
-<div>
-<p class="eyebrow">Prefer one quick form?</p>
-<h2 id="sq-h" class="h-gap">Send Jarrod the details.</h2>
-<p class="lede">Four boxes and a Send button. Jarrod reads every one and comes back to you to book a free on-site look.</p>
-<p class="sq-call">Rather talk? <a href="tel:0435193845">0435 193 845</a><span>Mon-Fri, 7am-7pm</span></p>
-</div>
-<form class="sqform" id="fc-simple" action="https://formspree.io/f/mrpeeawq" method="POST" novalidate>
-<div class="sq-fields" data-sq-fields>
-<div class="field"><label for="s-name">Name</label><input id="s-name" name="name" type="text" autocomplete="name" required></div>
-<div class="field"><label for="s-mobile">Mobile</label><input id="s-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" required pattern="^\s*(\+?61|0)\s*4(\s*\d){8}\s*$" data-msg="Enter an Australian mobile starting with 04."></div>
-<div class="field"><label for="s-postcode">Postcode</label><input id="s-postcode" name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4" required pattern="^\d{4}$" data-msg="Enter a 4-digit postcode."></div>
-<div class="field field--wide"><label for="s-job">What needs doing?</label><textarea id="s-job" name="job_details" rows="4" required placeholder="e.g. Double garage, oil stains, want a grey flake" data-msg="Tell Jarrod a little about the floor."></textarea></div>
-<input type="hidden" name="_subject" value="New PERTH quote request (quick form): floorcandyepoxy.com">
-<input type="hidden" name="market" value="Perth">
-<input type="hidden" name="form_type" value="simple_quote">
-<input type="hidden" name="page_url" value="">
-<p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
-<p class="err" data-sq-err role="alert"></p>
-<button class="btn btn--pink btn--full" type="submit" data-sq-send>Send <span aria-hidden="true">&rarr;</span></button>
-<p class="sq-fine">Free on-site assessment &middot; Fixed written price &middot; No obligation</p>
-</div>
-<div class="qdone" data-sq-done hidden tabindex="-1">
-<h3 data-sq-h>Thanks &mdash; Jarrod will call or text you to book your free look.</h3>
-<p data-sq-p>Want to be quicker? Send the same details straight to Jarrod.</p>
-<div class="qdone-act">
-<a class="btn btn--pink" data-sq-wa href="https://wa.me/61435193845" rel="noopener">Send my details on WhatsApp</a>
-<a class="btn" data-sq-mail href="mailto:floorcandyepoxy@gmail.com">Email my details instead</a>
-<a class="btn" href="tel:0435193845">Call 0435 193 845</a>
-</div>
-</div>
-</form>
 </div>
 </section>
 
