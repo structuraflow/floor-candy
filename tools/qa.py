@@ -22,7 +22,8 @@ FORBIDDEN = [
 ]
 # Claims we have no evidence for. Guard against regressions.
 UNVERIFIED = [
-    r"\bABN\s*\d", r"licence\s*(?:no\.?|number)?\s*[:#]?\s*\d",
+    r"\bABN\s*(?!48 418 586 020\b)\d",  # 48 418 586 020 verified on ABN Lookup 22 Nov 2026 (Jarrod William Fenton, sole trader)
+    r"licence\s*(?:no\.?|number)?\s*[:#]?\s*\d",
     r"\b\d+\s*[- ]year\s+warranty\b", r"\bfully insured\b",
     r"\b\d+\s*\+?\s*years?\s+(?:of\s+)?experience\b",
     r"\b\d{2,}\s*\+?\s*(?:projects|floors|jobs)\s+(?:completed|installed)",
