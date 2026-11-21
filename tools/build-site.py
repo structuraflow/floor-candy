@@ -24,7 +24,7 @@ from urllib.parse import quote_plus
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.floorcandyepoxy.com"
-ASSET_V = 18  # bump on any CSS/JS change or returning visitors keep the old file
+ASSET_V = 19  # bump on any CSS/JS change or returning visitors keep the old file
 
 # --------------------------------------------------------------------------
 # VERIFIED BUSINESS FACTS
@@ -88,7 +88,7 @@ BIZ = {
 # Pending confirmation from Jarrod. None = not rendered anywhere.
 # Fill a value in and it appears in the trust strip, footer and schema.
 CREDENTIALS = {
-    "abn": None,
+    "abn": "48 418 586 020",  # verified ABN Lookup 22 Nov 2026: Jarrod William Fenton, sole trader
     "licence_number": None,
     "public_liability": None,
     "insurer": None,
@@ -139,7 +139,7 @@ JOB_FACTS = {
 # --------------------------------------------------------------------------
 HEADLINES = {
     "a": "A garage floor you’ll actually want to show off.",
-    "b": "Mid North Coast garage floors from $2,450. New customers save $250.",
+    "b": "Perth garage floors from $2,450. New customers save $250.",
     "c": "Sick of a cracked, oil-stained garage floor?",
 }
 
@@ -383,9 +383,9 @@ SERVICES = [
         "nav": "Premium flake",
         "short": "Premium flake flooring",
         "h1": "Premium flake flooring",
-        "title": "Premium Flake Flooring Taree & Forster | Floor Candy",
-        "meta": "Premium flake epoxy flooring for garages and homes across Taree, "
-                "Forster and the Mid North Coast. Double garages from $2,450*. "
+        "title": "Premium Flake Flooring Perth | Floor Candy",
+        "meta": "Premium flake epoxy flooring for garages and homes across Perth "
+                "metro. Double garages from $2,450*. "
                 "Free on-site quote.",
         "lede": "The finish most people picture when they think of a coated garage "
                 "floor, a hard-wearing base, flake broadcast through it, and a "
@@ -437,9 +437,9 @@ SERVICES = [
         "nav": "Garage floors",
         "short": "Garage epoxy flooring",
         "h1": "Garage epoxy flooring",
-        "title": "Garage Epoxy Flooring Taree & Forster | Floor Candy",
-        "meta": "Epoxy garage floor coatings across Taree, Forster, Harrington and the "
-                "Mid North Coast. Double garages from $2,450*. Mechanically prepared "
+        "title": "Garage Epoxy Flooring Perth | Floor Candy",
+        "meta": "Epoxy garage floor coatings across Perth, north and south of the "
+                "river. Double garages from $2,450*. Mechanically prepared "
                 "concrete, fixed written price.",
         "lede": "Garage floors are the bulk of what we do, single, double and "
                 "oversized, in new builds and in slabs that have been worked on for "
@@ -483,9 +483,9 @@ SERVICES = [
         "nav": "Residential",
         "short": "Residential epoxy flooring",
         "h1": "Residential epoxy flooring",
-        "title": "Residential Epoxy Flooring Taree & Forster | Floor Candy",
+        "title": "Residential Epoxy Flooring Perth | Floor Candy",
         "meta": "Epoxy and concrete floor coatings for interiors, sheds and converted "
-                "spaces across the Mid North Coast and NSW. Free on-site assessment, "
+                "spaces across Perth metro. Free on-site assessment, "
                 "fixed written price.",
         "lede": "Interiors, sheds, studios and converted spaces, anywhere the concrete "
                 "is the floor you are keeping rather than something you cover up.",
@@ -525,17 +525,17 @@ SERVICES = [
         "nav": "Outdoor",
         "short": "Outdoor epoxy flooring",
         "h1": "Outdoor concrete coatings",
-        "title": "Outdoor Concrete Coatings Taree & Forster | Floor Candy",
+        "title": "Outdoor Concrete Coatings Perth | Floor Candy",
         "meta": "Driveways, paths, patios and alfresco slabs sealed and coated across "
-                "Taree, Forster and the Mid North Coast. Free on-site assessment.",
+                "Perth metro. Free on-site assessment.",
         "lede": "Driveways, paths, patios and alfresco slabs, the concrete that takes "
                 "the weather and usually looks it.",
         "img": "driveway",
         "intent": "outdoor concrete coating",
         "body": [
-            ("Coastal concrete has a harder time",
-             ["<p>Outdoor slabs on this coast deal with salt air, hard sun and heavy "
-              "rain in the same year. Untreated concrete is porous, so it takes up "
+            ("Perth concrete has a harder time",
+             ["<p>Outdoor slabs in Perth deal with hard summer sun, heat and heavy "
+              "winter rain in the same year. Untreated concrete is porous, so it takes up "
               "water and whatever is dissolved in it, and that is what produces the "
               "staining and surface breakdown people usually call us about.</p>",
               "<p>Sealing closes the surface. It also makes the slab far easier to "
@@ -564,9 +564,9 @@ SERVICES = [
         "nav": "Solid colour",
         "short": "Solid colour epoxy",
         "h1": "Solid colour epoxy flooring",
-        "title": "Solid Colour Epoxy Flooring Taree & Forster | Floor Candy",
+        "title": "Solid Colour Epoxy Flooring Perth | Floor Candy",
         "meta": "Solid colour epoxy floors for garages, sheds and alfresco slabs across "
-                "the Mid North Coast and NSW. Free on-site assessment, fixed written price.",
+                "Perth metro. Free on-site assessment, fixed written price.",
         "lede": "A single, even colour with nothing broadcast through it. Cleaner and "
                 "more uniform than flake, and less forgiving, which is worth knowing "
                 "before you choose it.",
@@ -596,9 +596,9 @@ SERVICES = [
         "nav": "Preparation & repair",
         "short": "Concrete preparation & crack repair",
         "h1": "Concrete preparation & crack repair",
-        "title": "Concrete Preparation & Crack Repair Taree & Forster | Floor Candy",
+        "title": "Concrete Preparation & Crack Repair Perth | Floor Candy",
         "meta": "Mechanical concrete preparation and crack repair before coating. The "
-                "stage that decides whether an epoxy floor lasts. Mid North Coast & NSW.",
+                "stage that decides whether an epoxy floor lasts. Perth metro.",
         "lede": "The part of the job nobody photographs, and the part that decides "
                 "whether the floor is still stuck down in ten years.",
         "img": "prep_grind",
@@ -1060,11 +1060,10 @@ for _l in LOCATIONS:
     _l["faqs"] = _l["faqs"] + _e["faqs"]
 
 
-AREA_LIST = ["Taree", "Forster", "Tuncurry", "Harrington", "Blueys Beach",
-             "Pacific Palms", "Newcastle", "Hunter Region"]
-AREA_LINKS = {"Taree": "taree", "Forster": "forster", "Harrington": "harrington",
-              "Blueys Beach": "blueys-beach", "Pacific Palms": "pacific-palms",
-              "Newcastle": "newcastle"}
+AREA_LIST = ["Perth metro", "North of the river", "South of the river",
+             "Eastern suburbs & Hills", "Mandurah & Peel (selected)"]
+AREA_LINKS = {}
+LEDE_PERTH = "Perth metro is our core area: north and south of the river, the eastern suburbs and the Hills. Mandurah and Peel are selected projects, decided by job size and timing."
 
 # --------------------------------------------------------------------------
 # GUIDES
@@ -1122,9 +1121,9 @@ GUIDES = [
               "options to the on-site quote so you can see them in your own light, "
               "screens are not a reliable guide to a floor.</p>"]),
             ("5. Where you are",
-             ["<p>Taree, Forster, Tuncurry, Harrington, Blueys Beach and Pacific Palms "
-              "are our core areas and are priced as such. Travel-heavy work, including "
-              "Newcastle and the Hunter, has to be commercially viable and can cost more. "
+             ["<p>Perth metro, north and south of the river, the eastern suburbs and "
+              "the Hills, is our core area and is priced as such. Travel-heavy work, "
+              "including Mandurah and Peel, has to be commercially viable and can cost more. "
               "You get the exact figure in writing after the on-site look.</p>"]),
             ("What a fair quote looks like",
              ["<p>It is written down. It follows someone actually looking at your slab. "
@@ -1344,10 +1343,9 @@ HOME_FAQS = [
      "are available too. We bring the options to the on-site quote so you can see them "
      "in your own space and light."),
     ("What areas do you service?",
-     "Taree, Forster, Tuncurry, Harrington, Blueys Beach, Pacific Palms and the "
-     "Mid North Coast are our core areas. We take selected projects in Newcastle and "
-     "the Hunter, decided by job size and timing. Not sure if we cover you? Send your "
-     "postcode."),
+     "Perth metro: north and south of the river, the eastern suburbs and the Hills. "
+     "We take selected projects in Mandurah and Peel, decided by job size and timing. "
+     "Not sure if we cover you? Send your postcode."),
     ("Can I send photos for a quote?",
      "Please do. Text them to 0435 193 845 or attach them to an email. Photos help us understand "
      "the existing floor and the preparation required, and they make the on-site visit "
@@ -1518,10 +1516,10 @@ def quote_form(form_id="quote", heading="Get my free quote"):
         % (esc(val), " required" if i == 0 else "", icon(ic), esc(lab))
         for i, (val, lab, ic) in enumerate(FLOOR_TYPES))
     towns = "".join('<option value="%s">' % esc(t) for t in
-                    ["Taree", "Forster", "Tuncurry", "Harrington", "Old Bar", "Wingham",
-                     "Blueys Beach", "Pacific Palms", "Hallidays Point", "Diamond Beach",
-                     "Tallwoods Village", "Coopernook", "Krambach", "Gloucester",
-                     "Newcastle", "Port Macquarie"])
+                    ["Perth", "Fremantle", "Joondalup", "Wanneroo", "Scarborough", "Stirling",
+                     "Morley", "Midland", "Ellenbrook", "Kalamunda", "Cannington",
+                     "Canning Vale", "Armadale", "Byford", "Cockburn", "Baldivis",
+                     "Rockingham", "Kwinana", "Mandurah"])
     heard = "".join('<option value="%s">%s</option>' % (esc(h), esc(h)) for h in HEARD)
     ballpark = ("Ballpark: double garages start from <strong>$%s</strong>, before your $%d "
                 "new-customer saving. Your exact price comes after a free on-site look."
@@ -1639,7 +1637,7 @@ def faq_schema(items):
 
 
 MAP_EMBED = """<div class="map-frame">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.609637146134!2d152.50482557524393!3d-32.052756027302344!2m3!1f0!2f0!3f0!3m2!1i1024!1i768!4f13.1!3m3!1m2!1s0x6b7435ea57496b4d%%3A0x46112d2c436f2682!2sFloor%%20Candy!5e0!3m2!1sen!2sau!4v1788943461550!5m2!1sen!2sau" loading="lazy" title="Floor Candy on Google Maps" width="100%%" height="300" style="border:0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<iframe src="https://maps.google.com/maps?q=Perth%%20WA&amp;z=10&amp;output=embed" loading="lazy" title="Map of the Perth metro service area" width="100%%" height="300" style="border:0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 <p class="small muted mt-3"><a class="tlink" href="%s" rel="noopener">Get directions / see reviews</a> &middot; Floor Candy is a mobile operation with no public showroom, we come to the floor.</p>""" % GOOGLE_REVIEWS_URL
 
@@ -1668,7 +1666,7 @@ def areas_block(current=None, dark=False, heading="Where we work", num=None,
     return """<section class="section %s" aria-labelledby="areas-h">
 <div class="wrap">
 <div class="sec-head"><div>%s<h2 id="areas-h">%s</h2></div>
-<div><p class="lede">Taree, Forster, Tuncurry, Harrington, Blueys Beach, Pacific Palms and the Mid North Coast are our core areas. Newcastle and the Hunter are selected projects, decided by job size and timing.</p></div></div>
+<div><p class="lede">Perth metro is our core area: north and south of the river, the eastern suburbs and the Hills. Mandurah and Peel are selected projects, decided by job size and timing.</p></div></div>
 <ul class="areas">%s</ul>
 <p class="small muted mt-3">Not sure if we cover your area? Send us your postcode and we&rsquo;ll let you know. <a class="tlink" href="/contact">Get in touch</a>.</p>
 %s
@@ -1830,7 +1828,7 @@ def header(active):
 </nav>
 <div class="drawer-foot">
 <a class="drawer-wa" href="%s" rel="noopener">%s Message us on WhatsApp</a>
-<p class="drawer-meta">%s &middot; mobile service, no showroom<br>Taree &middot; Forster &middot; Harrington &middot; Blueys Beach &middot; Pacific Palms</p>
+<p class="drawer-meta">%s &middot; mobile service, no showroom<br>Perth metro &middot; north &amp; south of the river &middot; the Hills</p>
 </div>
 </div>
 </div>
@@ -1869,7 +1867,7 @@ def footer():
 <div class="footer-brand">
 <h2 class="visually-hidden">Floor Candy</h2>
 <picture><source type="image/webp" srcset="/assets/logo-full.webp"><img class="footer-logo" src="/assets/logo-full.png" width="460" height="384" alt="Floor Candy epoxy flooring" loading="lazy" decoding="async"></picture>
-<p class="small">Epoxy and concrete floor coatings across Taree, Forster, Harrington, Blueys Beach and the Mid North Coast.</p>
+<p class="small">Epoxy and concrete floor coatings across Perth, Western Australia.</p>
 %s
 </div>
 <div class="footer-links">
@@ -1940,9 +1938,8 @@ def business_schema():
         "@id": SITE + "/#business",
         "name": BIZ["name"],
         "description": ("Epoxy flooring, flake flooring, concrete coatings and mechanical "
-                        "concrete preparation servicing Taree, Forster, Harrington, Blueys "
-                        "Beach and the Mid North Coast, with selected projects in Newcastle "
-                        "and the Hunter."),
+                        "concrete preparation across the Perth metropolitan area, Western "
+                        "Australia."),
         "url": SITE + "/",
         "telephone": "+" + BIZ["phone_href"].lstrip("+"),
         "email": BIZ["email"],
@@ -1953,11 +1950,7 @@ def business_schema():
                   + [u for u in SAME_AS_PENDING.values() if u],
         "founder": {"@id": OWNER_ID},
         "currenciesAccepted": "AUD",
-        "areaServed": [{"@type": "City", "name": n, "containedInPlace": NSW_PLACE}
-                       for n in ["Taree", "Forster", "Tuncurry", "Harrington", "Blueys Beach",
-                                 "Pacific Palms", "Newcastle"]]
-        + [{"@type": "AdministrativeArea", "name": n, "containedInPlace": NSW_PLACE}
-           for n in ["Mid North Coast", "Hunter Region"]],
+        "areaServed": PERTH_AREAS_SCHEMA,
         "openingHoursSpecification": [{
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -1973,8 +1966,13 @@ def business_schema():
     return node
 
 
-NSW_PLACE = {"@type": "State", "name": "New South Wales",
+WA_PLACE = {"@type": "State", "name": "Western Australia",
              "containedInPlace": {"@type": "Country", "name": "Australia"}}
+
+
+PERTH_AREAS_SCHEMA = [{"@type": "City", "name": "Perth", "containedInPlace": WA_PLACE},
+                      {"@type": "AdministrativeArea", "name": "Perth metropolitan area",
+                       "containedInPlace": WA_PLACE}]
 
 
 def owner_name():
@@ -2143,9 +2141,9 @@ HOME_FAQS_LP = [
      "The floor has to be clear to be ground and coated. If that is a problem, "
      "mention it when you book and we will work it out with you."),
     ("Which areas do you cover?",
-     "Taree, Forster, Tuncurry, Harrington, Blueys Beach, Pacific Palms and the "
-     "Mid North Coast are our core areas. We take selected projects in Newcastle and "
-     "the Hunter, depending on job size and timing. Not sure? Send your postcode."),
+     "Perth metro: north and south of the river, the eastern suburbs and the Hills. "
+     "We take selected projects in Mandurah and Peel, decided by job size and timing. "
+     "Not sure if we cover you? Send your postcode."),
     ("Can I choose the colour?",
      "Yes. Flake comes in blends of greys, creams, tans and mixes, and solid colours "
      "are available too. We bring real samples to the on-site quote so you pick in "
@@ -2201,7 +2199,7 @@ def build_home():
     body = """<section class="hero hero--lp">
 <div class="wrap hero-grid">
 <div class="hero-copy">
-<p class="eyebrow">Garage, patio &amp; shed floors &middot; Taree, Forster &amp; the Mid North Coast</p>
+<p class="eyebrow">Garage, patio &amp; shed floors &middot; Perth</p>
 <h1 id="hero-h1">%(h1)s</h1>
 %(swap)s
 <p class="lede">Ground back, cracks repaired, flake broadcast through a tough base coat and sealed under a clear topcoat.%(hero_days)s You deal directly with Jarrod, the owner.</p>
@@ -2399,9 +2397,8 @@ def build_home():
         "closer": closer("Get a floor worth showing off", ps=True),
     }
 
-    page("", "Epoxy Garage Floors Taree, Forster & Mid North Coast | Floor Candy",
-         "Flake epoxy garage, patio and shed floors across Taree, Forster and the Mid North "
-         "Coast. Double garages from $2,450, new customers save $250. Free on-site quote.",
+    page("", "Epoxy Garage Floors Perth | Floor Candy",
+         "Flake epoxy garage, patio and shed floors across Perth metro. Double garages from $2,450, new customers save $250. Free on-site quote.",
          body,
          schemas=[business_schema(),
                   {"@context": "https://schema.org", "@type": "WebSite",
@@ -2543,13 +2540,17 @@ def build_service(s):
         "@context": "https://schema.org", "@type": "Service",
         "name": s["short"], "serviceType": s["short"],
         "provider": {"@id": SITE + "/#business"},
-        "areaServed": [{"@type": "City", "name": n, "containedInPlace": NSW_PLACE}
-                       for n in ["Taree", "Forster", "Harrington", "Blueys Beach", "Pacific Palms"]],
+        "areaServed": PERTH_AREAS_SCHEMA,
         "url": SITE + "/" + s["slug"],
         "description": s["meta"],
     }
     page(s["slug"], s["title"], s["meta"], body,
          schemas=[bc, svc_schema, faq_schema(s["faqs"])], active="")
+
+
+RETIRED_TOWNS = [l["slug"] for l in LOCATIONS]  # NSW town pages, retired 22 Nov 2026 (move to Perth)
+LOCATIONS = []
+LOCATION_BY_SLUG = {}
 
 
 def build_location(l):
@@ -2677,7 +2678,7 @@ def build_location(l):
         "serviceType": "Epoxy flooring",
         "provider": {"@id": SITE + "/#business"},
         "areaServed": {"@type": "City", "name": l["name"],
-                       "containedInPlace": NSW_PLACE},
+                       "containedInPlace": WA_PLACE},
         "url": SITE + "/service-areas/" + l["slug"],
         "description": l["meta"],
     }
@@ -2687,18 +2688,21 @@ def build_location(l):
 
 def build_areas_index():
     nav, bc = crumbs([("/", "Home"), (None, "Service areas")])
-    cards = "".join("""<a class="svc svc--plain" href="/service-areas/%s">
+    regions = [
+        ("North of the river", "From the city out through the northern suburbs and the coast."),
+        ("South of the river", "From South Perth and Fremantle down through the southern suburbs."),
+        ("Eastern suburbs & Hills", "The eastern suburbs, the Swan Valley side and the Hills."),
+        ("Mandurah & Peel", "Selected projects, decided by job size and timing."),
+    ]
+    cards = "".join("""<div class="svc svc--plain">
 <span class="svc-n">%02d</span>
-<span><h3>%s</h3><p>%s</p></span>
-<span class="svc-go" aria-hidden="true">&rarr;</span></a>"""
-                    % (l["slug"], i, esc(l["name"]), esc(l["lede"]))
-                    for i, l in enumerate(LOCATIONS, 1))
+<span><h3>%s</h3><p>%s</p></span></div>""" % (i, esc(n), esc(d)) for i, (n, d) in enumerate(regions, 1))
     body = """%s
 <section class="page-hero">
 <div class="wrap">
 <p class="eyebrow">Service areas</p>
-<h1>Where Floor Candy works</h1>
-<p class="lede">Taree, Forster, Tuncurry, Harrington, Blueys Beach, Pacific Palms and the Mid North Coast are our core areas. Newcastle and the Hunter are selected projects, decided by job size and timing.</p>
+<h1>Epoxy flooring across Perth</h1>
+<p class="lede">%s</p>
 <div class="btn-row"><a class="btn btn--primary" href="/contact">Get a free quote</a>
 <a class="btn btn--ghost" href="tel:%s">Call %s</a></div>
 </div>
@@ -2706,8 +2710,8 @@ def build_areas_index():
 
 <section class="section">
 <div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Towns</p><h2>Pick your area</h2></div>
-<div><p class="lede">Each page covers what we actually see on slabs in that area, they&rsquo;re not the same page with the name swapped.</p></div></div>
+<div class="sec-head"><div><p class="eyebrow">Regions</p><h2>Where we come to</h2></div>
+<div><p class="lede">Floor Candy is a mobile operation. We come to the floor, look at the slab and price it from what is actually there.</p></div></div>
 <div class="svc-list">%s</div>
 </div>
 </section>
@@ -2715,22 +2719,20 @@ def build_areas_index():
 <section class="section band--paper2">
 <div class="wrap">
 <div class="prose">
-<h2>Somewhere else?</h2>
-<p>The list above is where we work regularly, not a boundary fence. Floor Candy is a mobile operation with no public showroom, we come to the floor.</p>
-<p>If you&rsquo;re outside these towns, send us your postcode and a couple of photos. We&rsquo;ll tell you honestly whether the job works. Travel-heavy jobs need to be commercially viable and can cost more, so larger floors travel better than small ones.</p>
+<h2>Somewhere else in WA?</h2>
+<p>The regions above are where we work regularly, not a boundary fence. Send us your postcode and a couple of photos and we&rsquo;ll tell you honestly whether the job works. Travel-heavy jobs need to be commercially viable and can cost more, so larger floors travel better than small ones.</p>
 </div>
 </div>
 </section>
 
 %s
 %s
-""" % (nav, BIZ["phone_href"], BIZ["phone_display"], cards,
+""" % (nav, LEDE_PERTH, BIZ["phone_href"], BIZ["phone_display"], cards,
        areas_block(dark=True, show_map=True), closer())
     page("service-areas",
-         "Service Areas | Epoxy Flooring Mid North Coast | Floor Candy",
-         "Where Floor Candy works: Taree, Forster, Tuncurry, Harrington, Blueys Beach, "
-         "Pacific Palms and the Mid North Coast, plus selected projects in Newcastle and "
-         "the Hunter.",
+         "Service Areas | Epoxy Flooring Perth | Floor Candy",
+         "Where Floor Candy works: Perth metro, north and south of the river, the eastern "
+         "suburbs and the Hills, plus selected projects in Mandurah and Peel.",
          body, schemas=[bc], active="/service-areas")
 
 
@@ -2838,7 +2840,7 @@ def build_projects():
 <div class="wrap">
 <p class="eyebrow">Projects</p>
 <h1>Real Floor Candy work</h1>
-<p class="lede">Every photograph on this page is a floor we finished. No stock imagery, no competitor work, and nothing generated.</p>
+<p class="lede">Every photograph on this page is a floor we finished. No stock imagery and no competitor work. These jobs were done in NSW before Jarrod moved to Perth; Perth projects will be added as they are finished.</p>
 <div class="btn-row"><a class="btn btn--primary" href="/contact">Get a free quote</a></div>
 </div>
 </section>
@@ -2931,7 +2933,7 @@ def build_about():
 <div class="split-media">%s</div>
 <div class="split-body">
 <h2>A small operation, on purpose</h2>
-<p>Floor Candy coats concrete on the Mid North Coast, garages, driveways, alfresco slabs and interiors. It is owner-led, and Jarrod is on the tools rather than running a sales team.</p>
+<p>Floor Candy coats concrete across Perth, garages, driveways, alfresco slabs and interiors. It is owner-led, and Jarrod is on the tools rather than running a sales team.</p>
 <p>We use subcontractors on some jobs. We mention that because a lot of flooring sites promise the opposite and it is rarely true. What we will say is that the standard doesn&rsquo;t change with who is holding the grinder.</p>
 <p>We are a mobile operation with no public showroom. We come to the floor, look at the slab, and price it from what is actually there.</p>
 </div>
@@ -2946,7 +2948,7 @@ def build_about():
 <div class="steps">
 <div class="step"><span class="step-n">01</span><div>%s</div></div>
 <div class="step"><span class="step-n">02</span><div><h3>We don&rsquo;t promise cracks will disappear</h3><p>Cracks are repaired where appropriate. A repair stops the crack being an open path through the coating; it does not change what the slab is doing. Some stay visible, and we say which.</p></div></div>
-<div class="step"><span class="step-n">03</span><div><h3>Three reviews, shown in full</h3><p>We have three Google reviews. Competitors in Newcastle have hundreds. Ours are all on this site, complete, including the one Google truncates.</p></div></div>
+<div class="step"><span class="step-n">03</span><div><h3>Three reviews, shown in full</h3><p>Our Google reviews come from jobs Jarrod did in NSW before moving to Perth. Ours are all on this site, complete, including the one Google truncates.</p></div></div>
 <div class="step"><span class="step-n">04</span><div><h3>We quote off the slab, not the photo</h3><p>Photos help and we ask for them. They don&rsquo;t replace standing on the floor, and a quote given without that is a guess dressed up as a price.</p></div></div>
 </div>
 </div>
@@ -2975,9 +2977,9 @@ def build_about():
        cred_block,
        picture("polished", "(min-width:900px) 460px, 90vw"),
        reviews_block(), areas_block(), closer())
-    page("about", "About Floor Candy | Owner-Led Epoxy Flooring, Mid North Coast",
-         "Floor Candy is an owner-led epoxy and concrete flooring business on the Mid North "
-         "Coast. What we claim, what we don't, and why preparation decides the result.",
+    page("about", "About Floor Candy | Owner-Led Epoxy Flooring, Perth",
+         "Floor Candy is an owner-led epoxy and concrete flooring business in Perth. "
+         "What we claim, what we don't, and why preparation decides the result.",
          body, schemas=[bc, person_schema()], active="/about")
 
 
@@ -3001,7 +3003,7 @@ def build_contact():
 <ul class="quote-points mt-3">
 <li><span class="qp-n">&#9742;</span><div><h3><a href="tel:%s">%s</a></h3><p>%s. If we&rsquo;re on a floor, leave a message and we&rsquo;ll call back.</p></div></li>
 <li><span class="qp-n">&#9993;</span><div><h3><a href="mailto:%s">%s</a></h3><p>Attach photos of the floor and your suburb, and we&rsquo;ll come back to you.</p></div></li>
-<li><span class="qp-n">&#9873;</span><div><h3>Mobile service</h3><p>Floor Candy has no public showroom. We come to the floor across Taree, Forster, Harrington, Blueys Beach, Pacific Palms and the Mid North Coast.</p></div></li>
+<li><span class="qp-n">&#9873;</span><div><h3>Mobile service</h3><p>Floor Candy has no public showroom. We come to the floor across Perth metro, north and south of the river and the Hills.</p></div></li>
 <li><span class="qp-n">$</span><div><h3>Double garages from $%s<sup>*</sup></h3><p>%s New customers save $%d on their first floor.</p></div></li>
 </ul>
 </div>
@@ -3027,9 +3029,9 @@ def build_contact():
        "{:,}".format(PRICING["double_garage_from"]), esc(PRICING["qualifier"]), OFFER["saving"],
        GOOGLE_WRITE_REVIEW_URL,
        areas_block(dark=True, show_map=True), closer("Send the floor over"))
-    page("contact", "Contact Floor Candy | Free Epoxy Flooring Quote, Mid North Coast",
+    page("contact", "Contact Floor Candy | Free Epoxy Flooring Quote, Perth",
          "Get a free on-site floor assessment and a fixed written price. Call 0435 193 845 "
-         "or send photos of your floor. Taree, Forster and the Mid North Coast.",
+         "or send photos of your floor. Perth metro.",
          body, schemas=[bc,
                         {"@context": "https://schema.org", "@type": "ContactPage",
                          "url": SITE + "/contact",
@@ -3348,7 +3350,10 @@ def build_vercel():
             {"source": "/floor-assessment.html", "destination": "/contact", "permanent": True},
             {"source": "/process", "destination": "/concrete-preparation-crack-repair", "permanent": True},
             {"source": "/process.html", "destination": "/concrete-preparation-crack-repair", "permanent": True},
-            {"source": "/lp/garage-floors-newcastle", "destination": "/service-areas/newcastle", "permanent": True},
+            {"source": "/lp/garage-floors-newcastle", "destination": "/service-areas", "permanent": True},
+            {"source": "/perth", "destination": "/", "permanent": True},
+        ] + [{"source": "/service-areas/" + t, "destination": "/service-areas", "permanent": True}
+             for t in RETIRED_TOWNS] + [
             {"source": "/services", "destination": "/premium-flake-flooring", "permanent": True},
             {"source": "/services.html", "destination": "/premium-flake-flooring", "permanent": True},
             {"source": "/gallery", "destination": "/projects", "permanent": True},

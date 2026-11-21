@@ -35,7 +35,42 @@
     },
     {
       "source": "/lp/garage-floors-newcastle",
-      "destination": "/service-areas/newcastle",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/perth",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/taree",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/forster",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/harrington",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/blueys-beach",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/pacific-palms",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/newcastle",
+      "destination": "/service-areas",
       "permanent": true
     },
     {
