@@ -889,3 +889,48 @@ h1, h2 { font-weight: 800; letter-spacing: -0.045em; }
     linear-gradient(180deg, rgba(12, 11, 12, .55) 0%, rgba(12, 11, 12, .45) 30%, rgba(12, 11, 12, .85) 60%, rgba(12, 11, 12, .97) 100%); }
   .work-lead .cmp { aspect-ratio: 4 / 3; }
 }
+
+/* hero v3: less text so the car reads; phone pins text to the bottom with the Ferrari above */
+.hero h1 { margin-top: 22px; }
+@media (max-width: 899px) {
+  .hero { min-height: calc(100svh - var(--header-h) - var(--mobar-h, 72px)); align-items: flex-end; padding-top: 0; }
+  .hero-bg img { object-position: 70% 0%; }
+  .hero-bg::after { background:
+    linear-gradient(180deg, rgba(12, 11, 12, .15) 0%, rgba(12, 11, 12, 0) 25%, rgba(12, 11, 12, .55) 48%, rgba(12, 11, 12, .9) 62%, rgba(12, 11, 12, .97) 100%); }
+  .hero-ticks { display: none; }
+  .hero-kick { margin-bottom: 0; }
+}
+@media (max-width: 899px) {
+  .hero-bg img { transform: translateY(-13%); }
+  .hero-kick .now { display: none; }
+  .hero h1 { margin-top: 14px; }
+}
+/* phone hero: photo first, headline only (sticky bar below carries Call + Get my fixed price) */
+@media (max-width: 899px) {
+  .hero-kick, .hero-price, .hero-cta, .hero-ticks { display: none; }
+  .hero { padding-bottom: 28px; }
+  .hero h1 { margin-top: 0; }
+  .hero-bg img { transform: none; object-position: 70% 0%; }
+  .hero-bg::after { background:
+    linear-gradient(180deg, rgba(12, 11, 12, 0) 0%, rgba(12, 11, 12, 0) 55%, rgba(12, 11, 12, .75) 72%, rgba(12, 11, 12, .95) 100%); }
+}
+/* phone hero v4: whole Ferrari photo shown uncovered, headline sits underneath it */
+@media (max-width: 899px) {
+  .hero { display: block; min-height: 0; padding: 0 0 32px; }
+  .hero-bg { position: relative; inset: auto; z-index: 0; display: block; }
+  .hero-bg img { height: auto; aspect-ratio: 752 / 1344; object-fit: cover; transform: none; }
+  .hero-bg::after { background: linear-gradient(180deg, rgba(12, 11, 12, 0) 88%, rgba(12, 11, 12, 1) 100%); }
+  .hero > .wrap { margin-top: 8px; }
+  .hero h1 .slab { display: none; }
+}
+@media (max-width: 899px) {
+  .hero-kick { display: flex; margin-bottom: 14px; }
+  .hero-kick .now { display: none; }
+}
+@media (max-width: 899px) {
+  .hero-bg img { aspect-ratio: 752 / 900; object-position: 70% 34%; }
+  .hero > .wrap { margin-top: 4px; }
+}
+@media (max-width: 899px) and (max-height: 780px) {
+  .hero-bg img { aspect-ratio: 752 / 790; object-position: 70% 30%; }
+}
