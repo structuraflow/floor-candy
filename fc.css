@@ -896,8 +896,7 @@ h1, h2 { font-weight: 800; letter-spacing: -0.045em; }
    car photo as a dimmed full-screen background, text from the top, quote + call buttons, ticks */
 @media (max-width: 899px) {
   .hero { min-height: calc(100svh - var(--header-h, 72px)); align-items: flex-start; padding: 32px 0 36px; }
-  .hero-bg img { object-position: 72% 50%; transform: none; }
-  .hero-bg::after { background: linear-gradient(180deg, rgba(12, 11, 12, .86) 0%, rgba(12, 11, 12, .7) 50%, rgba(12, 11, 12, .9) 100%); }
+  .hero-bg img { object-position: 78% 50%; transform: none; }
   .hero-kick { margin-bottom: 16px; }
   .hero-kick .now { display: none; }
   .hero h1 { margin-top: 0; }
@@ -906,18 +905,42 @@ h1, h2 { font-weight: 800; letter-spacing: -0.045em; }
   .hero-ticks { margin-top: 22px; padding-top: 16px; }
 }
 
-/* recent floors photo grid (owner job photos, 26 Nov 2026) */
-.gal { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.75rem, .5rem + 1vw, 1.5rem); margin-top: clamp(1.5rem, 1rem + 2vw, 3rem); }
-.gal figure { margin: 0; }
-.gal img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
-.gal figcaption { padding-top: 10px; margin-top: 10px; border-top: 2px solid var(--line); font-size: var(--fs-sm); color: var(--muted); }
-@media (max-width: 799px) { .gal { grid-template-columns: 1fr 1fr; } }
+/* recent floors photo carousel (26 Nov 2026): scroll-snap track, arrows on top, swipe on phones */
+.car { margin-top: clamp(1.75rem, 1rem + 2.5vw, 3.25rem); }
+.car-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.car-h { font-family: var(--display); font-weight: 700; font-size: clamp(1.125rem, 1rem + .4vw, 1.375rem); }
+.car-nav { display: flex; gap: 8px; }
+.car-btn { width: 44px; height: 44px; display: grid; place-items: center; background: transparent; color: var(--ink); border: 1px solid var(--line); cursor: pointer; }
+.car-btn svg { width: 18px; height: 18px; }
+.car-btn:hover { border-color: var(--pink); color: var(--pink); }
+.car-btn:disabled { opacity: .35; cursor: default; border-color: var(--line); color: var(--ink); }
+.car-track { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 2 * 20px) / 3); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-track:focus-visible { outline: 2px solid var(--pink); outline-offset: 4px; }
+.car-item { scroll-snap-align: start; }
+.car-item figure { margin: 0; }
+.car-item picture { display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--surface); }
+.car-item img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.car-item img.crop-corners { transform: scale(1.07); }
+.car-item img.pos-bottom { object-position: 50% 80%; }
+.car-item figcaption { padding-top: 10px; font-size: var(--fs-sm); color: var(--muted); }
+@media (max-width: 999px) { .car-track { grid-auto-columns: calc((100% - 16px) / 2); gap: 16px; } }
+@media (max-width: 599px) { .car-track { grid-auto-columns: 82%; gap: 12px; margin-right: calc(-1 * var(--gutter, 20px)); padding-right: var(--gutter, 20px); scroll-padding-left: 0; } }
+@media (prefers-reduced-motion: reduce) { .car-track { scroll-behavior: auto; } }
 
-/* cleaner pass (26 Nov 2026): one quiet card style, no pink glows, pink kept for buttons and accents */
-.btn--pink { box-shadow: none; }
-.qform { box-shadow: none; }
-.pcard { background: var(--surface); border: 1px solid rgba(249, 1, 159, .4); }
-.rv--cta { background: var(--surface); border-color: var(--line); }
-.hero-media .cmp { box-shadow: 0 0 0 1px rgba(255, 255, 255, .08); }
+/* reviews eyebrow spacing (26 Nov 2026); pink glows kept, Zach preferred the original colour treatment */
 .rv-head .eyebrow { margin-bottom: 10px; }
+
+/* phone hero v7 (26 Nov 2026): headline on plain dark, then the Ferrari as its own photo strip, then the buttons.
+   Same image file as .hero-bg so the browser fetches it once. */
+.hero-car { display: none; }
+@media (max-width: 899px) {
+  .hero { min-height: 0; padding: 28px 0 32px; }
+  .hero-bg { display: none; }
+  .hero-car { display: block; order: 6; justify-self: start; width: calc(100% + 2 * var(--gutter)); max-width: none; margin: 22px 0 0 calc(-1 * var(--gutter)); }
+  .hero-price { order: 5; }
+  .hero-car img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 80% 38%; }
+  .hero-cta { order: 7; margin-top: 22px; }
+  .hero-ticks { order: 8; }
+}
 

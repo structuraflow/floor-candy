@@ -308,3 +308,24 @@ var FC_AREAS = {
 
   show(1, false);
 })();
+
+/* recent floors carousel: arrows scroll one card; disabled at either end */
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll("[data-car]"), function (car) {
+    var track = car.querySelector(".car-track");
+    var prev = car.querySelector("[data-car-prev]");
+    var next = car.querySelector("[data-car-next]");
+    if (!track || !prev || !next) return;
+    function step() { var it = track.querySelector(".car-item"); return it ? it.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth; }
+    function sync() {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    }
+    prev.addEventListener("click", function () { track.scrollBy({ left: -step(), behavior: "smooth" }); });
+    next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: "smooth" }); });
+    track.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
+  });
+})();
+
