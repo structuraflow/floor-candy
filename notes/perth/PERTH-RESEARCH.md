@@ -70,3 +70,9 @@ Researched 20 Nov 2026 with Firecrawl (web search, Google Maps data, page scrape
 - `perth/index.html` + `perth/perth.css`: a standalone Perth homepage in the structure above, reusing `home.css`, `main.js`, `home.js` and genuine job photos only. It is `noindex` while it is a draft. The form posts to the same Formspree form, with subject "New PERTH quote request" and a hidden `market=Perth` field.
 - The NSW homepage and inner pages are untouched.
 - QA screenshots: `notes/perth/qa/`.
+
+## 7. Update 26 Nov 2026 (Firecrawl search "epoxy garage flooring Perth", Perth location)
+Organic top 10: WA Epoxy Flooring (#1, but its homepage carries `robots: noindex` and has generic, unverifiable testimonials), Perth Epoxy Floor, Dalex, Reddit thread, Epoxy Warehouse (DIY), **Gard Coatings (#6)**, Perth Concrete Care flake page (#7, title leads with "From $100/m²"), DRFloors (showroom + samples, 25 yrs), Garage Floors Perth, Polished Off Concrete.
+Gard Coatings homepage: 5-yr written workmanship warranty repeated 3x, **progress photos during the job**, "Watch a floor go down" video, Australian-made coatings, APC certified installer, client logos, 6 service cards each linking to its own page, no form on the homepage (quote is on /contact), no FAQ.
+WA Epoxy Flooring: 7 named finishes each with "View gallery", 100% satisfaction guarantee, process steps, no prices, no FAQ, no service/suburb links.
+PCC flake page ranks with the price in the <title> ("Epoxy Flake Flooring Perth: From $100/m²").

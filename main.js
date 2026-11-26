@@ -382,10 +382,15 @@
     var link = document.querySelector("[data-quote-link]");
     if (quote && link) link.setAttribute("href", "#quote");
     if (!bar || !quote || !("IntersectionObserver" in window)) return;
-    /* Hide the bar while the form is on screen: it would cover the buttons. */
-    new IntersectionObserver(function (es) {
-      bar.classList.toggle("is-hidden", es[0].isIntersecting);
-    }, { threshold: 0.15 }).observe(quote);
+    /* Hide the bar while the hero buttons or a form are on screen:
+       it would repeat the hero buttons or cover the form's own buttons. */
+    var watch = [quote, document.querySelector(".hero-cta"), document.getElementById("send")].filter(Boolean);
+    var seen = new Set();
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+      bar.classList.toggle("is-hidden", seen.size > 0);
+    }, { threshold: 0.15 });
+    watch.forEach(function (el) { io.observe(el); });
   })();
 
   /* ------------------------------------------------------- scroll reveal */
